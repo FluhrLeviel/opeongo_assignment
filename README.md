@@ -65,8 +65,9 @@ uv run opengo verify
 
 ## Execution order
 
-The whole analysis runs from the supplied inputs with one command (≈ 45 min on a laptop, peak
-≈ 3 GB RAM; headless Chrome or Chromium is needed only for the final PDF step):
+The whole analysis runs from the supplied inputs with one command (≈ 25 min on a laptop, peak
+≈ 2.6 GB RAM, as measured in the verified rebuild; headless Chrome or Chromium is needed only for
+the final PDF step):
 
 ```bash
 uv run opengo all

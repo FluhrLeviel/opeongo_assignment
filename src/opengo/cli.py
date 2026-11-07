@@ -237,7 +237,7 @@ def report() -> None:
 @click.option("--skip-load", is_flag=True, help="Reuse existing raw-count checkpoints.")
 @click.pass_context
 def run_all(ctx: click.Context, skip_load: bool) -> None:
-    """Run the whole pipeline from the supplied inputs (≈ 45 min, peak ≈ 3 GB RAM)."""
+    """Run the whole pipeline from the supplied inputs (≈ 25 min, peak ≈ 2.6 GB RAM)."""
     t0 = time.perf_counter()
     steps = [("verify", verify, {})]
     if not skip_load:
