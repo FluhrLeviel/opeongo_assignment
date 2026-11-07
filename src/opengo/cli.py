@@ -116,12 +116,13 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1", "2", "3", "4", "5", "6"]))
+@click.argument("stage", type=click.Choice(["1", "2", "3", "4", "5", "6", "report"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
     import importlib
 
-    module = importlib.import_module(f"opengo.plots_stage{stage}")
+    name = "plots_report" if stage == "report" else f"plots_stage{stage}"
+    module = importlib.import_module(f"opengo.{name}")
     for path in module.make_all():
         console.print(f"  {path.relative_to(config.PROJECT_ROOT)}")
 
@@ -218,6 +219,50 @@ def multimodal() -> None:
         ["scope", "assay", "n_donors", "mean", "ci_low", "ci_high", "n_up", "p_signflip"]
     ]
     console.print(show.round(3).to_string(index=False))
+
+
+@main.command()
+def report() -> None:
+    """Stage 7: render report/report.html to report/report.pdf (headless Chrome)."""
+    from opengo.report import render_pdf
+
+    pdf, pages = render_pdf()
+    console.print(f"{pdf.relative_to(config.PROJECT_ROOT)}: {pages} pages")
+    if pages > 4:
+        console.print("[red]Report exceeds the 4-page limit[/red]")
+        sys.exit(1)
+
+
+@main.command(name="all")
+@click.option("--skip-load", is_flag=True, help="Reuse existing raw-count checkpoints.")
+@click.pass_context
+def run_all(ctx: click.Context, skip_load: bool) -> None:
+    """Run the whole pipeline from the supplied inputs (≈ 45 min, peak ≈ 3 GB RAM)."""
+    t0 = time.perf_counter()
+    steps = [("verify", verify, {})]
+    if not skip_load:
+        steps.append(("load all", load, {"cohort": "all"}))
+    steps += [
+        ("genes", genes, {}),
+        ("qc", qc, {}),
+        ("explore", explore, {}),
+        ("integrate", integrate, {}),
+        ("overview", overview, {}),
+        ("pseudobulk", pseudobulk, {}),
+        ("multimodal", multimodal, {}),
+    ]
+    steps += [
+        (f"figures {s}", figures, {"stage": s}) for s in ["1", "2", "3", "4", "5", "6", "report"]
+    ]
+    steps.append(("report", report, {}))
+    for name, cmd, kwargs in steps:
+        console.rule(f"{name}  [{time.perf_counter() - t0:.0f}s]")
+        try:
+            ctx.invoke(cmd, **kwargs)
+        except SystemExit as err:
+            if err.code not in (0, None):
+                raise
+    console.rule(f"done in {time.perf_counter() - t0:.0f}s")
 
 
 if __name__ == "__main__":

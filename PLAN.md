@@ -207,6 +207,8 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | Date | Stage | Change | Reason |
 |---|---|---|---|
 | 2026-11-07 | all | Added check-in protocol, traceability table, CLI, multimodal n = 3 finding | Plan review |
+| 2026-11-07 | 7 | Done: 4-page report (report/report.pdf), executed notebook, `opengo all`, README finalised (AI note, time log to confirm) | Stage 7 |
+| 2026-11-07 | 6 | Stage 6 findings accepted | Check-in 6 |
 | 2026-11-07 | 6 | Done: crosswalk validated (27 primary, 3 matched pairs + C3N-00242). Full bulk RNA +0.52 (54/72), protein +0.68 (67/80); same gene pattern as B scRNA (collagens/FN1/SPARC up, DCN/LUM not). Fibroblast markers fall in 97 % of tumors; ECM tracks composition but rises despite fibroblast loss. Matched n = 3 inconclusive | Check-in 6 |
 | 2026-11-07 | 5 | Stage 5 findings accepted | Check-in 5 |
 | 2026-11-07 | 5 | Done: B +1.04 [0.63, 1.46] 9/9 donors; A +0.02 (n=3); meta RE +0.60 [−0.39, 1.59], I² 80 %. Robust to composition (pericytes only, no DCN/LUM, fibroblast share unchanged) and to all sensitivities; endothelial null | Check-in 5 |

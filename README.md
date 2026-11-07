@@ -7,10 +7,25 @@ combining cohorts changes that, and whether linked bulk RNA and protein data agr
 
 Panel: COL1A1, COL1A2, COL3A1, COL5A1, COL6A1, COL6A2, FN1, SPARC, DCN, LUM.
 
-> **Status:** work in progress. Stages 0–1 (environment, input verification, loading and
-> reconciliation of all three cohorts) are done;
-> the analysis stages are added one at a time after review. See [`PLAN.md`](PLAN.md) for the
-> full plan, decision gates and change log.
+**Deliverables**
+
+- **Report (4 pages):** [`report/report.pdf`](report/report.pdf) (source `report/report.html`,
+  figures `report/figures/`).
+- **Analysis notebook:** [`notebooks/ecm_analysis.ipynb`](notebooks/ecm_analysis.ipynb), executed,
+  with paired source `notebooks/ecm_analysis.py`. It walks through every stage's key numbers and figures.
+- **Decision record:** "How decisions were made" below, plus
+  [`outputs/tables/decisions_log.tsv`](outputs/tables/decisions_log.tsv) (inclusion/exclusion
+  record) and [`PLAN.md`](PLAN.md) (plan, review gates, change log).
+
+**Main findings**
+
+1. Cohort C was excluded: its counts are capped at ≤ 409 non-mitochondrial counts per cell.
+2. A (single-nucleus) and B (single-cell) were combined with Harmony (batch = cohort).
+3. The ECM panel is a stromal program. In the fibroblast + mural compartment, tumor exceeds adjacent
+   in 9/9 cohort B donors (+1.04 SD [0.63, 1.46]), robustly to composition.
+4. Cohort A (3 pairs) is null, so the pooled estimate is inconclusive (I² = 80 %).
+5. Full CPTAC bulk RNA (72 pairs) and protein (80 pairs) show the same gene pattern: collagens, FN1
+   and SPARC up; DCN/LUM not. The 3 matched multimodal donors are too few to decide.
 
 ## Inputs (not committed)
 
@@ -48,17 +63,27 @@ uv run opengo verify
 
 ## Execution order
 
+The whole analysis runs from the supplied inputs with one command (≈ 45 min on a laptop, peak
+≈ 3 GB RAM; headless Chrome or Chromium is needed only for the final PDF step):
+
+```bash
+uv run opengo all
+```
+
+The steps, which can also be run individually:
+
 | Step | Command | Output | Status |
 |---|---|---|---|
 | 0 | `uv run opengo verify` | `outputs/tables/input_verification.tsv` | done |
 | 1 | `uv run opengo load all` (or `A` / `B` / `C`), then `uv run opengo genes` | raw-count checkpoints in `outputs/checkpoints/`; `outputs/tables/stage1_*.tsv`, `gene_correspondence*.tsv`, `ecm_panel_presence.tsv` | done (~10 min, peak ~1.9 GB RAM) |
 | 1 fig | `uv run opengo figures 1` | `outputs/step_1_output/*.png` | done |
-| 2 | `uv run opengo qc`, then `uv run opengo explore`, then `uv run opengo figures 2` | per-cell QC flags, pseudobulk checkpoint, `outputs/tables/stage2_*.tsv`, `outputs/step_2_output/*.png` | done (~20 min); decisions pending review |
-| 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB); decision pending review |
-| 4 | `uv run opengo overview`, then `uv run opengo figures 4` | ECM overview, panel coherence, focus coverage, `outputs/tables/stage4_*.tsv`, `outputs/step_4_output/*.png` | done (~1 min); decision pending review |
-| 5 | `uv run opengo pseudobulk`, then `uv run opengo figures 5` | paired tumor vs adjacent effects, meta-analysis, robustness, `outputs/tables/stage5_*.tsv`, `outputs/step_5_output/*.png` | done (< 1 min); pending review |
-| 6 | `uv run opengo multimodal`, then `uv run opengo figures 6` | crosswalk validation, cross-assay agreement, composition proxy, `outputs/tables/stage6_*.tsv`, `outputs/step_6_output/*.png` | done (< 1 min); pending review |
-| 7 | notebook in `notebooks/` | report figures and numbers | planned |
+| 2 | `uv run opengo qc`, then `uv run opengo explore`, then `uv run opengo figures 2` | per-cell QC flags, pseudobulk checkpoint, `outputs/tables/stage2_*.tsv`, `outputs/step_2_output/*.png` | done (~20 min) |
+| 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB) |
+| 4 | `uv run opengo overview`, then `uv run opengo figures 4` | ECM overview, panel coherence, focus coverage, `outputs/tables/stage4_*.tsv`, `outputs/step_4_output/*.png` | done (~1 min) |
+| 5 | `uv run opengo pseudobulk`, then `uv run opengo figures 5` | paired tumor vs adjacent effects, meta-analysis, robustness, `outputs/tables/stage5_*.tsv`, `outputs/step_5_output/*.png` | done (< 1 min) |
+| 6 | `uv run opengo multimodal`, then `uv run opengo figures 6` | crosswalk validation, cross-assay agreement, composition proxy, `outputs/tables/stage6_*.tsv`, `outputs/step_6_output/*.png` | done (< 1 min) |
+| 7 | `uv run opengo figures report`, then `uv run opengo report` | `report/figures/*.png`, `report/report.pdf` (fails if > 4 pages) | done |
+| nb | `uv run jupytext --to ipynb --execute notebooks/ecm_analysis.py` | `notebooks/ecm_analysis.ipynb` (reads the tables; seconds) | done |
 
 Each command reads the supplied inputs or earlier checkpoints and can be re-run from a clean session.
 
@@ -405,11 +430,17 @@ marker genes in bulk RNA, 72 pairs)
 ## Repository layout
 
 ```
-src/opengo/      importable analysis code (config, verify, CLI; loaders and stages to follow)
-tests/           pytest checks for joins, counts and metadata wiring
-outputs/         tables and figures (checkpoints are regenerated, not committed)
-notebooks/       report notebook (jupytext)
-PLAN.md          analysis plan, decision gates, change log
+src/opengo/          analysis package: config, io (loaders), genes, qc, explore, integrate,
+                     stage4-6, plots_stage1-6, plots_report, report, cli
+tests/               pytest checks (counts, joins, label override, Harmony not a no-op,
+                     exact sign-flip p, crosswalk, 4-page report)
+outputs/tables/      every number in the report + decisions_log.tsv
+outputs/step_N_output/  per-stage diagnostic figures
+outputs/logs/        run logs
+outputs/checkpoints/ large intermediates (regenerated, not committed)
+notebooks/           analysis notebook (jupytext pair, executed)
+report/              4-page report (HTML source, figures, PDF)
+PLAN.md              analysis plan, review gates, change log
 ```
 
 Development checks:
@@ -424,22 +455,41 @@ uv run pytest
 
 ## AI assistance
 
-Claude Code (Anthropic, Claude Opus 5.5) was used to plan the analysis, write code and draft text.
-How consequential outputs were checked:
+**Tools.** Claude Code (Anthropic, Claude Opus 5.5) planned the analysis with the author, wrote the
+code and drafted the text. A second AI agent was consulted by the author for independent review at
+two points (the TRM label, and focus-population / statistics advice).
 
-- Input integrity: SHA-256 of all 70 supplied files against the package manifest.
-- Joins and counts: pytest checks against counts stated in the package documentation
-  (specimens and cells per cohort, annotation matches, integer counts, ECM panel presence).
-- Each analysis stage is reviewed by the author before the next stage starts (see `PLAN.md`);
-  every figure is inspected before a decision is taken.
-- Contested decisions get a second opinion and an empirical test: e.g. the TRM relabelling was
-  challenged by a second AI agent and settled by lineage-marker expression (see
-  "How decisions were made").
+**Workflow.** Work proceeded in stages. After each stage the AI stopped and reported what was run,
+key numbers and figures, surprises, and proposed decisions with alternatives. The author approved,
+redirected or asked for a redo before the next stage started (`PLAN.md` change log;
+`decisions_log.tsv`).
 
-This section is updated as the analysis proceeds.
+**How consequential outputs were checked**
+
+- *Inputs:* SHA-256 of all 70 supplied files against the package manifest.
+- *Joins and counts:* pytest assertions against the package documentation: cells and specimens
+  per cohort, every author annotation matched, integer counts, ECM genes present by Ensembl ID,
+  crosswalk counts (29 linked, 27 primary), no multimodal pair invented from donor identity.
+- *Figures:* every figure was inspected before a decision was based on it; several were redrawn
+  after inspection.
+- *Tool failures caught by checking, not assumed away:*
+  - harmonypy 2.1.0 silently made no correction. It was detected because the metrics equalled the
+    baseline, confirmed against 0.0.10 on identical input, then pinned and guarded by a test.
+  - scanpy's neighbour search failed on a sparse type above ~8k cells; a wrapper was added after
+    reproducing the failure.
+- *Second opinion settled by data:* the TRM relabelling was challenged and then decided by
+  lineage-marker expression, not by label text.
+- *Statistics:* the exact sign-flip minimum p is unit-tested. With n = 3 pairs no p below 0.25 is
+  possible, so effect sizes and confidence intervals lead.
+- *Report:* every number in the report comes from `outputs/tables/`. The PDF build fails if the
+  report exceeds four pages.
 
 ## Time spent
 
-| Date | Activity | Hours |
+| Date | Activity | Hours (approx.) |
 |---|---|---|
-| 2026-11-07 | Reading materials, planning, environment and repository setup | _to fill_ |
+| 2026-11-07 | Reading materials, planning, environment, repository and GitHub setup | _to confirm_ |
+| 2026-11-07 | Stages 1–3: loading, QC, integration (incl. tool issues) | _to confirm_ |
+| 2026-11-07 | Stages 4–6: ECM overview, tumor vs adjacent, multimodal | _to confirm_ |
+| 2026-11-07 | Stage 7: report, notebook, README | _to confirm_ |
+| | **Total** (wall clock ≈ 11:00–17:00) | **≈ 6** |
