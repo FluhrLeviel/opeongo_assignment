@@ -32,3 +32,12 @@ def test_no_pair_invented_from_donor_identity():
     md = pd.read_csv(config.TABLES_DIR / "stage6_matched_donors.tsv", sep="\t")
     assert set(md.loc[md["primary_pair"], "donor_id"]) == {"C3L-00079", "C3L-00088", "C3N-01200"}
     assert set(md.loc[~md["primary_pair"], "donor_id"]) == {"C3N-00242"}
+
+
+def test_stage6_specimen_inclusion_record():
+    p = config.TABLES_DIR / "stage6_specimen_inclusion.tsv"
+    if not p.exists():
+        pytest.skip("run `opengo multimodal` first")
+    t = pd.read_csv(p, sep="\t")
+    assert len(t) == 34 and t["reason"].notna().all()
+    assert t["matched_primary"].sum() == 6  # 3 donors x (tumor + adjacent)

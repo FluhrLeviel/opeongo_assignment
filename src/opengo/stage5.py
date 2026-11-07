@@ -239,6 +239,34 @@ def fibroblast_share(long: pd.DataFrame) -> pd.DataFrame:
     return n.reset_index()
 
 
+# ----------------------------------------------------------------------------- record
+
+
+def specimen_inclusion(long: pd.DataFrame, population: str = FOCUS) -> pd.DataFrame:
+    """Every A/B specimen: compartment cells, and whether/why it enters the primary analysis."""
+    from opengo.io import sample_manifest
+
+    man = sample_manifest()
+    man = man[man["cohort"].isin(config.ANALYSIS_COHORTS)][
+        ["cohort", "sample_id", "donor_key", "condition"]
+    ]
+    n = long[(long["population"] == population) & (long["gene"] == GENES[0])]
+    man = man.merge(n[["sample_id", "n_cells"]], on="sample_id", how="left").fillna({"n_cells": 0})
+    man["enough_cells"] = man["n_cells"] >= config.PSEUDOBULK_MIN_CELLS
+    ok = man[man["enough_cells"]].groupby("donor_key")["condition"].nunique()
+    man["donor_paired"] = man["donor_key"].map(ok).eq(2)
+    man["in_primary_paired_analysis"] = man["enough_cells"] & man["donor_paired"]
+    man["reason"] = np.select(
+        [~man["enough_cells"], ~man["donor_paired"]],
+        [
+            f"< {config.PSEUDOBULK_MIN_CELLS} compartment cells",
+            "donor lacks a usable tumor/adjacent partner (mixed model only)",
+        ],
+        default="included (tumor regions averaged per donor)",
+    )
+    return man
+
+
 # ----------------------------------------------------------------------------- driver
 
 
@@ -268,6 +296,7 @@ def run() -> dict[str, pd.DataFrame]:
         levels.groupby(["cohort", "donor_key", "condition", "gene"])["logcpm"].mean().reset_index()
     )
     tables["stage5_mixed_model"] = mixed_model(long)
+    tables["stage5_specimen_inclusion"] = specimen_inclusion(long)
     tables["stage5_leave_one_out"] = leave_one_out(primary)
     fs = fibroblast_share(long)
     tables["stage5_B_fibroblast_share"] = fs

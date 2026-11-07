@@ -1,0 +1,35 @@
+sample_id	donor_id	condition	matching_status	bulk_sample_id	matched_primary	matched_sensitivity	reason
+CPT0001540013	C3L-00004	Tumor	same_parent_specimen	C3L-00004__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0001220012	C3L-00010	Tumor	same_parent_specimen	C3L-00010__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0001500003	C3L-00026	Tumor	same_parent_specimen	C3L-00026__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0001270002	C3L-00079	Adjacent	same_parent_specimen	C3L-00079__Adjacent	True	True	matched pair (primary link)
+CPT0001260013	C3L-00079	Tumor	same_parent_specimen	C3L-00079__Tumor	True	True	matched pair (primary link)
+CPT0000890002	C3L-00088	Adjacent	same_parent_specimen	C3L-00088__Adjacent	True	True	matched pair (primary link)
+CPT0000880001	C3L-00088	Tumor	no_author_bulk_link		False	False	no author bulk link (no pair invented)
+CPT0000870003	C3L-00088	Tumor	same_parent_specimen	C3L-00088__Tumor	True	True	matched pair (primary link)
+CPT0001180011	C3L-00096	Tumor	same_parent_specimen	C3L-00096__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0010100001	C3L-00416	Tumor	no_author_bulk_link		False	False	no author bulk link (no pair invented)
+CPT0010110013	C3L-00416	Tumor	same_parent_specimen	C3L-00416__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0010160004	C3L-00448	Tumor	same_parent_specimen	C3L-00448__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0019130004	C3L-00583	Tumor	same_parent_specimen	C3L-00583__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0025110004	C3L-00610	Tumor	same_parent_specimen	C3L-00610__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0065690004	C3L-00790	Tumor	same_parent_specimen	C3L-00790__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0015810004	C3L-00813	Tumor	same_parent_specimen	C3L-00813__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0086350004	C3L-00908	Tumor	different_parent_specimen	C3L-00908__Tumor	False	False	protein from a different parent specimen: excluded
+CPT0023690004	C3L-00917	Tumor	same_parent_specimen	C3L-00917__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0079410004	C3L-01287	Tumor	same_parent_specimen	C3L-01287__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0063630004	C3L-01302	Tumor	same_parent_specimen	C3L-01302__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0086820004	C3L-01313	Tumor	same_parent_specimen	C3L-01313__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0020120013	C3N-00177	Tumor	same_parent_specimen	C3N-00177__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0014470002	C3N-00242	Adjacent	same_parent_specimen	C3N-00242__Adjacent	False	True	sensitivity only (this donor's tumor link is flagged)
+CPT0014450005	C3N-00242	Tumor	multiple_protein_specimen_ids	C3N-00242__Tumor	False	True	protein from two parent specimens: sensitivity only
+CPT0012280004	C3N-00317	Tumor	same_parent_specimen	C3N-00317__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0012550012	C3N-00437	Tumor	same_parent_specimen	C3N-00437__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0078510004	C3N-00495	Tumor	same_parent_specimen	C3N-00495__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0025880013	C3N-00733	Tumor	same_parent_specimen	C3N-00733__Tumor	False	False	linked, but donor has no linked adjacent specimen
+CPT0025890002	C3N-00733	Tumor	no_author_bulk_link		False	False	no author bulk link (no pair invented)
+CPT0075170013	C3N-01200	Adjacent	same_parent_specimen	C3N-01200__Adjacent	True	True	matched pair (primary link)
+CPT0075130004	C3N-01200	Tumor	same_parent_specimen	C3N-01200__Tumor	True	True	matched pair (primary link)
+CPT0075120002	C3N-01200	Tumor	no_author_bulk_link		False	False	no author bulk link (no pair invented)
+CPT0075140002	C3N-01200	Tumor	no_author_bulk_link		False	False	no author bulk link (no pair invented)
+CPT0075720013	C3N-01213	Tumor	same_parent_specimen	C3N-01213__Tumor	False	False	linked, but donor has no linked adjacent specimen

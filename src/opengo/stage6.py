@@ -305,6 +305,38 @@ def agreement_table(effects: pd.DataFrame) -> pd.DataFrame:
     return t
 
 
+# ----------------------------------------------------------------------------- record
+
+
+def specimen_inclusion(v: pd.DataFrame, primary: list[str], flagged: list[str]) -> pd.DataFrame:
+    """Every cohort A snRNA specimen: its bulk link and role in the matched comparison."""
+    r = v[["sample_id", "donor_id", "condition", "matching_status", "bulk_sample_id"]].copy()
+    in_primary = v["primary"] & v["donor_id"].isin(primary)
+    in_sens = (v["primary"] | (v["matching_status"] == "multiple_protein_specimen_ids")) & v[
+        "donor_id"
+    ].isin(flagged)
+    r["matched_primary"] = in_primary.to_numpy()
+    r["matched_sensitivity"] = in_sens.to_numpy()
+    r["reason"] = np.select(
+        [
+            ~v["linked"],
+            v["matching_status"].eq("different_parent_specimen"),
+            v["matching_status"].eq("multiple_protein_specimen_ids"),
+            ~v["donor_id"].isin(flagged),
+            ~v["donor_id"].isin(primary),
+        ],
+        [
+            "no author bulk link (no pair invented)",
+            "protein from a different parent specimen: excluded",
+            "protein from two parent specimens: sensitivity only",
+            "linked, but donor has no linked adjacent specimen",
+            "sensitivity only (this donor's tumor link is flagged)",
+        ],
+        default="matched pair (primary link)",
+    )
+    return r
+
+
 # ----------------------------------------------------------------------------- driver
 
 
@@ -357,6 +389,7 @@ def run() -> dict[str, pd.DataFrame]:
         ),
     }
     tables["stage6_agreement"] = agreement_table(tables["stage6_effects"])
+    tables["stage6_specimen_inclusion"] = specimen_inclusion(v, primary, with_flagged)
     for name, df in tables.items():
         df.to_csv(config.TABLES_DIR / f"{name}.tsv", sep="\t", index=False)
     return tables

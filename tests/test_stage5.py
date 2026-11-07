@@ -32,3 +32,14 @@ def test_every_gene_reported_with_bh(eff):
     p = eff[eff["analysis"].str.startswith("primary") & eff["cohort"].isin(["A", "B"])]
     genes = p[p["feature"].isin(config.ECM_GENES)]
     assert len(genes) == 20 and genes["q_BH"].notna().all()
+
+
+def test_specimen_inclusion_record_complete():
+    p = config.TABLES_DIR / "stage5_specimen_inclusion.tsv"
+    if not p.exists():
+        pytest.skip("run `opengo pseudobulk` first")
+    t = pd.read_csv(p, sep="\t")
+    assert len(t) == 34 + 26  # every A and B specimen has a row and a reason
+    assert t["reason"].notna().all()
+    used = t[t["in_primary_paired_analysis"]]
+    assert used.groupby("cohort")["donor_key"].nunique().to_dict() == {"A": 3, "B": 9}
