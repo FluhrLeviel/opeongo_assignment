@@ -140,6 +140,20 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
 
 ---
 
+## Stage 1 findings → changes to later stages (proposed at Check-in 1)
+Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
+
+| Finding | Best-practice basis | Change |
+|---|---|---|
+| TRM (510 A nuclei) mapped to Lymphoid, authors group it with Macrophages | Harmonise labels to a shared ontology/reference, log deviations | Remap TRM → Myeloid (pending OK); log as deviation from the guide |
+| Stromal paired coverage thin: A ≤ 3, B ≤ 2 donors (≥ 10 cells) | Pseudobulk floor ≈ 10 cells / 1,000 counts (50 conservative) | Stage 4: focus population probably endothelial (A 3 + B 9 paired) or a mural/stromal compartment; decided from coverage + QC |
+| B `Unresolved` = fibroblast/pericyte/endothelial label conflicts (2,087 cells) | Fibroblast vs pericyte not cleanly separable by single markers | Stage 2: re-check these with non-panel markers (fibroblast: PDGFRA, C7, FBLN1; pericyte: RGS5, MYH11, NOTCH3; endothelial: VWF, CDH5, RAMP2 — PECAM1 absent in B). **Never use DCN/LUM/COL genes to define cells (they are the panel).** |
+| A has no pericyte label; A "Myofibroblasts" may contain mural cells | Same | Stage 2: check RGS5/MYH11 in A myofibroblasts before treating A stroma ≈ B fibroblasts |
+| Composition differs strongly by cohort (B tumors mostly immune; A mostly tumor nuclei) | snRNA vs scRNA capture biases (Wu 2019; Denisenko 2020) | Never compare population proportions across cohorts; compare within-population expression only, cohort as a fixed term |
+| Depth differs ~10× (C adjacent specimens ~300–1,000 counts/cell) | Per-specimen QC | Stage 2: per-specimen/assay-aware QC; C may be robustness-only |
+| Gene names: B older annotation, 2,204 unmatched, 532 rename pairs left out | Ensembl ID first, symbol fallback, log ambiguities | Keep; check every marker gene used later is in the shared set |
+| Paired n small (A 3–4, C 4, B 9) | Sign-flip minimum two-sided p = 2/2ⁿ (n = 3 → 0.25) | Lead with effect size + CI and direction consistency; pool across cohorts (cohort-stratified model + meta-analysis) |
+
 ## Requirements traceability (assignment → plan)
 | Assignment requirement | Stage |
 |---|---|

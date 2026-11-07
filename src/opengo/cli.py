@@ -112,6 +112,16 @@ def genes() -> None:
 
 
 @main.command()
+@click.argument("stage", type=click.Choice(["1"]))
+def figures(stage: str) -> None:
+    """Render a stage's figures into outputs/step_<stage>_output/."""
+    from opengo import plots_stage1
+
+    for path in plots_stage1.make_all():
+        console.print(f"  {path.relative_to(config.PROJECT_ROOT)}")
+
+
+@main.command()
 def qc() -> None:
     """Stage 2: per-specimen QC metrics and exploratory structure."""
     _not_yet("Stage 2")

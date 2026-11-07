@@ -56,6 +56,7 @@ uv run opengo verify
 | 3 | `uv run opengo integrate` | baseline vs Harmony comparison | planned |
 | 4–5 | `uv run opengo pseudobulk` | ECM overview, tumor vs adjacent tests | planned |
 | 6 | `uv run opengo multimodal` | crosswalk validation, bulk RNA / protein comparison | planned |
+| fig | `uv run opengo figures 1` | `outputs/step_1_output/*.png` | done |
 | 7 | notebook in `notebooks/` | report figures and numbers | planned |
 
 Each command reads the supplied inputs or earlier checkpoints and can be re-run from a clean session.
