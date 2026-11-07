@@ -486,10 +486,12 @@ redirected or asked for a redo before the next stage started (`PLAN.md` change l
 
 ## Time spent
 
-| Date | Activity | Hours (approx.) |
-|---|---|---|
-| 2026-11-07 | Reading materials, planning, environment, repository and GitHub setup | _to confirm_ |
-| 2026-11-07 | Stages 1–3: loading, QC, integration (incl. tool issues) | _to confirm_ |
-| 2026-11-07 | Stages 4–6: ECM overview, tumor vs adjacent, multimodal | _to confirm_ |
-| 2026-11-07 | Stage 7: report, notebook, README | _to confirm_ |
-| | **Total** (wall clock ≈ 11:00–17:00) | **≈ 6** |
+| Date | Time | Activity | Hours (approx.) |
+|---|---|---|---|
+| 2026-11-07 | 11:00–14:00 | Reading the assignment and data documentation, best-practice review, plan, uv environment, CLI, GitHub setup | 3.0 |
+| 2026-11-07 | 14:00–16:00 | Stages 1–3: loading and reconciliation, QC, cohort C assessment, integration (incl. two tool issues) | 2.0 |
+| 2026-11-07 | 16:00–16:45 | Stages 4–6: ECM overview, tumor vs adjacent, robustness, multimodal comparison | 0.75 |
+| 2026-11-07 | 16:45–17:00 | Stage 7: report, notebook, README | 0.25 |
+| | | **Total** | **≈ 6** |
+
+Split by activity estimated from commit timestamps; the total is the author's own record (11:00–17:00).

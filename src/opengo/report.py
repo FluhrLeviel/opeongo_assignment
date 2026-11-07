@@ -15,7 +15,7 @@ from pypdf import PdfReader
 
 from opengo import config
 
-REPORT_DIR = config.PROJECT_ROOT / "report"
+REPORT_DIR = config.REPORT_DIR
 CANDIDATES = [
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     "/Applications/Chromium.app/Contents/MacOS/Chromium",
@@ -35,6 +35,9 @@ def find_chrome() -> str:
 def render_pdf(
     html: Path = REPORT_DIR / "report.html", pdf: Path = REPORT_DIR / "report.pdf"
 ) -> tuple[Path, int]:
+    if not html.exists() and config.REPORT_SOURCE.exists():  # redirected build: reuse the text
+        html.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(config.REPORT_SOURCE, html)
     subprocess.run(
         [
             find_chrome(),

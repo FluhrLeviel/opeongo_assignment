@@ -19,3 +19,6 @@ outputs/checkpoints/*
 !outputs/checkpoints/.gitkeep
 # OS
 .DS_Store
+
+# Clean end-to-end rebuild (verification only; compared against outputs/)
+rebuild_check/

@@ -18,7 +18,7 @@ import seaborn as sns  # noqa: E402
 
 from opengo import config  # noqa: E402
 
-OUT_DIR = config.PROJECT_ROOT / "report" / "figures"
+OUT_DIR = config.REPORT_DIR / "figures"
 T = config.TABLES_DIR
 GENES = config.ECM_GENES
 COH = {"A": "#1f77b4", "B": "#ff7f0e", "C": "#2ca02c"}

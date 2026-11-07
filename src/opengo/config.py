@@ -1,10 +1,15 @@
+import os
 from pathlib import Path
 
 # Base Paths
 PROJECT_ROOT = Path(__file__).resolve().parents[2]  # src/opengo/config.py -> project root
 DATA_DIR = PROJECT_ROOT / "data"
 METADATA_DIR = PROJECT_ROOT / "metadata"
-OUTPUTS_DIR = PROJECT_ROOT / "outputs"
+# Outputs can be redirected (e.g. a clean rebuild that must not touch existing results):
+#   OPENGO_OUTPUTS_DIR=rebuild/outputs OPENGO_REPORT_DIR=rebuild/report uv run opengo all
+OUTPUTS_DIR = Path(os.environ.get("OPENGO_OUTPUTS_DIR", PROJECT_ROOT / "outputs")).resolve()
+REPORT_DIR = Path(os.environ.get("OPENGO_REPORT_DIR", PROJECT_ROOT / "report")).resolve()
+REPORT_SOURCE = PROJECT_ROOT / "report" / "report.html"  # report text is never regenerated
 FIGURES_DIR = OUTPUTS_DIR / "figures"
 TABLES_DIR = OUTPUTS_DIR / "tables"
 CHECKPOINTS_DIR = OUTPUTS_DIR / "checkpoints"
