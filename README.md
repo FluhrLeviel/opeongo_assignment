@@ -57,7 +57,7 @@ uv run opengo verify
 | 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB); decision pending review |
 | 4 | `uv run opengo overview`, then `uv run opengo figures 4` | ECM overview, panel coherence, focus coverage, `outputs/tables/stage4_*.tsv`, `outputs/step_4_output/*.png` | done (~1 min); decision pending review |
 | 5 | `uv run opengo pseudobulk`, then `uv run opengo figures 5` | paired tumor vs adjacent effects, meta-analysis, robustness, `outputs/tables/stage5_*.tsv`, `outputs/step_5_output/*.png` | done (< 1 min); pending review |
-| 6 | `uv run opengo multimodal` | crosswalk validation, bulk RNA / protein comparison | planned |
+| 6 | `uv run opengo multimodal`, then `uv run opengo figures 6` | crosswalk validation, cross-assay agreement, composition proxy, `outputs/tables/stage6_*.tsv`, `outputs/step_6_output/*.png` | done (< 1 min); pending review |
 | 7 | notebook in `notebooks/` | report figures and numbers | planned |
 
 Each command reads the supplied inputs or earlier checkpoints and can be re-run from a clean session.
@@ -334,6 +334,66 @@ tumor shift in ECM transcripts.
   up (fibroblast-like + mural, versus ~97 % pericytes in B). The combined random-effects interval
   includes zero. The B result is robust within B; whether it generalises to snRNA data and to
   fibroblasts is not established here.
+
+### Stage 6 — linked modalities: snRNA vs bulk RNA vs protein
+
+Figures: [`outputs/step_6_output/`](outputs/step_6_output/) (regenerate with
+`uv run opengo multimodal`, `uv run opengo figures 6`). Bulk values are used as supplied (log2,
+already normalised); missing protein values are not imputed (none occur for the 10 panel genes).
+
+**1. Is the snRNA ↔ bulk correspondence what the crosswalk says?** (`01_crosswalk_validation.png`)
+- *Checks per snRNA specimen:* link given → resolves through `bulk_samples.tsv` → column exists in
+  the condition-specific RNA and protein file → protein aliquot equals the authors' sample table →
+  snRNA parent specimen equals protein parent specimen.
+- *Evidence:* 29 / 34 linked; all 29 resolve to real RNA and protein columns; all protein aliquots
+  match the author table; the 2 parent mismatches are exactly the 2 flagged links. 27 primary links
+  (23 tumor, 4 adjacent), as documented.
+- *Matched subset:* donors with primary-linked tumor **and** adjacent = **C3L-00079, C3L-00088,
+  C3N-01200 (n = 3)**. C3N-00242 (tumor protein from two parent specimens) is sensitivity only;
+  C3L-00908 (different parent) has no adjacent anyway. The 5 unlinked snRNA specimens get no bulk
+  partner — no pairing is invented from donor identity. Bulk RNA is a donor/condition column whose
+  exact aliquot is not reconciled; each assay used a different portion of the parent specimen.
+
+**2. Do the assays agree on direction?** (`02_cross_assay_agreement.png`, `03_matched_subset.png`;
+each effect estimated within its own assay, tumor − adjacent, paired by donor)
+
+| Evidence | Panel score | Collagens / FN1 / SPARC | DCN / LUM |
+|---|---|---|---|
+| B scRNA stroma (9 pairs, Stage 5) | **+1.04** | up (7/8 genes, q ≤ 0.03) | not up |
+| A snRNA stroma (3 pairs) | +0.02 | mixed | down / mixed |
+| Matched subset, 3 donors: snRNA stroma / whole specimen / bulk RNA / protein | −0.22 / −0.14 / +0.48 / +0.26 | FN1, SPARC up in all four; collagens mixed | down |
+| **Bulk RNA, all CPTAC pairs (72)** | **+0.52 [0.31, 0.73], 54/72 up** | up (FN1 72/72, SPARC 72/72) | **down** (DCN 4/72 up) |
+| **Protein, all CPTAC pairs (80)** | **+0.68 [0.49, 0.87], 67/80 up** | up (SPARC 78/80, COL3A1 72/80) | DCN down, LUM ≈ 0 |
+
+- *Observation:* the well-powered bulk cohorts and the single-cell cohort B show the **same gene
+  pattern** — fibrillar collagens, FN1 and SPARC higher in tumor, DCN/LUM lower or unchanged — at
+  both RNA and protein level. COL6A1 is the one discrepancy (down in bulk RNA, up in protein and B).
+- *Observation:* the 3-donor matched subset cannot settle direction (donors disagree, all p ≥ 0.5);
+  FN1 and SPARC are higher in tumor in every matched assay.
+
+**3. Could tissue composition explain the bulk signal?** (`04_composition_proxy.png`; non-panel
+marker genes in bulk RNA, 72 pairs)
+- Fibroblast markers (PDGFRA, C7, FBLN1) **fall** in 97 % of tumors (mean −1.54 SD); mural (+0.56)
+  and endothelial (+1.63) markers rise — the hypervascular ccRCC pattern.
+- Across donors the ECM change tracks fibroblast (ρ 0.77; 0.68 without DCN/LUM) and mural (ρ 0.62)
+  marker change: composition strongly shapes the bulk signal.
+- Yet the 8-gene panel (without DCN/LUM) rises on average (+0.96 SD) **despite** the fibroblast
+  loss, so the bulk increase is not explained by more fibroblasts. (A regression extrapolated to
+  "no marker change" gives +1.46; shown but not relied on, because almost no donor has zero change.)
+- In snRNA, the matched specimens' stromal fraction differs strongly between tumor and adjacent
+  (e.g. C3L-00079 8 % vs 1.5 %); snRNA captures a different aliquot and nuclei capture is biased, so
+  it is not used as a quantitative composition estimate for bulk.
+
+**Interpretation and limitations**
+- Bulk RNA, protein and single-cell B agree that collagen I/III, FN1 and SPARC are higher in
+  ccRCC tissue than in adjacent kidney while DCN/LUM are not. Single-cell B places at least part of
+  the RNA increase within mural/pericyte cells (Stage 5). **Cell-specific RNA does not establish the
+  cellular source of bulk protein**: endothelial cells, which expand in tumors, also express FN1 and
+  SPARC strongly (Stage 4).
+- The matched snRNA–bulk comparison (n = 3) is too small to confirm or refute anything; the
+  full-cohort bulk analysis is context from different donors, not a matched validation.
+- Composition is a major driver of bulk differences; the marker-based proxy is approximate and
+  RNA-based.
 
 ## Parameters, seeds and records
 

@@ -1,0 +1,34 @@
+linked                                 29
+primary                                27
+in_RNA_file                            29
+in_protein_file                        29
+protein_aliquot_matches_anchor         29
+snRNA_parent_matches_protein_parent    27
+condition_matches_bulk_file            34
+ donor_id  primary_pair
+C3L-00079          True
+C3L-00088          True
+C3N-00242         False
+C3N-01200          True
+                                   scope                            assay  
+n_donors   mean  ci_low  ci_high  n_up  p_signflip
+matched subset (3 donors, primary links)                     snRNA stroma       
+3 -0.219  -1.523    1.086     1       0.500
+matched subset (3 donors, primary links)             snRNA whole specimen       
+3 -0.139  -2.634    2.357     1       1.000
+matched subset (3 donors, primary links)                         bulk RNA       
+3  0.481  -1.841    2.803     2       0.500
+matched subset (3 donors, primary links)                     bulk protein       
+3  0.259  -0.728    1.245     2       0.500
+          matched + C3N-00242 (4 donors)                     snRNA stroma       
+3 -0.219  -1.523    1.086     1       0.500
+          matched + C3N-00242 (4 donors)             snRNA whole specimen       
+4 -0.716  -2.970    1.538     1       0.500
+          matched + C3N-00242 (4 donors)                         bulk RNA       
+4  0.071  -1.712    1.853     2       0.875
+          matched + C3N-00242 (4 donors)                     bulk protein       
+4 -0.167  -1.617    1.283     2       0.875
+ full bulk cohort (context, not matched)     bulk RNA (all paired donors)       
+72  0.519   0.309    0.729    54       0.000
+ full bulk cohort (context, not matched) bulk protein (all paired donors)       
+80  0.680   0.493    0.867    67       0.000

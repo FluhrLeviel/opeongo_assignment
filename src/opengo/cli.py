@@ -116,7 +116,7 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1", "2", "3", "4", "5"]))
+@click.argument("stage", type=click.Choice(["1", "2", "3", "4", "5", "6"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
     import importlib
@@ -197,8 +197,27 @@ def pseudobulk() -> None:
 
 @main.command()
 def multimodal() -> None:
-    """Stage 6: crosswalk validation and bulk RNA / protein comparison."""
-    _not_yet("Stage 6")
+    """Stage 6: crosswalk validation, snRNA vs bulk RNA vs protein, composition proxy."""
+    from opengo import stage6
+
+    out = stage6.run()
+    v = out["stage6_crosswalk_validation"]
+    checks = [
+        "linked",
+        "primary",
+        "in_RNA_file",
+        "in_protein_file",
+        "protein_aliquot_matches_anchor",
+        "snRNA_parent_matches_protein_parent",
+        "condition_matches_bulk_file",
+    ]
+    console.print(v[checks].sum().to_string())
+    console.print(out["stage6_matched_donors"].to_string(index=False))
+    e = out["stage6_effects"]
+    show = e[e["feature"] == "panel_z"][
+        ["scope", "assay", "n_donors", "mean", "ci_low", "ci_high", "n_up", "p_signflip"]
+    ]
+    console.print(show.round(3).to_string(index=False))
 
 
 if __name__ == "__main__":
