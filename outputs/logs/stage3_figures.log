@@ -1,0 +1,4 @@
+  outputs/step_3_output/01_umap_baseline_vs_harmony.png
+  outputs/step_3_output/02_integration_metrics.png
+  outputs/step_3_output/03_condition_structure_and_purity.png
+  outputs/step_3_output/04_label_transfer.png

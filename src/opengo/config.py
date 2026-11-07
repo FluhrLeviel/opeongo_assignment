@@ -39,6 +39,7 @@ def cohort_raw_path(cohort: str) -> Path:
 
 
 COHORTS = ("A", "B", "C")
+ANALYSIS_COHORTS = ("A", "B")  # C excluded at Check-in 2 (see decisions_log.tsv)
 
 # Stage 2 QC flag parameters (flags only; inclusion rule decided at Check-in 2)
 QC_PARAMS = {
@@ -53,6 +54,22 @@ QC_PARAMS = {
 
 PSEUDOBULK_MIN_CELLS = 10  # primary floor (sensitivity at 20 / 50 in Stage 5)
 MARKER_VALIDATION_N = 20_000  # cells subsampled from A and B to validate marker labelling
+
+# Stage 3 integration
+INTEGRATION = {
+    "cells_per_specimen": 1000,  # random QC-passing cells per specimen ...
+    "keep_all": [
+        "Endothelial",
+        "Stromal_fibro_myo",
+        "Pericyte",
+    ],  # ... plus every rare stromal cell
+    "n_hvg": 2000,
+    "n_pcs": 30,
+    "n_neighbors": 15,
+    "leiden_resolution": 1.0,
+    "harmony_keys": ["cohort", "sample_id"],  # primary: cohort; sample_id as sensitivity
+    "metric_subsample": 15000,  # cells for silhouette / LISI
+}
 
 # Deliberate deviations from metadata/label_mapping.tsv (author broad label -> population).
 # Evidence: outputs/step_1_output/07_TRM_marker_check.png and decisions_log.tsv.

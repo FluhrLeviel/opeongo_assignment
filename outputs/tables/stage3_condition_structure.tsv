@@ -1,0 +1,33 @@
+embedding	cohort	population	condition_ASW
+A_baseline	A	Endothelial	0.16094012558460236
+A_baseline	A	Lymphoid	0.12517285346984863
+A_baseline	A	Myeloid	0.07065771520137787
+A_baseline	A	Nonmalignant_epithelial	-0.0008858325309120119
+A_baseline	A	Stromal (fibro+mural)	0.26175931096076965
+AB_baseline	A	Endothelial	0.13538986444473267
+AB_baseline	A	Lymphoid	0.1331966668367386
+AB_baseline	A	Myeloid	0.07634633034467697
+AB_baseline	A	Nonmalignant_epithelial	0.01036335714161396
+AB_baseline	A	Stromal (fibro+mural)	0.25763076543807983
+AB_baseline	B	Endothelial	0.22779986262321472
+AB_baseline	B	Lymphoid	0.027464359998703003
+AB_baseline	B	Myeloid	0.010264599695801735
+AB_baseline	B	Stromal (fibro+mural)	0.23234057426452637
+AB_harmony	A	Endothelial	0.14622195065021515
+AB_harmony	A	Lymphoid	0.09973060339689255
+AB_harmony	A	Myeloid	0.08019599318504333
+AB_harmony	A	Nonmalignant_epithelial	0.01578454114496708
+AB_harmony	A	Stromal (fibro+mural)	0.20242014527320862
+AB_harmony	B	Endothelial	0.19932007789611816
+AB_harmony	B	Lymphoid	0.02736719138920307
+AB_harmony	B	Myeloid	0.010706668719649315
+AB_harmony	B	Stromal (fibro+mural)	0.20553116500377655
+AB_harmony_spec	A	Endothelial	-0.018090499565005302
+AB_harmony_spec	A	Lymphoid	0.12834054231643677
+AB_harmony_spec	A	Myeloid	0.09536873549222946
+AB_harmony_spec	A	Nonmalignant_epithelial	0.16651363670825958
+AB_harmony_spec	A	Stromal (fibro+mural)	0.0011409142753109336
+AB_harmony_spec	B	Endothelial	0.0009105880162678659
+AB_harmony_spec	B	Lymphoid	0.009342881850898266
+AB_harmony_spec	B	Myeloid	-0.00016215008508879691
+AB_harmony_spec	B	Stromal (fibro+mural)	0.044871505349874496

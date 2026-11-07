@@ -268,17 +268,17 @@ wheels = [
 
 [[package]]
 name = "harmonypy"
-version = "2.1.0"
+version = "0.0.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
+    { name = "pandas" },
+    { name = "scikit-learn" },
+    { name = "scipy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/5c/5824bb681062b5369602e633786233cd6423b5e42793c9d6009b29f0ba36/harmonypy-2.1.0.tar.gz", hash = "sha256:e255c927848564b2198c4b6d09de9402f5ab10e92dcb1be6f8a49164190b4a5c", size = 61069, upload-time = "2026-10-06T00:13:00.886Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1a/69/9af6183745618057797b940a76320c52a38ad2a69e688e6345e2a0219655/harmonypy-0.0.10.tar.gz", hash = "sha256:27bd39a6f9ada1708ffa577e46c9b7363d1e2fd62740e477ce11fd61819a54df", size = 20339, upload-time = "2024-07-04T20:55:06.385Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0f/3c/e95411845d3912f69d0bd425fd0e37f47fb5d515d6b516435e08295d8be1/harmonypy-2.1.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:55fe3599b500c275949b7e5098bc5fd4b26cf19c034716f8461fbe41209b52b4", size = 186116, upload-time = "2026-10-06T00:12:32.187Z" },
-    { url = "https://files.pythonhosted.org/packages/7e/a2/337861c6708421b865e79691507f1a74254f47a084c981771b9cdc2263fb/harmonypy-2.1.0-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:281a9c4b6ff5c9ef451d6f58e445186e72b741c1115824ebbe785efe6b964b3a", size = 222243, upload-time = "2026-10-06T00:12:33.592Z" },
-    { url = "https://files.pythonhosted.org/packages/ba/81/208b993d56506b8e2e7063a5994a541e9c6bb44a6773e54f09445bae3cd9/harmonypy-2.1.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:fbe0aea51149f2e0f7edf6c1a942bc67a919cf7242da8eb77bd1a225a7febe09", size = 219901, upload-time = "2026-10-06T00:12:35.043Z" },
-    { url = "https://files.pythonhosted.org/packages/03/27/cfbe983fdcd779ac3ba978a25d23919aa49180bda4934fadeca118d54cd9/harmonypy-2.1.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b9eab5eb201468fcfd4429061e0560dfc770becd51122314bf85356054cb26ce", size = 239416, upload-time = "2026-10-06T00:12:36.652Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/cd/9479dd66e503af191edc016a302d2125c4f02ea777ebea1e48f6b944b073/harmonypy-0.0.10-py3-none-any.whl", hash = "sha256:dab528052f909204e521c9c2bd980221c64003538b0c0fe25be2e43c1199282b", size = 20885, upload-time = "2024-07-04T20:55:00.329Z" },
 ]
 
 [[package]]
@@ -799,7 +799,7 @@ requires-dist = [
     { name = "anndata", specifier = "==0.12.19" },
     { name = "click", specifier = "==8.5.1" },
     { name = "h5py", specifier = "==3.16.0" },
-    { name = "harmonypy", specifier = "==2.1.0" },
+    { name = "harmonypy", specifier = "==0.0.10" },
     { name = "igraph", specifier = ">=1.0.0" },
     { name = "ipython", specifier = "==9.18.1" },
     { name = "jupytext", specifier = "==1.19.6" },

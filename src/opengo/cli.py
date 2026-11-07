@@ -116,7 +116,7 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1", "2"]))
+@click.argument("stage", type=click.Choice(["1", "2", "3"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
     import importlib
@@ -157,8 +157,16 @@ def explore() -> None:
 
 @main.command()
 def integrate() -> None:
-    """Stage 3: unintegrated baseline vs Harmony, with evaluation metrics."""
-    _not_yet("Stage 3")
+    """Stage 3: A alone, A+B unintegrated, A+B Harmony (cohort / specimen); evaluation metrics."""
+    from opengo import integrate as integ
+
+    t0 = time.perf_counter()
+    out = integ.run(
+        progress=lambda msg: console.print(f"  [{time.perf_counter() - t0:.0f}s] {msg}")
+    )
+    for name in ["stage3_integration_metrics", "stage3_label_transfer"]:
+        console.rule(name)
+        console.print(out[name].round(3).to_string(index=False))
 
 
 @main.command()

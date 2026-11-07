@@ -54,7 +54,7 @@ uv run opengo verify
 | 1 | `uv run opengo load all` (or `A` / `B` / `C`), then `uv run opengo genes` | raw-count checkpoints in `outputs/checkpoints/`; `outputs/tables/stage1_*.tsv`, `gene_correspondence*.tsv`, `ecm_panel_presence.tsv` | done (~10 min, peak ~1.9 GB RAM) |
 | 1 fig | `uv run opengo figures 1` | `outputs/step_1_output/*.png` | done |
 | 2 | `uv run opengo qc`, then `uv run opengo explore`, then `uv run opengo figures 2` | per-cell QC flags, pseudobulk checkpoint, `outputs/tables/stage2_*.tsv`, `outputs/step_2_output/*.png` | done (~20 min); decisions pending review |
-| 3 | `uv run opengo integrate` | baseline vs Harmony comparison | planned |
+| 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB); decision pending review |
 | 4–5 | `uv run opengo pseudobulk` | ECM overview, tumor vs adjacent tests | planned |
 | 6 | `uv run opengo multimodal` | crosswalk validation, bulk RNA / protein comparison | planned |
 | 7 | notebook in `notebooks/` | report figures and numbers | planned |
@@ -182,6 +182,55 @@ Figures: [`outputs/step_2_output/`](outputs/step_2_output/) (regenerate with `uv
 - *Implication:* a combined **fibroblast + mural (stromal) compartment** is defensible across A and
   B and has 3 (A) + 9 (B) paired donors at ≥ 10 cells — the same coverage as endothelium, but it is
   the compartment that actually produces the ECM panel. Decided at Stage 4 from the ECM dot plot.
+
+### Stage 3 — combining cohorts: unintegrated baseline vs Harmony
+
+Figures: [`outputs/step_3_output/`](outputs/step_3_output/) (regenerate with
+`uv run opengo integrate`, `uv run opengo figures 3`). Cohorts A + B (C excluded at Stage 2).
+Embeddings use a stratified subsample (87,489 cells: ≤ 1,000 per specimen plus every endothelial,
+fibroblast/myofibroblast and pericyte cell). **Embeddings are used for visualisation, evaluation and
+label transfer only — never for testing** (tests use pseudobulk counts, Stages 4–5).
+
+**1. Did the integration method actually run? (a tool problem caught by checking)**
+- *Issue:* the first Harmony run reproduced the unintegrated metrics to three decimals.
+- *Check:* Harmony on identical PCs with harmonypy 2.1.0 vs the long-established 0.0.10.
+- *Evidence:* 2.1.0 stopped after one iteration (cohort silhouette 0.308 → 0.307); 0.0.10 ran
+  2 × 19 iterations (0.31 → 0.25) and improved population separation (0.25 → 0.28).
+- *Action:* harmonypy pinned to 0.0.10; a test now fails if Harmony stops correcting.
+
+**2. Which embedding, and which batch key?**
+- *Compared:* A alone; A + B unintegrated; A + B Harmony with batch = cohort; A + B Harmony with
+  batch = specimen.
+- *Evidence:* `02_integration_metrics.png`, `03_condition_structure_and_purity.png`,
+  `04_label_transfer.png`.
+
+| | A + B unintegrated | Harmony (cohort) | Harmony (specimen) |
+|---|---|---|---|
+| Within-population cohort mixing (batch ASW) | 0.49 | **0.81** | 0.43 |
+| Cell-type separation (ASW) / ARI | 0.62 / 0.29 | **0.65 / 0.39** | 0.63 / 0.56 |
+| Label transfer A→B / B→A (balanced acc.) | 0.78 / 0.65 | **0.88 / 0.88** | 0.81 / 0.55 |
+| Tumor/adjacent structure, stroma A / B (ASW) | 0.26 / 0.23 | 0.20 / 0.21 | **0.00 / 0.05** |
+
+- *Decision (proposed):* **Harmony with batch = cohort** is the integrated embedding. Batch =
+  specimen is rejected: specimen is confounded with condition, and it erased the tumor/adjacent
+  structure in stroma and endothelium — exactly the signal Stage 5 tests.
+
+**3. What was preserved, weakened or lost?**
+- *Preserved:* every major population stays distinct (kNN purity 0.89–1.00); tumor vs adjacent
+  structure within stroma and endothelium (reduced ~10–20 %, not erased).
+- *Weakened:* the malignant vs non-malignant epithelium boundary across cohorts (both derive from
+  proximal tubule); global cohort mixing stays low (median iLISI ≈ 1) because the two cohorts have
+  very different compositions (A mostly tumor nuclei, B mostly immune cells) and assays — Harmony
+  aligns matching identities rather than forcing everything to mix.
+- *Lost:* nothing with batch = cohort; with batch = specimen, the condition structure.
+
+**4. What does combining cohorts add?**
+- B's stromal cells (fibroblasts + pericytes) are predicted as stroma from A's labels in 99 % of
+  cases after Harmony (baseline: 70 %), supporting a **combined fibroblast + mural compartment**
+  across cohorts.
+- Paired donors for that compartment rise from 3 (A) to 12 (A + B) at ≥ 10 cells.
+- B adds an explicit pericyte label and an independent single-cell assay to test whether a
+  tumor-vs-adjacent effect seen in nuclei replicates.
 
 ## Parameters, seeds and records
 

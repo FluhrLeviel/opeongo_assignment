@@ -207,5 +207,7 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | Date | Stage | Change | Reason |
 |---|---|---|---|
 | 2026-11-07 | all | Added check-in protocol, traceability table, CLI, multimodal n = 3 finding | Plan review |
+| 2026-11-07 | 3 | Done: A, A+B baseline, Harmony(cohort), Harmony(specimen). harmonypy pinned 0.0.10 (2.1.0 no-op). Proposed: Harmony by cohort; specimen key rejected (erases condition). Combined stromal compartment supported by label transfer (99 %) | Check-in 3 |
+| 2026-11-07 | 2 | Done: C excluded, flagged cells removed (approved) | Check-in 2 |
 | 2026-11-07 | 1 | Done: 329,330 cells loaded (A 141,950 / B 157,881 / C 29,499), all counts match docs; 29,531 shared genes. Early signal: stromal paired coverage is thin (A ≤3, B ≤2 donors) — affects Stage 4 choice | Check-in 1 |
 | 2026-11-07 | 0 | Done: uv project (96 locked pkgs), `src/opengo/` package, CLI with `verify`, pytest + ruff, git init (no commit). 70/70 inputs verified | Check-in 0 |

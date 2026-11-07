@@ -1,0 +1,53 @@
+  [10s] subsample: 87,489 cells x 29,531 shared genes
+  [17s] A_baseline: PCA done
+  [72s] AB PCA done
+2026-11-07 15:56:36,569 - harmonypy - INFO - Computing initial centroids with sklearn.KMeans...
+2026-11-07 15:56:42,068 - harmonypy - INFO - sklearn.KMeans initialization complete.
+  [103s] AB_harmony: Harmony done
+2026-11-07 15:57:07,073 - harmonypy - INFO - Computing initial centroids with sklearn.KMeans...
+2026-11-07 15:57:12,254 - harmonypy - INFO - sklearn.KMeans initialization complete.
+  [156s] AB_harmony_spec: Harmony done
+  [206s] AB_baseline: graph/UMAP/Leiden done
+  [252s] AB_harmony: graph/UMAP/Leiden done
+  [299s] AB_harmony_spec: graph/UMAP/Leiden done
+  [307s] A_baseline: metrics done
+  [322s] AB_baseline: metrics done
+  [336s] AB_harmony: metrics done
+  [351s] AB_harmony_spec: metrics done
+────────────────────────── stage3_integration_metrics ──────────────────────────
+      embedding  cells  cLISI_scaled  celltype_ASW   ARI   NMI  iLISI_scaled  
+batch_ASW
+     A_baseline  39632           1.0         0.625 0.100 0.496           NaN    
+NaN
+    AB_baseline  87489           1.0         0.624 0.291 0.637         0.000    
+0.485
+     AB_harmony  87489           1.0         0.649 0.392 0.662         0.003    
+0.807
+AB_harmony_spec  87489           1.0         0.631 0.561 0.727         0.000    
+0.428
+──────────────────────────── stage3_label_transfer ─────────────────────────────
+      embedding direction  accuracy  balanced_accuracy
+    AB_baseline      A->B     0.845              0.785
+    AB_baseline      B->A     0.659              0.655
+     AB_harmony      A->B     0.963              0.885
+     AB_harmony      B->A     0.869              0.880
+AB_harmony_spec      A->B     0.947              0.807
+AB_harmony_spec      B->A     0.304              0.546
+      356.25 real       490.50 user        28.83 sys
+          2682994688  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             3823237  page reclaims
+                7685  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   1  messages received
+                   1  signals received
+               42660  voluntary context switches
+             1168000  involuntary context switches
+           146934526  instructions retired
+            70150437  cycles elapsed
+            10781952  peak memory footprint

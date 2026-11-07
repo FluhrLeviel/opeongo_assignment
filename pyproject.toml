@@ -7,7 +7,7 @@ dependencies = [
     "anndata==0.12.19",
     "click==8.5.1",
     "h5py==3.16.0",
-    "harmonypy==2.1.0",
+    "harmonypy==0.0.10",
     "igraph>=1.0.0",
     "ipython==9.18.1",
     "jupytext==1.19.6",

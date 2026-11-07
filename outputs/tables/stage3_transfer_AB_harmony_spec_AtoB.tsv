@@ -1,0 +1,7 @@
+pop_eval	Endothelial	Lymphoid	Malignant_epithelial	Myeloid	Nonmalignant_epithelial	Stromal (fibro+mural)
+Endothelial	6947	2	1	1	40	80
+Lymphoid	2	14797	18	291	33	2
+Malignant_epithelial	1	49	17	8	1218	13
+Myeloid	2	372	0	6461	31	10
+Nonmalignant_epithelial	0	4	74	0	2146	45
+Stromal (fibro+mural)	55	4	3	2	157	14662
