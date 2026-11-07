@@ -116,7 +116,7 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1", "2", "3"]))
+@click.argument("stage", type=click.Choice(["1", "2", "3", "4"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
     import importlib
@@ -170,9 +170,22 @@ def integrate() -> None:
 
 
 @main.command()
+def overview() -> None:
+    """Stage 4: ECM panel across populations, panel coherence, focus-population coverage."""
+    from opengo import stage4
+
+    t0 = time.perf_counter()
+    out = stage4.run()
+    for name in ["stage4_ecm_median_logcpm", "stage4_focus_coverage", "stage4_panel_coherence"]:
+        console.rule(name)
+        console.print(out[name].round(2).to_string(index=False))
+    console.print(f"done in {time.perf_counter() - t0:.0f}s")
+
+
+@main.command()
 def pseudobulk() -> None:
-    """Stages 4-5: ECM overview and tumor vs adjacent pseudobulk testing."""
-    _not_yet("Stage 4-5")
+    """Stage 5: tumor vs adjacent testing in the focus population."""
+    _not_yet("Stage 5")
 
 
 @main.command()

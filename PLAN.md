@@ -207,6 +207,8 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | Date | Stage | Change | Reason |
 |---|---|---|---|
 | 2026-11-07 | all | Added check-in protocol, traceability table, CLI, multimodal n = 3 finding | Plan review |
+| 2026-11-07 | 4 | Done: ECM highest in stroma (both cohorts); summary = mean z (agrees with PC1, ρ ≥ 0.97); DCN/LUM fibroblast-specific, discordant in B. Proposed focus: stroma (fibro + mural), 3 + 9 paired donors; sensitivity pericyte-only and fibroblast fraction | Check-in 4 |
+| 2026-11-07 | 3 | Harmony by cohort approved | Check-in 3 |
 | 2026-11-07 | 3 | Done: A, A+B baseline, Harmony(cohort), Harmony(specimen). harmonypy pinned 0.0.10 (2.1.0 no-op). Proposed: Harmony by cohort; specimen key rejected (erases condition). Combined stromal compartment supported by label transfer (99 %) | Check-in 3 |
 | 2026-11-07 | 2 | Done: C excluded, flagged cells removed (approved) | Check-in 2 |
 | 2026-11-07 | 1 | Done: 329,330 cells loaded (A 141,950 / B 157,881 / C 29,499), all counts match docs; 29,531 shared genes. Early signal: stromal paired coverage is thin (A ≤3, B ≤2 donors) — affects Stage 4 choice | Check-in 1 |

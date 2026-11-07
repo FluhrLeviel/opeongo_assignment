@@ -55,7 +55,8 @@ uv run opengo verify
 | 1 fig | `uv run opengo figures 1` | `outputs/step_1_output/*.png` | done |
 | 2 | `uv run opengo qc`, then `uv run opengo explore`, then `uv run opengo figures 2` | per-cell QC flags, pseudobulk checkpoint, `outputs/tables/stage2_*.tsv`, `outputs/step_2_output/*.png` | done (~20 min); decisions pending review |
 | 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB); decision pending review |
-| 4–5 | `uv run opengo pseudobulk` | ECM overview, tumor vs adjacent tests | planned |
+| 4 | `uv run opengo overview`, then `uv run opengo figures 4` | ECM overview, panel coherence, focus coverage, `outputs/tables/stage4_*.tsv`, `outputs/step_4_output/*.png` | done (~1 min); decision pending review |
+| 5 | `uv run opengo pseudobulk` | tumor vs adjacent tests in the focus population | planned |
 | 6 | `uv run opengo multimodal` | crosswalk validation, bulk RNA / protein comparison | planned |
 | 7 | notebook in `notebooks/` | report figures and numbers | planned |
 
@@ -231,6 +232,53 @@ label transfer only — never for testing** (tests use pseudobulk counts, Stages
 - Paired donors for that compartment rise from 3 (A) to 12 (A + B) at ≥ 10 cells.
 - B adds an explicit pericyte label and an independent single-cell assay to test whether a
   tumor-vs-adjacent effect seen in nuclei replicates.
+
+### Stage 4 — where is the ECM panel expressed, and which population to test?
+
+Figures: [`outputs/step_4_output/`](outputs/step_4_output/) (regenerate with
+`uv run opengo overview`, `uv run opengo figures 4`). Values: cell level = log1p(CP10k) and
+fraction expressing (overview only); donor level = pseudobulk log2-CPM per specimen (≥ 10 cells),
+library size from all genes of the cohort.
+
+**1. Where is the program expressed?**
+- *Evidence:* `01_ecm_dotplot.png`, `02_ecm_donor_level.png`.
+- *Observation:* in both cohorts the stromal compartment has the highest expression of every panel
+  gene (median log2-CPM 6–9 in A, 4–10 in B). Endothelial cells express SPARC and FN1 strongly
+  (log2-CPM 7–10) but fibrillar collagens weakly and DCN/LUM not at all. Immune and epithelial
+  populations are low throughout.
+- *Within stroma:* DCN and LUM are **fibroblast-specific** (B fibroblasts log2-CPM ≈ 9; B pericytes
+  3.5 and 0; A "Fibroblasts", which are mostly mural cells, ≈ 0). The collagens, FN1 and SPARC are
+  shared by fibroblasts and mural cells.
+
+**2. Which summary of the 10 genes?**
+- *Check:* do the genes co-vary across specimens within stroma? Gene–gene Spearman, PC1, and
+  agreement between candidate summaries (`03_panel_coherence.png`).
+- *Evidence:* median pairwise ρ 0.48 (A) and 0.70 (B); PC1 explains 49 % / 64 %. The mean of
+  per-gene z-scores agrees with PC1 (ρ 1.00 / 0.97) and with log of summed CPM (0.96 / 0.98).
+- *Decision:* **mean of per-gene z-scored log2-CPM** (z within cohort × population): equal gene
+  weights, simple, and equivalent to the alternatives here.
+- *Genes that challenge it:* in B, **DCN and LUM do not co-vary with the other eight** (PC1 loadings
+  ≈ 0; ρ with the rest ≈ −0.3 to 0.5). Because they mark fibroblasts rather than mural cells, they
+  track the fibroblast-to-pericyte mix inside the compartment. They are always reported separately,
+  and the summary is also reported without them.
+
+**3. Which focus population? (proposed)**
+- *Evidence:* `04_focus_population_choice.png`.
+
+| Candidate | Panel expression | Paired donors ≥ 10 cells (A + B) | Verdict |
+|---|---|---|---|
+| **Stroma: fibroblast + mural** | highest | 3 + 9 = **12** | **chosen** |
+| Fibroblast/myofibroblast only | highest | 3 + 2 = 5 | too few pairs in B |
+| Pericyte only | high | 0 + 9 = 9 | B only; sensitivity |
+| Endothelial | SPARC/FN1 only | 3 + 9 = 12 | weak for collagens/DCN/LUM; contrast only |
+
+- *Justification:* the stromal compartment is where the panel is expressed, it is supported as one
+  compartment across cohorts by markers (Stage 2) and label transfer (Stage 3, 99 %), and it has
+  the best paired coverage.
+- *Known risk, carried into Stage 5:* a tumor-vs-adjacent difference in this compartment can come
+  from a change in its fibroblast:mural mix rather than a change in expression per cell. Stage 5
+  therefore reports the pericyte-only (B) result and the fibroblast fraction within the
+  compartment alongside the main estimate.
 
 ## Parameters, seeds and records
 

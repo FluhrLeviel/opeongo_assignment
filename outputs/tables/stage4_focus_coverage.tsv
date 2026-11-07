@@ -1,0 +1,20 @@
+cohort	population	paired_donors_ge10	paired_donors_ge20	paired_donors_ge50
+A	ALL	4	4	4
+A	Endothelial	3	2	0
+A	Lymphoid	2	2	2
+A	Malignant_epithelial	0	0	0
+A	Myeloid	3	3	3
+A	Nonmalignant_epithelial	1	1	1
+A	Stromal (fibro+mural)	3	2	1
+A	Stromal_fibro_myo	3	2	1
+A	Unresolved	1	1	0
+B	ALL	9	9	9
+B	Endothelial	9	8	8
+B	Lymphoid	9	9	9
+B	Malignant_epithelial	0	0	0
+B	Myeloid	9	9	9
+B	Nonmalignant_epithelial	0	0	0
+B	Pericyte	9	9	8
+B	Stromal (fibro+mural)	9	9	8
+B	Stromal_fibro_myo	2	0	0
+B	Unresolved	3	3	0
