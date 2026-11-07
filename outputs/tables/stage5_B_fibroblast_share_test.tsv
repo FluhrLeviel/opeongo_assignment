@@ -1,0 +1,2 @@
+feature	n_donors	mean	sd	se	ci_low	ci_high	n_up	p_signflip	min_possible_p
+fibroblast share (T - Adj)	9	0.04434639677387811	0.12931654651006372	0.04310551550335457	-0.055055100226964804	0.14374789377472103	2	0.5	0.00390625

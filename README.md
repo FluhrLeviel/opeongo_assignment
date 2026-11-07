@@ -56,7 +56,7 @@ uv run opengo verify
 | 2 | `uv run opengo qc`, then `uv run opengo explore`, then `uv run opengo figures 2` | per-cell QC flags, pseudobulk checkpoint, `outputs/tables/stage2_*.tsv`, `outputs/step_2_output/*.png` | done (~20 min); decisions pending review |
 | 3 | `uv run opengo integrate`, then `uv run opengo figures 3` | embeddings + metrics, `outputs/tables/stage3_*.tsv`, `outputs/step_3_output/*.png` | done (~6 min, peak ~2.7 GB); decision pending review |
 | 4 | `uv run opengo overview`, then `uv run opengo figures 4` | ECM overview, panel coherence, focus coverage, `outputs/tables/stage4_*.tsv`, `outputs/step_4_output/*.png` | done (~1 min); decision pending review |
-| 5 | `uv run opengo pseudobulk` | tumor vs adjacent tests in the focus population | planned |
+| 5 | `uv run opengo pseudobulk`, then `uv run opengo figures 5` | paired tumor vs adjacent effects, meta-analysis, robustness, `outputs/tables/stage5_*.tsv`, `outputs/step_5_output/*.png` | done (< 1 min); pending review |
 | 6 | `uv run opengo multimodal` | crosswalk validation, bulk RNA / protein comparison | planned |
 | 7 | notebook in `notebooks/` | report figures and numbers | planned |
 
@@ -279,6 +279,61 @@ library size from all genes of the cohort.
   from a change in its fibroblast:mural mix rather than a change in expression per cell. Stage 5
   therefore reports the pericyte-only (B) result and the fibroblast fraction within the
   compartment alongside the main estimate.
+
+### Stage 5 — tumor vs adjacent in the stromal compartment
+
+Figures: [`outputs/step_5_output/`](outputs/step_5_output/) (regenerate with
+`uv run opengo pseudobulk`, `uv run opengo figures 5`).
+
+**What is tested.** Pseudobulk raw counts of QC-passing stromal (fibroblast + mural) cells per
+specimen → log2-CPM (library size = all genes of the cohort). **Donors are the replicates:**
+repeated tumor regions are averaged within donor; the primary analysis is paired (tumor − adjacent
+within donor); specimens with < 10 compartment cells are dropped. Panel summary = mean of per-gene
+standardized differences (the paired form of the Stage 4 mean-z score). Per cohort: mean, 95 %
+t-interval, exact sign-flip p (all 2ⁿ sign patterns; with n = 3 the smallest possible p is 0.25),
+BH correction over the 10 genes. Cohorts combined by inverse-variance meta-analysis
+(DerSimonian–Laird random effects, I²). The integration embedding is not used.
+
+**Observations** (`01_paired_panel_score.png`, `02_gene_effects.png`)
+
+| | n paired donors | Panel score, tumor − adjacent [95 % CI] | Donors up | Sign-flip p |
+|---|---|---|---|---|
+| Cohort B (scRNA) | 9 | **+1.04 [+0.63, +1.46]** | 9 / 9 | 0.004 |
+| Cohort A (snRNA) | 3 | +0.02 [−1.77, +1.81] | 1 / 3 | 1.0 |
+| A + B, random effects | 12 | +0.60 [−0.39, +1.59] (I² = 80 %) | 10 / 12 | — |
+
+- *B, per gene:* COL1A2, COL3A1, FN1 and SPARC increase in all 9 donors (log2FC +1.7 to +2.6,
+  BH q = 0.01); COL1A1, COL6A1, COL6A2 also increase (q ≤ 0.03); COL5A1 is borderline (q = 0.09).
+- *Genes that challenge the summary:* **DCN and LUM do not increase** (B log2FC −1.7 and −0.7,
+  q ≥ 0.17) and vary wildly between donors (±5 log2 units), consistent with their being
+  fibroblast-specific in a compartment that is ~97 % pericytes in B.
+- *A:* no consistent direction; one donor up, two down; intervals span ±2.
+
+**Robustness check — targeted at the main uncertainty, compartment composition**
+(`03_robustness.png`). If the effect came from more fibroblasts in tumor stroma, it should vanish in
+pure mural cells and without the fibroblast genes, and the fibroblast share should rise in tumors.
+- Pericytes only (B): **+1.27 [+0.85, +1.70], 9 / 9 up.**
+- Panel without DCN/LUM (B): **+1.41 [+0.96, +1.86], 9 / 9 up.**
+- Fibroblast share of the compartment, tumor − adjacent (B): +0.04 [−0.06, +0.14], 2 / 9 up.
+- → composition does not explain the B effect.
+
+**Sensitivities** (same figure): B is unchanged with ≥ 20 or ≥ 50 cells (+1.04, +1.07), with one
+tumor region per donor (+1.04), in a mixed model using all 26 specimens with a donor random
+intercept (+1.11 [+0.85, +1.36]), and when any single donor is left out (+0.93 to +1.15). A stays
+null in a mixed model using all 24 donors and 32 specimens (−0.18 [−0.85, +0.48]).
+*Specificity:* endothelial cells show no change (B +0.13 [−0.26, +0.52]), so this is not a global
+tumor shift in ECM transcripts.
+
+**Interpretation (separate from the observations above)**
+- In single-cell data (B), tumor-associated mural/pericyte cells express more fibrillar collagen,
+  FN1 and SPARC transcript than their adjacent counterparts in the same patients; the fibroblast
+  proteoglycans DCN/LUM do not follow. Higher transcript levels are not, by themselves, evidence of
+  active matrix remodelling.
+- **Adding cohort A does not strengthen this; it exposes disagreement.** A has only 3 paired donors
+  and 4 adjacent specimens in total, a different assay (nuclei), and a compartment of different make-
+  up (fibroblast-like + mural, versus ~97 % pericytes in B). The combined random-effects interval
+  includes zero. The B result is robust within B; whether it generalises to snRNA data and to
+  fibroblasts is not established here.
 
 ## Parameters, seeds and records
 

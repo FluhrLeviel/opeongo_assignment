@@ -207,6 +207,8 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | Date | Stage | Change | Reason |
 |---|---|---|---|
 | 2026-11-07 | all | Added check-in protocol, traceability table, CLI, multimodal n = 3 finding | Plan review |
+| 2026-11-07 | 5 | Done: B +1.04 [0.63, 1.46] 9/9 donors; A +0.02 (n=3); meta RE +0.60 [−0.39, 1.59], I² 80 %. Robust to composition (pericytes only, no DCN/LUM, fibroblast share unchanged) and to all sensitivities; endothelial null | Check-in 5 |
+| 2026-11-07 | 4 | Stromal focus + mean-z approved | Check-in 4 |
 | 2026-11-07 | 4 | Done: ECM highest in stroma (both cohorts); summary = mean z (agrees with PC1, ρ ≥ 0.97); DCN/LUM fibroblast-specific, discordant in B. Proposed focus: stroma (fibro + mural), 3 + 9 paired donors; sensitivity pericyte-only and fibroblast fraction | Check-in 4 |
 | 2026-11-07 | 3 | Harmony by cohort approved | Check-in 3 |
 | 2026-11-07 | 3 | Done: A, A+B baseline, Harmony(cohort), Harmony(specimen). harmonypy pinned 0.0.10 (2.1.0 no-op). Proposed: Harmony by cohort; specimen key rejected (erases condition). Combined stromal compartment supported by label transfer (99 %) | Check-in 3 |

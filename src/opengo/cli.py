@@ -116,7 +116,7 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1", "2", "3", "4"]))
+@click.argument("stage", type=click.Choice(["1", "2", "3", "4", "5"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
     import importlib
@@ -184,8 +184,15 @@ def overview() -> None:
 
 @main.command()
 def pseudobulk() -> None:
-    """Stage 5: tumor vs adjacent testing in the focus population."""
-    _not_yet("Stage 5")
+    """Stage 5: tumor vs adjacent (paired, donor-level) in the stromal compartment."""
+    from opengo import stage5
+
+    out = stage5.run()
+    e = out["stage5_effects"]
+    show = e[e["analysis"].str.startswith("primary") & e["feature"].str.startswith("panel")]
+    cols = ["cohort", "feature", "n_donors", "mean", "ci_low", "ci_high", "n_up", "p_signflip"]
+    cols += ["random", "random_low", "random_high", "I2"]
+    console.print(show[[c for c in cols if c in show]].round(3).to_string(index=False))
 
 
 @main.command()
