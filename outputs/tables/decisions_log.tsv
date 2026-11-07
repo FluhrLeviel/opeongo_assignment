@@ -3,3 +3,8 @@ date	stage	decision	evidence	alternatives_considered
 2026-11-07	0	Environment = uv project (pyproject.toml + uv.lock), Python 3.11, seed 42	Reproducibility requirement	pip requirements.txt
 2026-11-07	0	Supplied README.md moved byte-identical to docs/supplied/README.md; verify remaps it	Repository README must sit at root; inputs must stay unchanged	Repo root in a parent folder
 2026-11-07	0	No supplied package files committed except FILE_MANIFEST.tsv	Repository may be public; inputs referenced via manifest	Commit small metadata tables
+2026-11-07	1	A restricted to the 141,950 author-annotated nuclei; no cell calling	Assignment instruction; all annotations matched raw barcodes (34/34 specimens)	Re-call cells (not required)
+2026-11-07	1	B and C: all deposited cells kept at load (B 157,881 all annotated; C 29,499)	No filtering before Stage 2 QC	-
+2026-11-07	1	Counts stored float32 after check: non-negative integers, < 2^24	Exact representation; scanpy convention	int32
+2026-11-07	1	Gene correspondence: A-C by Ensembl ID; B symbols -> unique A symbol, else unique C symbol; 532 B symbols (266 IDs) where old+new names of one ID both appear in B left unassigned; 2,204 B symbols unmatched	gene_correspondence_summary.tsv; ECM panel found by Ensembl ID in all cohorts	Map via external annotation (not supplied)
+2026-11-07	1	Shared gene set A/B/C = 29,531 Ensembl IDs (used for integration); absent genes never zero-filled	gene_correspondence.tsv	Union with zero fill (rejected)

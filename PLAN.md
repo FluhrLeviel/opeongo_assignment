@@ -180,4 +180,5 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
 | Date | Stage | Change | Reason |
 |---|---|---|---|
 | 2026-11-07 | all | Added check-in protocol, traceability table, CLI, multimodal n = 3 finding | Plan review |
+| 2026-11-07 | 1 | Done: 329,330 cells loaded (A 141,950 / B 157,881 / C 29,499), all counts match docs; 29,531 shared genes. Early signal: stromal paired coverage is thin (A ≤3, B ≤2 donors) — affects Stage 4 choice | Check-in 1 |
 | 2026-11-07 | 0 | Done: uv project (96 locked pkgs), `src/opengo/` package, CLI with `verify`, pytest + ruff, git init (no commit). 70/70 inputs verified | Check-in 0 |

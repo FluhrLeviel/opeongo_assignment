@@ -57,10 +57,58 @@ def _not_yet(stage: str) -> None:
 
 
 @main.command()
-@click.argument("cohort", type=click.Choice(["A", "B", "C"]))
+@click.argument("cohort", type=click.Choice(["A", "B", "C", "all"]))
 def load(cohort: str) -> None:
-    """Stage 1: load one cohort's native files into a raw-count checkpoint."""
-    _not_yet("Stage 1")
+    """Stage 1: load native files into raw-count checkpoints (per specimen + per cohort)."""
+    import pandas as pd
+
+    from opengo.io import load_cohort
+
+    cohorts = config.COHORTS if cohort == "all" else (cohort,)
+    config.TABLES_DIR.mkdir(parents=True, exist_ok=True)
+    for c in cohorts:
+        t0 = time.perf_counter()
+        console.rule(f"Cohort {c}")
+
+        def progress(rec, t0=t0):
+            console.print(
+                f"  {rec.sample_id:<18} cells={rec.cells_loaded:>6} "
+                f"annotated={rec.annotated_matched}/{rec.annotated_expected} "
+                f"genes={rec.n_genes} int={rec.integer_counts} "
+                f"[{time.perf_counter() - t0:.0f}s]"
+            )
+
+        table = load_cohort(c, progress=progress)
+        out = config.TABLES_DIR / f"stage1_specimens_{c}.tsv"
+        table.to_csv(out, sep="\t", index=False)
+        console.print(
+            f"Cohort {c}: {len(table)} specimens, {table['cells_loaded'].sum():,} cells "
+            f"-> {config.cohort_raw_path(c).relative_to(config.PROJECT_ROOT)} "
+            f"({time.perf_counter() - t0:.0f}s)"
+        )
+    parts = [
+        pd.read_csv(p, sep="\t")
+        for c in config.COHORTS
+        if (p := config.TABLES_DIR / f"stage1_specimens_{c}.tsv").exists()
+    ]
+    pd.concat(parts).to_csv(config.TABLES_DIR / "stage1_specimens.tsv", sep="\t", index=False)
+
+
+@main.command()
+def genes() -> None:
+    """Stage 1: gene correspondence across cohorts + ECM panel presence check."""
+    from opengo.genes import build_gene_table, ecm_check
+
+    table, summary = build_gene_table()
+    table.to_csv(config.TABLES_DIR / "gene_correspondence.tsv", sep="\t", index=False)
+    summary.to_csv(config.TABLES_DIR / "gene_correspondence_summary.tsv", sep="\t", index=False)
+    ecm = ecm_check(table)
+    ecm.to_csv(config.TABLES_DIR / "ecm_panel_presence.tsv", sep="\t", index=False)
+    console.print(summary.to_string(index=False))
+    console.print(ecm.to_string(index=False))
+    if not ecm["shared_ABC"].fillna(False).all():
+        console.print("[red]ECM panel gene missing from a cohort[/red]")
+        sys.exit(1)
 
 
 @main.command()

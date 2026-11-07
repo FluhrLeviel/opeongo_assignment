@@ -1,0 +1,14 @@
+cohort	sample_id	donor_key	condition	assay	manifest_cells	raw_barcodes	cells_loaded	annotated_expected	annotated_matched	loaded_not_annotated	n_genes	integer_counts	min_count	max_count	total_counts
+C	GSM4819725	C:Patient SS_2005	Tumor	scRNA-seq	1704	1704	1704	0	0	0	33694	True	1.0	1800.0	1769822.0
+C	GSM4819726	C:Patient SS_2006	Tumor	scRNA-seq	1410	1410	1410	0	0	0	33694	True	1.0	4422.0	6117924.0
+C	GSM4819727	C:Patient SS_2006	Adjacent	scRNA-seq	1660	1660	1660	0	0	0	33694	True	1.0	2536.0	1625657.0
+C	GSM4819728	C:Patient SS_2007	Tumor	scRNA-seq	923	923	923	0	0	0	33694	True	1.0	4591.0	3126230.0
+C	GSM4819729	C:Patient SS_2007	Adjacent	scRNA-seq	3674	3674	3674	0	0	0	33694	True	1.0	1611.0	2158595.0
+C	GSM4819730	C:Patient SS_2014	Adjacent	scRNA-seq	1097	1097	1097	0	0	0	33694	True	1.0	2183.0	896777.0
+C	GSM4819731	C:Patient SS_2014	Adjacent	scRNA-seq	578	578	578	0	0	0	33694	True	1.0	1287.0	387004.0
+C	GSM4819733	C:Patient SS_2017	Tumor	scRNA-seq	1644	1644	1644	0	0	0	33694	True	1.0	619.0	675711.0
+C	GSM4819734	C:Patient SS_2017	Adjacent	scRNA-seq	2872	2872	2872	0	0	0	33694	True	1.0	286.0	863312.0
+C	GSM4819735	C:Patient SS_2022	Tumor	scRNA-seq	1896	1896	1896	0	0	0	33694	True	1.0	2165.0	2796463.0
+C	GSM4819736	C:Patient SS_2022	Adjacent	scRNA-seq	1953	1953	1953	0	0	0	33694	True	1.0	433.0	806981.0
+C	GSM4819737	C:Patient SS_2023	Tumor	scRNA-seq	6453	6453	6453	0	0	0	33694	True	1.0	1760.0	5064357.0
+C	GSM4819738	C:Patient SS_2026	Tumor	scRNA-seq	3635	3635	3635	0	0	0	33694	True	1.0	266.0	1178238.0

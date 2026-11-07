@@ -7,7 +7,8 @@ combining cohorts changes that, and whether linked bulk RNA and protein data agr
 
 Panel: COL1A1, COL1A2, COL3A1, COL5A1, COL6A1, COL6A2, FN1, SPARC, DCN, LUM.
 
-> **Status:** work in progress. Stage 0 (environment, CLI, input verification) is done;
+> **Status:** work in progress. Stages 0–1 (environment, input verification, loading and
+> reconciliation of all three cohorts) are done;
 > the analysis stages are added one at a time after review. See [`PLAN.md`](PLAN.md) for the
 > full plan, decision gates and change log.
 
@@ -50,7 +51,7 @@ uv run opengo verify
 | Step | Command | Output | Status |
 |---|---|---|---|
 | 0 | `uv run opengo verify` | `outputs/tables/input_verification.tsv` | done |
-| 1 | `uv run opengo load A` / `B` / `C` | raw-count checkpoints in `outputs/checkpoints/` | planned |
+| 1 | `uv run opengo load all` (or `A` / `B` / `C`), then `uv run opengo genes` | raw-count checkpoints in `outputs/checkpoints/`; `outputs/tables/stage1_*.tsv`, `gene_correspondence*.tsv`, `ecm_panel_presence.tsv` | done (~10 min, peak ~1.9 GB RAM) |
 | 2 | `uv run opengo qc` | QC tables and figures | planned |
 | 3 | `uv run opengo integrate` | baseline vs Harmony comparison | planned |
 | 4–5 | `uv run opengo pseudobulk` | ECM overview, tumor vs adjacent tests | planned |

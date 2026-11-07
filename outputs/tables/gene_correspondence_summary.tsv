@@ -1,0 +1,12 @@
+metric	value
+genes_A	33538
+genes_B	32738
+genes_C	33694
+A_and_C_by_id	32991
+B_mapped_via_A_symbol	20167
+B_mapped_via_C_symbol	9831
+B_ambiguous	4
+B_collision	532
+B_unmatched	2204
+shared_A_B_C	29531
+symbol_differs_A_vs_C_same_id	11116
