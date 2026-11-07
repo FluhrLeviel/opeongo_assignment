@@ -2,234 +2,312 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ECM program in ccRCC</title>
+<title>ECM program in ccRCC stroma</title>
 <style>
-  @page { size: A4; margin: 11mm 12mm 11mm 12mm; }
-  body { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.6pt; line-height: 1.32;
-         color: #111; margin: 0; }
-  h1 { font-size: 13.5pt; margin: 0 0 1mm 0; }
-  h2 { font-size: 10pt; margin: 2.6mm 0 1mm 0; border-bottom: 0.4pt solid #999; padding-bottom: 0.4mm; }
-  h3 { font-size: 8.8pt; margin: 1.6mm 0 0.6mm 0; }
-  p { margin: 0 0 1.3mm 0; text-align: justify; }
-  ul { margin: 0 0 1.3mm 0; padding-left: 4.2mm; }
-  li { margin: 0 0 0.5mm 0; }
-  .meta { font-size: 7.8pt; color: #444; margin-bottom: 1.6mm; }
-  .box { border: 0.5pt solid #888; background: #f6f6f6; padding: 1.4mm 2mm; margin: 1.2mm 0 1.6mm 0; }
-  figure { margin: 1.4mm 0 1.4mm 0; page-break-inside: avoid; }
+  @page { size: A4; margin: 10.5mm 12mm 10.5mm 12mm; }
+  :root { --ink: #1a1a1a; --muted: #555; --accent: #1f3a5f; --rule: #c8ccd2; --tint: #f3f5f8; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 8.45pt;
+         line-height: 1.31; color: var(--ink); margin: 0; hyphens: auto; }
+  header { border-bottom: 1.2pt solid var(--accent); padding-bottom: 1.6mm; margin-bottom: 2.2mm; }
+  h1 { font-size: 13.2pt; font-weight: 700; color: var(--accent); margin: 0 0 1mm 0;
+       letter-spacing: -0.1pt; }
+  .byline { font-size: 8.4pt; color: var(--ink); }
+  .byline b { font-weight: 600; }
+  .meta { font-size: 7.4pt; color: var(--muted); margin-top: 0.6mm; }
+  .meta code { font-size: 7pt; }
+  h2 { font-size: 10pt; color: var(--accent); margin: 2.4mm 0 1mm 0; font-weight: 700; }
+  h2 .num { display: inline-block; min-width: 5mm; }
+  p { margin: 0 0 1.2mm 0; text-align: justify; }
+  .lead { font-weight: 600; color: var(--accent); }
+  .box { background: var(--tint); border-left: 2.2pt solid var(--accent); padding: 1.8mm 2.6mm;
+         margin: 0 0 2mm 0; }
+  .box .title { font-weight: 700; color: var(--accent); font-size: 8.4pt; letter-spacing: 0.2pt;
+                text-transform: uppercase; margin-bottom: 0.8mm; }
+  .box ol { margin: 0; padding-left: 4.4mm; }
+  .box li { margin-bottom: 0.4mm; }
+  figure { margin: 1.6mm 0 1.6mm 0; page-break-inside: avoid; }
   figure img { width: 100%; display: block; }
-  figcaption { font-size: 7.4pt; color: #222; margin-top: 0.6mm; text-align: justify; }
-  table { border-collapse: collapse; width: 100%; font-size: 7.6pt; margin: 1mm 0 1.6mm 0; }
-  th, td { border-bottom: 0.4pt solid #bbb; padding: 0.5mm 1.2mm; text-align: left; vertical-align: top; }
-  th { background: #eee; }
-  .obs { font-weight: 600; }
-  .small { font-size: 7.4pt; }
-  .refs { font-size: 7.1pt; color: #333; }
+  figcaption { font-size: 7.4pt; color: #222; margin-top: 1mm; text-align: justify;
+               line-height: 1.3; border-top: 0.5pt solid var(--rule); padding-top: 0.8mm; }
+  figcaption b { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 7.8pt; margin: 1.4mm 0 2mm 0;
+          border-top: 1pt solid var(--ink); border-bottom: 1pt solid var(--ink); }
+  th { text-align: left; font-weight: 600; border-bottom: 0.6pt solid var(--ink);
+       padding: 0.7mm 1.4mm; }
+  td { padding: 0.6mm 1.4mm; border-bottom: 0.3pt solid var(--rule); }
+  tr:last-child td { border-bottom: none; }
+  tr.key td { background: var(--tint); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tcap { font-size: 7.4pt; color: #222; margin: 0 0 0.6mm 0; }
+  .tcap b { color: var(--accent); }
+  ul.lim { margin: 0 0 1.5mm 0; padding-left: 4.2mm; }
+  ul.lim li { margin-bottom: 0.7mm; text-align: justify; }
+  .fine { font-size: 7.1pt; color: #333; line-height: 1.3; }
+  .refs { font-size: 7.1pt; color: #333; margin: 0.8mm 0 0 0; padding-left: 4.4mm; }
   .refs li { margin-bottom: 0.2mm; }
+  code { font-family: Menlo, Consolas, monospace; font-size: 7.4pt; }
 </style>
 </head>
 <body>
 
+<header>
 <h1>An extracellular-matrix gene program in clear-cell renal cell carcinoma stroma</h1>
-<div class="meta"><b>Leviel Fluhr</b> · Opeongo computational biology home assignment · 7 November 2026 ·
-Code, environment and every number/figure: <b>github.com/FluhrLeviel/opeongo_assignment</b>
-(<code>uv sync &amp;&amp; uv run opengo all</code>; decisions with evidence in
-<code>outputs/tables/decisions_log.tsv</code>)</div>
+<div class="byline"><b>Leviel Fluhr</b> · Opeongo computational biology home assignment · 7 November 2026</div>
+<div class="meta">Code, environment and every number and figure: <b>github.com/FluhrLeviel/opeongo_assignment</b>
+(<code>uv sync &amp;&amp; uv run opengo all</code>). Decisions and their evidence:
+<code>outputs/tables/decisions_log.tsv</code>.</div>
+</header>
 
 <div class="box">
-<b>Summary.</b>
-(1) Of three RNA cohorts, cohort C was excluded because its counts are capped at ≤409
-non-mitochondrial counts per cell; A (single-nucleus, 25 donors) and B (single-cell, 11 donors) were
-combined with Harmony (batch = cohort), which aligned cell identities without erasing tumor/adjacent
-structure. (2) The 10-gene panel is a stromal program; in the combined fibroblast + mural (pericyte)
-compartment, cohort B shows higher panel expression in tumor than adjacent tissue in <b>9/9 paired
-donors</b> (+1.04 SD, 95 % CI 0.63–1.46), robust to compartment composition. Cohort A (3 paired donors)
-is too imprecise to confirm or refute this, so the pooled estimate depends on B and on the pooling model.
-Fibrillar collagens, FN1 and SPARC drive the increase; DCN and LUM do not follow. (3) The 3 matched
-snRNA–bulk donors are too few to decide; the whole CPTAC bulk RNA (72 pairs) and protein (80 pairs)
-cohorts show the same gene-level pattern, which may reflect per-cell change, the expansion of mural and
-vascular tissue, or both.
+<div class="title">Key findings</div>
+<ol>
+<li>Cohort C was excluded because every cell carries at most 409 non-mitochondrial counts. Cohorts A
+(single-nucleus, 25 donors) and B (single-cell, 11 donors) were combined with Harmony, which aligned
+cell identities without erasing tumor/adjacent structure.</li>
+<li>The ten-gene panel is a stromal program. In the fibroblast + mural compartment, cohort B shows
+higher expression in tumor than in adjacent tissue in all 9 paired donors (+1.04 SD, 95 % CI
+0.63–1.46), and this is not explained by compartment composition. Fibrillar collagens, FN1 and SPARC
+drive the increase; DCN and LUM do not follow.</li>
+<li>Cohort A (3 paired donors) is too imprecise to confirm or refute this, so the pooled estimate
+rests on B and depends on the pooling model.</li>
+<li>Only 3 donors have matched single-nucleus, bulk RNA and protein data, too few to decide. The whole
+CPTAC bulk RNA (72 pairs) and protein (80 pairs) cohorts show the same gene-level pattern, which may
+reflect per-cell change, expansion of mural and vascular tissue, or both.</li>
+</ol>
 </div>
 
-<h2>1 · Quality, cohorts and integration</h2>
-<p><b>Loading and reconciliation.</b> Cohort A raw droplet matrices were restricted to the
-141,950 author-annotated nuclei (34 specimens; every annotation matched); B (157,881 cells,
-26 specimens) and C (29,499 cells, 13 ccRCC/adjacent specimens; the chromophobe specimen is out of scope) were
-loaded in full. Per-specimen counts equal the
-package manifest. Genes were matched by Ensembl ID (A, C) and unique symbol (B; 532 symbols that are
-old and new names of the same gene were left out): 29,531 genes are shared, including all 10 panel
-genes. The suggested label guide maps A "TRM" to lymphoid; these 510 nuclei express CSF1R (50 %, as
-macrophages) but not CD3D/E, CD2 or CD8A (≤2 %), so they were remapped to myeloid.</p>
-<p><b>QC criteria.</b> Flags were set per specimen and per assay rather than with global cut-offs:
-counts/genes &lt; median − 5 MAD, counts &gt; median + 5 MAD, mitochondrial fraction &gt; median + 3
-MAD and &gt;5 % in nuclei (where mitochondrial reads indicate ambient RNA) or &gt;25 % in whole kidney
-cells, plus Scrublet doublets. A and B were already author-filtered (B's QC fields match our
-recomputation exactly); flagged cells were removed (A 4.2 %, B 0.9 %; no specimen removed). Removal is
-uneven across populations: ≤4 % in stroma and endothelium, but 22 % of A lymphoid, 10 % of A myeloid
-and 13 % of B non-malignant epithelial cells (Fig. 1f), one reason population proportions are never
-compared. <span class="obs">Cohort C was excluded</span>: every cell has ≤409
-non-mitochondrial counts (A and B reach 10<sup>4</sup>–10<sup>5</sup>; Fig. 1a), 76 % of its reads
-are mitochondrial, its two worst specimens are the tumors of two of its four paired donors, and DCN/LUM
-are detected in 0.2 % of cells. A marker-based labelling validated on A and B (81 %/95 % agreement
-with author labels) still recovers broad populations in C, but per-cell ECM signal is too sparse.</p>
-<p><b>Baseline vs integration.</b> On a stratified subsample (87,489 cells: ≤1,000 per specimen plus
-every stromal and endothelial cell) the unintegrated A+B embedding separates by cohort (Fig. 1b). In whole-specimen pseudobulk PCA, PC1
-carries 83 % of variance and is almost entirely cohort (R² 0.99; single-nucleus vs single-cell). Cohort A
-alone, the starting point, has cell-type ASW 0.63 and tumor/adjacent structure within stroma 0.26. Harmony with batch = cohort (Fig. 1c,d) raised within-population cohort mixing (batch ASW
-0.49→0.81), cell-type separation (0.62→0.65) and cross-cohort kNN label transfer (balanced accuracy
-0.72→0.88), and kept the tumor/adjacent structure within stroma (0.24→0.20). Harmony with batch =
-specimen erased that structure (0.02), because specimen is confounded with condition, and was rejected
-(Fig. 1e). <i>Preserved:</i> all major populations (kNN purity 0.89–1.00) and within-population
-condition structure. <i>Weakened:</i> the malignant/non-malignant epithelial boundary across cohorts and
-global mixing, which stays low because the cohorts differ in composition (A mostly tumor nuclei, B mostly
-immune cells) and assay. <i>Lost:</i> nothing with batch = cohort; with batch = specimen, the
-tumor/adjacent structure. C's potential contribution (4 more paired donors) is lost to its exclusion. <i>What combining adds:</i> after Harmony, A's labels predict 99 % of B's
-fibroblast and pericyte cells as stroma (69 % unintegrated), supporting one stromal compartment across
-cohorts, and paired donors for that compartment rise from 3 to 12 (Fig. 1g). The embedding was used only
-for visualisation and label transfer; no test uses it.</p>
+<h2><span class="num">1</span>Quality, cohorts and integration</h2>
+
+<p><span class="lead">Loading and reconciliation.</span> We restricted cohort A's raw droplet
+matrices to the 141,950 nuclei annotated by the authors (34 specimens; every annotation matched a
+barcode). Cohort B (157,881 cells, 26 specimens) and cohort C (29,499 cells, 13 ccRCC or adjacent
+specimens; the chromophobe specimen is out of scope) were loaded in full. Cell counts per specimen
+match the package manifest. Genes were matched by Ensembl identifier in A and C and by unique symbol in
+B, leaving 29,531 shared genes, including all ten panel genes. One suggested label was corrected: the
+guide maps A's "TRM" nuclei (n = 510) to lymphoid, but they express CSF1R as often as macrophages do
+(50 %) and almost never express CD3D/E, CD2 or CD8A (≤ 2 %), so we treated them as myeloid.</p>
+
+<p><span class="lead">Quality control.</span> We flagged cells per specimen and per assay rather than
+with global cut-offs. A cell was flagged if its counts or genes fell more than 5 median absolute
+deviations below the specimen median, its counts exceeded 5 MAD above it, or Scrublet called it a
+doublet. It was also flagged if its mitochondrial fraction exceeded the specimen median by 3 MAD and
+exceeded 5 % in nuclei (where mitochondrial reads indicate ambient RNA) or 25 % in whole kidney cells
+(where proximal-tubule cells are naturally high). Cohorts A and B had already been filtered by their
+authors, and B's quality fields match our recomputation exactly. Removing flagged cells cost 4.2 % of
+A and 0.9 % of B, and no specimen was removed. Removal was uneven across populations: under 4 % in
+stroma and endothelium, but 22 % of A lymphoid, 10 % of A myeloid and 13 % of B non-malignant
+epithelial cells (Fig. 1f). This is one reason we never compare population proportions. <b>Cohort C
+was excluded.</b> Every C cell has at most 409 non-mitochondrial counts, whereas A and B reach
+10<sup>4</sup>–10<sup>5</sup> (Fig. 1a). Mitochondrial reads make up 76 % of C's counts, its two
+worst specimens are tumors from two of its four paired donors, and DCN and LUM are detected in only
+0.2 % of its cells. A marker-based labelling, validated on A and B (81 % and 95 % agreement with
+author labels; <code>stage2_marker_label_accuracy.tsv</code>), still recovers broad populations in C,
+but per-cell ECM signal there is too sparse to support a comparison.</p>
+
+<p><span class="lead">Baseline versus integration.</span> We embedded a stratified subsample of
+87,489 cells (up to 1,000 per specimen plus every stromal and endothelial cell). Cohort A on its own,
+our starting point, separates cell types well (cell-type ASW 0.63) and shows tumor/adjacent structure
+within stroma (silhouette 0.26). Adding cohort B without correction separates the cells by cohort
+(Fig. 1b). In whole-specimen pseudobulk, the first principal component carries 83 % of the variance
+and is almost entirely cohort (R² 0.99), i.e. single-nucleus versus single-cell
+(<code>stage2_pseudobulk_pca_r2_ALL.tsv</code>). Harmony with cohort as the batch (Fig. 1c, d)
+raised cohort mixing within populations (batch ASW 0.49 → 0.81), cell-type separation
+(0.62 → 0.65) and cross-cohort label transfer (balanced accuracy 0.72 → 0.88), while largely keeping
+the tumor/adjacent structure in stroma (0.24 → 0.20; Fig. 1e). Using specimen as the batch erased that
+structure (0.02), because specimen is confounded with condition, so we rejected it.</p>
+
+<p>Integration with batch = cohort <i>preserved</i> every major population (kNN purity 0.89–1.00)
+and the within-population condition structure. It <i>weakened</i> the malignant/non-malignant
+epithelial boundary across cohorts and left global mixing low, because the cohorts differ in
+composition (A is mostly tumor nuclei, B mostly immune cells) and in assay. Nothing was <i>lost</i>
+with batch = cohort; with batch = specimen the tumor/adjacent structure was lost. Excluding C forfeits
+its four paired donors. <i>Combining cohorts adds</i> two things. After Harmony, A's labels predict
+99 % of B's fibroblasts and pericytes as stroma (69 % without integration), which supports treating
+them as one compartment. And paired donors for that compartment rise from 3 to 12 (Fig. 1g). We used
+the embedding only for visualisation and label transfer; no statistical test uses it.</p>
 
 <figure>
 <img src="figures/figure1_qc_integration.png" alt="Figure 1">
-<figcaption><b>Figure 1. Quality control and integration.</b> (a) Non-mitochondrial counts per cell:
-cohort C has a hard ceiling. (b–d) UMAPs of the A+B subsample: unintegrated and Harmony
-(batch = cohort), coloured by cohort or population. (e) Integration metrics: batch ASW = 1 − |silhouette of
-cohort| within each population; cell-type ASW = rescaled silhouette of populations; label transfer = mean
-A→B / B→A balanced accuracy of a 15-nearest-neighbour classifier; last group = tumor-vs-adjacent
-silhouette within stroma (mean of A and B). (f) Percentage of cells removed by QC per population.
-(g) Paired donors with ≥10 cells in both conditions per candidate population.</figcaption>
+<figcaption><b>Figure 1 | Quality control and integration.</b> <b>a</b>, Non-mitochondrial counts per
+cell; cohort C has a hard ceiling. <b>b–d</b>, UMAPs of the A+B subsample, unintegrated (b) and after
+Harmony with batch = cohort, coloured by cohort (c) or population (d). <b>e</b>, Integration metrics:
+batch ASW = 1 − |silhouette of cohort| within each population; cell-type ASW = rescaled silhouette of
+populations; label transfer = mean A→B and B→A balanced accuracy of a 15-nearest-neighbour
+classifier; tumor/adjacent = silhouette of condition within stroma (mean of A and B). <b>f</b>,
+Percentage of cells removed by QC per population. <b>g</b>, Paired donors with ≥ 10 cells in both
+conditions per candidate population.</figcaption>
 </figure>
 
-<h2>2 · The ECM program</h2>
-<p><b>Overview and summary.</b> In both cohorts the stromal compartment has the highest expression of
-every panel gene (Fig. 2a); endothelial cells express SPARC and FN1 but few collagens and no DCN/LUM;
-immune and epithelial cells are low. Within stroma, DCN and LUM are fibroblast-specific (high in B
-fibroblasts; near zero in B pericytes and in A "fibroblasts", which by non-panel markers RGS5, NOTCH3
-and PDGFRB are largely mural cells; Fig. 2a). As the panel summary we use the <b>mean of per-gene z-scored
-log2-CPM</b> (z within cohort and population): genes co-vary across stromal pseudobulks (median pairwise
-ρ 0.48 in A, 0.70 in B) and the score agrees with PC1 (ρ 1.00/0.97) and log summed CPM (0.96/0.98), so
-the simplest equal-weight score is used; DCN and LUM, which do not co-vary with the rest in B, are always
-reported separately.</p>
-<p><b>Population choice.</b> The <b>combined fibroblast + mural compartment</b> (A fibroblasts and
-myofibroblasts; B fibroblasts and pericytes) expresses the panel most strongly, is supported as one
-compartment by non-panel markers and label transfer, and has 3 + 9 paired donors with ≥10 cells.
-Fibroblasts alone have 5 pairs (2 in B); endothelium has 12 pairs but expresses mainly SPARC/FN1 and is
-used as a contrast. Malignant cells have no adjacent counterpart and were not tested.</p>
-<p><b>Testing.</b> Values tested are pseudobulk raw counts of QC-passing compartment cells per specimen,
-converted to log2-CPM with library size from all genes; specimens with &lt;10 compartment cells are
-dropped. Donors are the replicates: repeated tumor regions are averaged per donor and each donor's tumor
-is compared with its own adjacent sample. Per cohort we report the mean paired difference, 95 %
-t-interval, direction count and an exact sign-flip p (all 2<sup>n</sup> sign patterns; with n = 3 the
-smallest possible p is 0.25), with Benjamini–Hochberg correction over genes; cohorts are combined by fixed- and random-effects meta-analysis.</p>
+<h2><span class="num">2</span>The ECM program</h2>
 
+<p><span class="lead">Where the program is expressed.</span> In both cohorts every panel gene is
+expressed most highly in the stromal compartment (Fig. 2a). Endothelial cells express SPARC and FN1
+strongly but few collagens and no DCN or LUM, and immune and epithelial cells express little of the
+panel. Within stroma, DCN and LUM are specific to fibroblasts. They are high in B fibroblasts but near
+zero in B pericytes and in A's "fibroblasts", which non-panel markers (RGS5, NOTCH3, PDGFRB) identify
+as largely mural cells (Fig. 2a).</p>
+
+<p><span class="lead">Summary score.</span> We summarise the panel as the <b>mean of per-gene z-scored
+log2-CPM</b>, with z computed within cohort and population. The genes co-vary across stromal
+pseudobulks (median pairwise ρ 0.48 in A and 0.70 in B), and this score agrees with the first
+principal component (ρ 1.00 and 0.97) and with log summed CPM (ρ 0.96 and 0.98;
+<code>stage4_panel_coherence.tsv</code>). We therefore use the simplest equal-weight score. Because
+DCN and LUM do not co-vary with the other genes in B, we always report them separately.</p>
+
+<p><span class="lead">Choice of population.</span> We focus on the <b>combined fibroblast + mural
+compartment</b> (A fibroblasts and myofibroblasts; B fibroblasts and pericytes). It expresses the panel
+most strongly, non-panel markers and label transfer support it as one compartment, and it has 3 + 9
+paired donors with at least 10 cells (Fig. 1g). Fibroblasts alone offer only 5 pairs, 2 of them in B.
+Endothelium also has 12 pairs, but it expresses mainly SPARC and FN1, so we use it as a contrast.
+Malignant cells have no adjacent counterpart and were not tested.</p>
+
+<p><span class="lead">Testing.</span> For each specimen we summed the raw counts of its QC-passing
+compartment cells (pseudobulk) and converted them to log2-CPM, using the library size over all genes.
+Specimens with fewer than 10 compartment cells were dropped (record:
+<code>stage5_specimen_inclusion.tsv</code>). Donors are the replicates. We averaged repeated tumor
+regions within each donor and compared each donor's tumor with its own adjacent sample. For each
+cohort we report the mean paired difference with a 95 % t-interval, the number of donors going up, and
+an exact sign-flip p (all 2<sup>n</sup> sign patterns; with n = 3 the smallest possible p is 0.25). We
+apply Benjamini–Hochberg correction across genes and pool cohorts by fixed- and random-effects
+meta-analysis.</p>
+
+<div class="tcap"><b>Table 1 | Tumor − adjacent difference in the fibroblast + mural compartment</b>
+(panel score in SD units).</div>
 <table>
-<tr><th>Stromal compartment, tumor − adjacent</th><th>Paired donors</th><th>Panel score (SD) [95 % CI]</th><th>Donors up</th><th>Sign-flip p</th></tr>
-<tr><td>Cohort B (single-cell)</td><td>9</td><td><b>+1.04 [+0.63, +1.46]</b></td><td>9/9</td><td>0.004</td></tr>
-<tr><td>Cohort A (single-nucleus)</td><td>3</td><td>+0.02 [−1.77, +1.81]</td><td>1/3</td><td>1.0</td></tr>
-<tr><td>A + B, fixed effect / pooled sign-flip</td><td>12</td><td>+0.88 [+0.56, +1.21]</td><td>10/12</td><td>0.003</td></tr>
-<tr><td>A + B, random effects (k = 2 cohorts)</td><td>12</td><td>+0.60 [−0.39, +1.59]</td><td></td><td></td></tr>
+<tr><th>Cohort or pooling</th><th class="num">Paired donors</th><th>Difference [95 % CI]</th><th class="num">Donors up</th><th class="num">Sign-flip p</th></tr>
+<tr class="key"><td>Cohort B (single-cell)</td><td class="num">9</td><td>+1.04 [+0.63, +1.46]</td><td class="num">9/9</td><td class="num">0.004</td></tr>
+<tr><td>Cohort A (single-nucleus)</td><td class="num">3</td><td>+0.02 [−1.77, +1.81]</td><td class="num">1/3</td><td class="num">1.0</td></tr>
+<tr><td>A + B, fixed effect / pooled sign-flip</td><td class="num">12</td><td>+0.88 [+0.56, +1.21]</td><td class="num">10/12</td><td class="num">0.003</td></tr>
+<tr><td>A + B, random effects (two cohorts)</td><td class="num">12</td><td>+0.60 [−0.39, +1.59]</td><td class="num"></td><td class="num"></td></tr>
 </table>
 
-<p><span class="obs">Observations.</span> In B, COL1A2, COL3A1, FN1 and SPARC rise in all 9 donors
-(log2FC +1.7 to +2.6, q = 0.01) and COL1A1, COL6A1 and COL6A2 also rise (q ≤ 0.03); <b>DCN and LUM do not</b>
-(−1.7 and −0.7, q ≥ 0.17) and vary by ±5 log2 units between donors (Fig. 2d), consistent with
-their source being the ~3 % of B's compartment that is author-labelled fibroblasts. A shows no
-consistent direction (Fig. 2c); a mixed model adding A's unpaired tumor-only donors (24 donors) gives
-−0.18 [−0.85, +0.48], but those donors add only between-donor information and the contrast still rests on
-4 adjacent specimens. <b>Does adding cohorts change the finding?</b> A's interval contains B's estimate,
-so A is uninformative rather than contradictory; the pooled result depends on the model (the
-fixed-effect interval excludes zero, the random-effects one does not). The heterogeneity statistic
-(I² = 80 %) is unreliable with two cohorts, one of n = 3, each standardised by its own SD.</p>
-<p><b>Robustness check (main uncertainty: compartment composition).</b> If the B effect reflected more
-fibroblasts in tumor stroma, it should vanish in pure mural cells and without the fibroblast genes, and
-the fibroblast share should rise. It does not: pericytes only +1.27 [+0.85, +1.70], 9/9 up; panel
-without DCN/LUM +1.41 [+0.96, +1.86], 9/9 up (Fig. 2e); fibroblast share tumor − adjacent +0.04
-[−0.06, +0.14], up in only 2/9 donors (Fig. 2f). The estimate is also stable with ≥50 cells (+1.07), one tumor region per donor (+1.04), a
-donor random-intercept model on all specimens (+1.11 [+0.85, +1.36]) and leave-one-donor-out (+0.93 to +1.15; Fig. 2e). Endothelial cells show no change (+0.13 [−0.26, +0.52]), so this is not a global shift
-in ECM transcripts.</p>
-<p><span class="obs">Interpretation.</span> In single-cell data, tumor-associated mural/pericyte cells
-carry more fibrillar collagen, FN1 and SPARC transcript than adjacent ones in the same patients. Higher
-transcript levels are not evidence of active remodelling, and whether the effect holds in single-nucleus
-data and in fibroblasts is not established: cohort A has 3 pairs, a different assay and a compartment of
-different make-up.</p>
+<p><span class="lead">Tumor versus adjacent.</span> In cohort B the panel score is higher in tumor in
+all nine donors (Table 1; Fig. 2b). COL1A2, COL3A1, FN1 and SPARC rise in every donor (log2FC +1.7 to
++2.6, q = 0.01), and COL1A1, COL6A1 and COL6A2 rise as well (q ≤ 0.03; Fig. 2d). <b>DCN and LUM do
+not</b> (log2FC −1.7 and −0.7, q ≥ 0.17), and they vary by up to ±5 log2 units between donors
+(Fig. 2d). That is consistent with their coming from the roughly 3 % of B's compartment labelled as
+fibroblasts. Cohort A shows no consistent direction (Fig. 2c). A mixed model that also uses A's
+tumor-only donors (24 donors) gives −0.18 [−0.85, +0.48]. Those extra donors contribute only
+between-donor information, so the contrast still rests on four adjacent specimens
+(<code>stage5_mixed_model.tsv</code>).</p>
+
+<p><span class="lead">Does adding cohorts change the finding?</span> Not decisively. Cohort A's
+interval contains B's estimate, so A is uninformative rather than contradictory (Table 1). The pooled
+result depends on the model: the fixed-effect interval excludes zero and the random-effects interval
+does not. The random-effects heterogeneity (I² = 80 %) is not reliable here, because it rests on two
+cohorts, one with n = 3, each standardised by its own SD.</p>
+
+<p><span class="lead">Robustness check.</span> The main uncertainty is composition: the B effect
+might reflect more fibroblasts in tumor stroma rather than a change in the cells themselves. If so, it
+should vanish in pure mural cells and without the fibroblast genes, and the fibroblast share should
+rise in tumors. None of these happens. The effect holds in pericytes alone (+1.27 [+0.85, +1.70],
+9/9 up) and without DCN and LUM (+1.41 [+0.96, +1.86], 9/9 up; Fig. 2e). The fibroblast share barely
+changes (+0.04 [−0.06, +0.14]) and rises in only 2 of 9 donors (Fig. 2f). The estimate is also stable
+with at least 50 cells per specimen (+1.07), with one tumor region per donor (+1.04), in a donor
+random-intercept model on all specimens (+1.11 [+0.85, +1.36]), and when any single donor is left out
+(+0.93 to +1.15; Fig. 2e). Endothelial cells show no change (+0.13 [−0.26, +0.52]; Fig. 2e), so this
+is not a tissue-wide shift in ECM transcripts.</p>
+
+<p><span class="lead">Interpretation.</span> In single-cell data, tumor-associated mural and
+pericyte cells carry more fibrillar collagen, FN1 and SPARC transcript than adjacent ones in the same
+patients. Higher transcript levels do not by themselves show active matrix remodelling. Nor is it
+established that the effect holds in single-nucleus data or in fibroblasts: cohort A has three pairs,
+a different assay, and a compartment of different make-up.</p>
 
 <figure>
 <img src="figures/figure2_ecm_program.png" alt="Figure 2">
-<figcaption><b>Figure 2. ECM panel across populations and tumor vs adjacent in stroma.</b>
-(a) Fraction expressing (size) and mean expression (colour) per population (QC-passing cells).
-(b, c) Donor-level panel score in the fibroblast + mural compartment, adjacent vs tumor, cohort B and A.
-(d) Per-gene paired log2 fold change (95 % CI; A intervals clipped at ±6). (e) Cohort B robustness and
-sensitivity estimates (bar = leave-one-donor-out range; grey = endothelial contrast). (f) Fibroblast share
-of B's compartment per donor.</figcaption>
+<figcaption><b>Figure 2 | ECM panel across populations and tumor versus adjacent in stroma.</b>
+<b>a</b>, Fraction of cells expressing (dot size) and mean expression (colour) per population,
+QC-passing cells; A and B stroma are split by author label. <b>b, c</b>, Donor-level panel score in
+the fibroblast + mural compartment, adjacent versus tumor, in cohorts B (b) and A (c). <b>d</b>,
+Per-gene paired log2 fold change with 95 % CI (A intervals clipped at ±6). <b>e</b>, Cohort B
+robustness and sensitivity estimates (bar, leave-one-donor-out range; grey, endothelial contrast).
+<b>f</b>, Fibroblast share of B's compartment per donor.</figcaption>
 </figure>
 
-<h2>3 · Linked bulk RNA and protein</h2>
-<p><b>Correspondence.</b> Every cohort A snRNA specimen was checked through the crosswalk: 29/34 are
-linked, all resolve through <code>bulk_samples.tsv</code> to real columns of the condition-specific RNA
-and protein files, and all protein aliquots match the author sample table. The two parent-specimen
-mismatches are exactly the two flagged links (C3L-00908, different parent; C3N-00242, protein from two
-parents), leaving 27 primary links (23 tumor, 4 adjacent). Donors with primary-linked tumor
-<i>and</i> adjacent are <b>C3L-00079, C3L-00088 and C3N-01200 (n = 3)</b>; C3N-00242 is a sensitivity
-case. Unlinked specimens were not paired by donor identity (per-specimen record:
-<code>stage6_specimen_inclusion.tsv</code>). Each assay used a different portion of the parent specimen,
-and bulk RNA is a donor/condition column whose exact aliquot is not reconciled. Bulk values were used as
-supplied (log2, normalised); panel genes have no missing values, although upstream imputation cannot be
-ruled out.</p>
-<p><b>Within-assay comparison.</b> <span class="obs">Observations.</span> In the matched donors (Fig. 3a,d) the panel difference is −0.22 (snRNA stroma; linked tumor specimen only, hence not the +0.02
-of Section 2, which averages tumor regions), −0.14 (snRNA whole specimen), +0.48 (bulk RNA) and +0.26
-(protein). Donors disagree and all p ≥ 0.5, so the matched subset cannot confirm or refute the finding;
-on average FN1 and SPARC are higher in tumor in every matched assay. As context, the whole CPTAC cohorts
-(the same study as cohort A, including the matched donors, mostly without snRNA) show higher panel levels
-in tumor in bulk RNA (+0.52 SD [0.31, 0.73], 54/72 donors) and protein (+0.68 [0.49, 0.87], 67/80), with
-<b>the same gene pattern as cohort B</b>: collagens, FN1 (RNA 72/72) and SPARC (RNA 72/72,
-protein 78/80) up; DCN down (RNA 4/72 up) and LUM down or unchanged. COL6A1 is the one discrepancy
-(down in bulk RNA, up in protein and B).</p>
-<p><b>Composition.</b> Non-panel marker genes in bulk RNA show that tumors lose fibroblast markers
-(PDGFRA, C7, FBLN1; 97 % of donors, −1.54 SD) and gain mural (+0.56) and endothelial (+1.63) markers.
-The 8-gene ECM change (without DCN/LUM) tracks fibroblast-marker (ρ 0.68) and mural-marker (ρ 0.62)
-change across donors (Fig. 3b,c) and rises on average (+0.96 SD) despite the fibroblast loss.
-<span class="obs">Interpretation.</span> Composition strongly shapes bulk differences. The rise is not
-explained by more fibroblasts, but it may reflect expansion of mural and endothelial tissue as well as, or
-instead of, per-cell change; bulk data cannot separate the two.</p>
+<h2><span class="num">3</span>Linked bulk RNA and protein</h2>
+
+<p><span class="lead">Correspondence.</span> We traced every cohort A specimen through the crosswalk.
+Of the 34, 29 are linked to bulk data. All 29 resolve through <code>bulk_samples.tsv</code> to real
+columns of the condition-specific RNA and protein files, and every protein aliquot matches the authors'
+sample table. The only two parent-specimen mismatches are the two flagged links: C3L-00908's protein
+comes from a different parent specimen, and C3N-00242's from two. That leaves 27 primary links
+(23 tumor, 4 adjacent). Three donors have primary links for both tumor and adjacent tissue:
+<b>C3L-00079, C3L-00088 and C3N-01200</b>. C3N-00242 serves as a sensitivity case. We did not pair
+unlinked specimens on donor identity alone (record: <code>stage6_specimen_inclusion.tsv</code>). Each
+assay used a different portion of the parent specimen, and bulk RNA is a donor-level column whose exact
+aliquot has not been reconciled. Bulk values were used as supplied (log2, normalised); the panel genes
+have no missing values, although upstream imputation cannot be ruled out.</p>
+
+<p><span class="lead">Observations.</span> In the three matched donors the panel difference is
+−0.22 for single-nucleus stroma, −0.14 for the whole single-nucleus specimen, +0.48 for bulk RNA and
++0.26 for protein (Fig. 3a, d). The stroma value differs from Section 2's +0.02 because here only the
+linked tumor specimen is used, rather than the average of all tumor regions. The donors disagree and
+every p is at least 0.5, so the matched subset can neither confirm nor refute the finding. On average,
+though, FN1 and SPARC are higher in tumor in every matched assay (Fig. 3a).</p>
+
+<p>For context we used the whole CPTAC cohort. It comes from the same study as cohort A and includes
+the matched donors, but most of its donors have no single-nucleus data. Tumor panel levels are higher
+in bulk RNA (+0.52 SD [0.31, 0.73], 54/72 donors) and in protein (+0.68 [0.49, 0.87], 67/80). The gene
+pattern matches cohort B (Fig. 3a). Collagens rise, FN1 rises in all 72 RNA donors, and SPARC rises in
+all 72 RNA donors and 78 of 80 protein donors. DCN falls (it rises in only 4 of 72 RNA donors), and LUM
+falls or stays flat. COL6A1 is the one discrepancy: it falls in bulk RNA but rises in protein and in
+cohort B.</p>
+
+<p><span class="lead">Composition.</span> Non-panel marker genes in bulk RNA show that tumors lose
+fibroblast markers (PDGFRA, C7, FBLN1; in 97 % of donors, −1.54 SD) and gain mural (+0.56) and
+endothelial (+1.63) markers (<code>stage6_composition_corr.tsv</code>). Across donors the eight-gene
+ECM change (without DCN and LUM) tracks fibroblast-marker change (ρ 0.68; Fig. 3b) and mural-marker
+change (ρ 0.62; Fig. 3c). On average it rises by 0.96 SD despite the fibroblast loss.
+<i>Interpretation:</i> composition strongly shapes bulk differences. More fibroblasts cannot explain
+the rise, but expansion of mural and endothelial tissue could, alongside or instead of per-cell
+change, and bulk data cannot separate the two.</p>
 
 <figure>
 <img src="figures/figure3_multimodal.png" alt="Figure 3">
-<figcaption><b>Figure 3. Linked modalities.</b> (a) Tumor − adjacent per gene and panel, each estimated
-within its own assay: cohort B stroma (Section 2), the 3 matched cohort A donors (four assays), and the
-whole CPTAC bulk RNA/protein cohorts (context, not matched); dots mark BH q &lt; 0.05. (b, c) Bulk RNA: 8-gene ECM change vs fibroblast (b) and mural (c) marker
-change per donor. (d) Panel difference per matched donor in each assay.</figcaption>
+<figcaption><b>Figure 3 | Linked modalities.</b> <b>a</b>, Tumor − adjacent difference per gene
+(log2FC) and for the panel score (SD units), each estimated within its own assay. Columns show cohort
+B stroma (Section 2), the three matched cohort A donors (four assays) and the whole CPTAC bulk RNA and
+protein cohorts (context, not matched); dots mark BH q &lt; 0.05. <b>b, c</b>, Bulk RNA: eight-gene ECM
+change versus fibroblast (b) and mural (c) marker change per donor. <b>d</b>, Panel difference per
+matched donor in each assay.</figcaption>
 </figure>
 
-<h2>Agreement, discrepancies and limitations</h2>
-<ul>
-<li><b>Agreement:</b> single-cell B, bulk RNA and protein agree that collagen I/III, FN1 and SPARC are
-higher in ccRCC than in adjacent kidney, while DCN/LUM are not. <b>Discrepancy:</b> cohort A
-(single-nucleus) does not reproduce the stromal increase, and COL6A1 differs between bulk RNA and protein.</li>
-<li><b>Cellular source:</b> cell-specific RNA does not establish the source of bulk protein. B places part
-of the RNA increase in pericytes, but endothelial cells, which expand in tumors, also express FN1 and
-SPARC strongly.</li>
-<li><b>Coverage:</b> 4 adjacent specimens in A (3 usable pairs; smallest possible p = 0.25); 3 matched
-multimodal pairs; ~97 % of B's compartment is author-labelled pericytes, so "stroma" differs between
-cohorts.</li>
-<li><b>Composition and capture:</b> single-nucleus and single-cell assays capture different cells; bulk
-differences are strongly composition-dependent; the marker-based composition proxy is approximate;
-ambient RNA in nuclei may add low-level ECM signal to non-stromal populations.</li>
-<li><b>Exclusions:</b> cohort C (integrity), QC-flagged cells, specimens with &lt;10 compartment cells,
-two flagged crosswalk links (sensitivity only), and five unlinked snRNA specimens for Section 3
-(per-specimen records: <code>stage5_specimen_inclusion.tsv</code>, <code>stage6_specimen_inclusion.tsv</code>).</li>
+<h2><span class="num">4</span>Agreement, discrepancies and limitations</h2>
+<ul class="lim">
+<li><b>Agreement.</b> Single-cell cohort B, bulk RNA and protein agree that collagen I/III, FN1 and
+SPARC are higher in ccRCC than in adjacent kidney, while DCN and LUM are not (Fig. 3a).
+<b>Discrepancies.</b> Single-nucleus cohort A does not reproduce the stromal increase (Fig. 2c), and
+COL6A1 differs between bulk RNA and protein.</li>
+<li><b>Cellular source.</b> Cell-type-specific RNA does not establish the source of bulk protein.
+Cohort B places part of the RNA increase in pericytes, but endothelial cells, which expand in tumors,
+also express FN1 and SPARC strongly (Fig. 2a).</li>
+<li><b>Coverage.</b> Cohort A has 4 adjacent specimens and 3 usable pairs, so no sign-flip p below 0.25
+is possible. There are only 3 matched multimodal pairs. About 97 % of B's compartment is labelled as
+pericytes, so the "stroma" compartment is not identical between cohorts.</li>
+<li><b>Composition and capture.</b> Single-nucleus and single-cell assays capture different cells,
+bulk differences depend strongly on composition, and the marker-based composition proxy is
+approximate. Ambient RNA in nuclei may add low-level ECM signal to non-stromal populations.</li>
+<li><b>Exclusions.</b> We excluded cohort C (data integrity), QC-flagged cells, specimens with fewer
+than 10 compartment cells, two flagged crosswalk links (used for sensitivity only) and, for
+Section 3, five unlinked single-nucleus specimens. Per-specimen records are in the repository.</li>
 </ul>
-<p class="small"><b>Abbreviations.</b> ASW, average silhouette width; kNN, k-nearest neighbours; MAD,
-median absolute deviation; CPM, counts per million; log2FC, log2 fold change; SD units, per-gene SD of
-log2-CPM across the cohort's specimens; q, Benjamini–Hochberg-adjusted p; I², share of variance between
-cohorts; mural, pericyte/vascular smooth-muscle-like cells; CPTAC, Clinical Proteomic Tumor Analysis
-Consortium.</p>
+
+<p class="fine"><b>Abbreviations.</b> ASW, average silhouette width; kNN, k-nearest neighbours; MAD,
+median absolute deviation; CPM, counts per million; log2FC, log2 fold change; SD units, per-gene
+standard deviation of log2-CPM across the cohort's specimens; q, Benjamini–Hochberg-adjusted p; I²,
+share of variance between cohorts; mural, pericyte or vascular smooth-muscle-like cells; CPTAC,
+Clinical Proteomic Tumor Analysis Consortium. Table files cited in the text are in
+<code>outputs/tables/</code>.</p>
 
 <ol class="refs">
-<li>Heumos L. et al. Best practices for single-cell analysis across modalities. <i>Nat Rev Genet</i> 2023.</li>
-<li>Squair J.W. et al. Confronting false discoveries in single-cell differential expression. <i>Nat Commun</i> 2021.</li>
-<li>Luecken M.D. et al. Benchmarking atlas-level data integration in single-cell genomics. <i>Nat Methods</i> 2022.</li>
-<li>Korsunsky I. et al. Fast, sensitive and accurate integration of single-cell data with Harmony. <i>Nat Methods</i> 2019.</li>
-<li>Wu H. et al. Advantages of single-nucleus over single-cell RNA sequencing of adult kidney. <i>J Am Soc Nephrol</i> 2019.</li>
-<li>Clark D.J. et al. Integrated proteogenomic characterization of clear cell renal cell carcinoma. <i>Cell</i> 2019.</li>
-<li>Data: GEO GSE227898 (A), GSE178481 (B), GSE159115 (C); CPTAC ccRCC processed RNA and harmonised protein (see <code>SOURCES.md</code>).</li>
+<li>Heumos L. et al. Best practices for single-cell analysis across modalities. <i>Nat Rev Genet</i> (2023).</li>
+<li>Squair J.W. et al. Confronting false discoveries in single-cell differential expression. <i>Nat Commun</i> (2021).</li>
+<li>Luecken M.D. et al. Benchmarking atlas-level data integration in single-cell genomics. <i>Nat Methods</i> (2022).</li>
+<li>Korsunsky I. et al. Fast, sensitive and accurate integration of single-cell data with Harmony. <i>Nat Methods</i> (2019).</li>
+<li>Wu H. et al. Advantages of single-nucleus over single-cell RNA sequencing of adult kidney. <i>J Am Soc Nephrol</i> (2019).</li>
+<li>Clark D.J. et al. Integrated proteogenomic characterization of clear cell renal cell carcinoma. <i>Cell</i> (2019).</li>
+<li>Data: GEO GSE227898 (A), GSE178481 (B), GSE159115 (C); CPTAC ccRCC processed RNA and harmonised protein (package <code>SOURCES.md</code>).</li>
 </ol>
 
 </body>

@@ -28,10 +28,10 @@ POP_COLORS = {
     "Nonmalignant_epithelial": "#e59866",
     "Endothelial": "#1f618d",
     "Stromal_fibro_myo": "#196f3d",
-    "Pericyte": "#82e0aa",
+    "Pericyte": "#a6d854",
     "Myeloid": "#7d3c98",
     "Lymphoid": "#d4ac0d",
-    "Unresolved": "#bfc9ca",
+    "Unresolved": "#8c8c8c",
 }
 SHORT = {
     "Malignant_epithelial": "Malignant epi.",
@@ -41,8 +41,49 @@ SHORT = {
 }
 
 
+STYLE = {
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+    "font.size": 7.5,
+    "axes.titlesize": 8.5,
+    "axes.titleweight": "medium",
+    "axes.labelsize": 7.5,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "legend.fontsize": 7,
+    "legend.title_fontsize": 7,
+    "axes.linewidth": 0.7,
+    "xtick.major.width": 0.7,
+    "ytick.major.width": 0.7,
+    "xtick.major.size": 2.5,
+    "ytick.major.size": 2.5,
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "savefig.dpi": 300,
+}
+TITLE = 8.5
+LEG = 7
+
+
 def _label(ax, s, x=-0.12):
-    ax.text(x, 1.06, s, transform=ax.transAxes, fontsize=11, fontweight="bold", va="bottom")
+    """Panel letter, placed left of the axes and above any title."""
+    ax.text(
+        min(x, -0.22),
+        1.13,
+        s,
+        transform=ax.transAxes,
+        fontsize=12,
+        fontweight="bold",
+        va="bottom",
+        ha="right",
+    )
+
+
+def _umap_axes(ax):
+    for side in ("top", "right", "left", "bottom"):
+        ax.spines[side].set_visible(False)
+    ax.set_xlabel("UMAP 1", fontsize=6.5, labelpad=1)
+    ax.set_ylabel("UMAP 2", fontsize=6.5, labelpad=1)
 
 
 def _save(fig, name: str) -> Path:
@@ -84,8 +125,9 @@ def figure1() -> Path:
             label=f"{c}: max {nonmt.max():,.0f}",
         )
     ax.set_xscale("log")
+    ax.minorticks_off()
     ax.set(xlabel="non-mito counts / cell", ylabel="density", yticks=[])
-    ax.set_title("QC: cohort C is capped", fontsize=9)
+    ax.set_title("QC: cohort C is capped", fontsize=TITLE)
     ax.legend(
         fontsize=6.5,
         frameon=False,
@@ -117,11 +159,22 @@ def figure1() -> Path:
             rasterized=True,
         )
         ax.set(xticks=[], yticks=[])
-        ax.set_title(title, fontsize=9)
+        _umap_axes(ax)
+        ax.set_title(title, fontsize=TITLE)
         _label(ax, lab, -0.05)
-        if i == 0:
-            h = [plt.Line2D([], [], marker="o", ls="", color=COH[k], label=k, ms=4) for k in "AB"]
-            ax.legend(handles=h, fontsize=7, frameon=False, loc="lower left")
+        if i == 1:
+            h = [
+                plt.Line2D([], [], marker="o", ls="", color=COH[k], label=f"cohort {k}", ms=4)
+                for k in "AB"
+            ]
+            ax.legend(
+                handles=h,
+                fontsize=LEG,
+                frameon=False,
+                loc="upper center",
+                bbox_to_anchor=(-0.1, -0.08),
+                ncol=2,
+            )
     h = [
         plt.Line2D([], [], marker="o", ls="", color=v, label=SHORT.get(k, k), ms=4)
         for k, v in POP_COLORS.items()
@@ -142,7 +195,7 @@ def figure1() -> Path:
         rows[names[e]] = {
             "cohort mixing\n(batch ASW)": m.loc[e, "batch_ASW"],
             "cell-type sep.\n(ASW)": m.loc[e, "celltype_ASW"],
-            "label transfer\nA↔B": tr[tr["embedding"] == e]["balanced_accuracy"].mean(),
+            "label transfer\nbetween cohorts": tr[tr["embedding"] == e]["balanced_accuracy"].mean(),
             "tumor/adjacent\nin stroma": st["condition_ASW"].mean(),
         }
     d = pd.DataFrame(rows).T
@@ -151,8 +204,8 @@ def figure1() -> Path:
     for cont in ax.containers:
         ax.bar_label(cont, fmt="%.2f", fontsize=6.5, padding=1)
     ax.set(ylim=(0, 1.12), ylabel="score")
-    ax.set_title("Integration evaluation", fontsize=9)
-    ax.legend(fontsize=6.5, frameon=False, ncol=3, loc="upper left")
+    ax.set_title("Integration evaluation", fontsize=TITLE)
+    ax.legend(fontsize=LEG, frameon=False, ncol=3, loc="upper left")
     plt.setp(ax.get_xticklabels(), fontsize=7)
     _label(ax, "e", -0.08)
 
@@ -180,14 +233,15 @@ def figure1() -> Path:
         cmap="Reds",
         vmin=0,
         vmax=30,
-        cbar=False,
+        cbar=True,
+        cbar_kws={"label": "% removed", "shrink": 0.7, "pad": 0.03},
         ax=ax,
         annot_kws={"fontsize": 7},
         linewidths=0.4,
         linecolor="white",
     )
     ax.set(xlabel="cohort", ylabel="")
-    ax.set_title("% cells removed by QC", fontsize=9)
+    ax.set_title("% cells removed by QC", fontsize=TITLE)
     plt.setp(ax.get_yticklabels(), fontsize=7)
     _label(ax, "f", -0.75)
 
@@ -205,7 +259,7 @@ def figure1() -> Path:
     w.plot.barh(ax=ax, stacked=True, color=[COH["A"], COH["B"]], width=0.7, legend=False)
     ax.invert_yaxis()
     ax.set(xlabel="paired donors (≥10 cells)")
-    ax.set_title("What combining adds", fontsize=9)
+    ax.set_title("What combining adds", fontsize=TITLE)
     h = [plt.Rectangle((0, 0), 1, 1, color=COH[k], label=f"cohort {k}") for k in "AB"]
     ax.legend(
         handles=h,
@@ -279,7 +333,7 @@ def figure2() -> Path:
         bbox_to_anchor=(0.5, -0.13),
         ncol=3,
     )
-    ax.set_title("ECM panel by population (QC-passing cells)", fontsize=9)
+    ax.set_title("ECM panel by population (QC-passing cells)", fontsize=TITLE)
     _label(ax, "a", -0.4)
 
     lv = pd.read_csv(T / "stage5_donor_levels.tsv", sep="\t")
@@ -305,12 +359,12 @@ def figure2() -> Path:
         ax.set_title(
             f"Stroma, cohort {c}: {int(st['n_up'])}/{int(st['n_donors'])} up\n"
             f"Δ {st['mean']:+.2f} [{st['ci_low']:+.2f}, {st['ci_high']:+.2f}]",
-            fontsize=8,
+            fontsize=TITLE,
         )
         _label(ax, "b" if c == "B" else "c")
     ax.legend(
         handles=[
-            plt.Line2D([], [], color=UP, label="tumor > adjacent"),
+            plt.Line2D([], [], color=UP, label="tumor > adjacent (b, c, f)"),
             plt.Line2D([], [], color=DOWN, label="tumor < adjacent"),
         ],
         fontsize=6.5,
@@ -338,7 +392,7 @@ def figure2() -> Path:
     ax.set_title(
         f"B: fibroblast share, {int(t['n_up'])}/{int(t['n_donors'])} up\n"
         f"Δ {t['mean']:+.2f} [{t['ci_low']:+.2f}, {t['ci_high']:+.2f}]",
-        fontsize=8,
+        fontsize=TITLE,
     )
     _label(ax, "f")
 
@@ -365,8 +419,8 @@ def figure2() -> Path:
     ax.invert_yaxis()
     ax.set(xlim=(-6, 6))
     ax.set_xlabel("log2FC tumor − adjacent (95 % CI)", fontsize=7)
-    ax.set_title("Per gene (stroma)", fontsize=8)
-    ax.legend(fontsize=6.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2)
+    ax.set_title("Per gene (stroma)", fontsize=TITLE)
+    ax.legend(fontsize=LEG, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2)
     _label(ax, "d")
 
     ax = fig.add_subplot(gs[1, 2:])
@@ -396,7 +450,7 @@ def figure2() -> Path:
     ax.yaxis.tick_right()
     ax.invert_yaxis()
     ax.set_xlabel("panel Δ tumor − adjacent, cohort B (95 % CI)", fontsize=7)
-    ax.set_title("Robustness (composition) and sensitivities", fontsize=8)
+    ax.set_title("Robustness (composition) and sensitivities", fontsize=TITLE)
     _label(ax, "e", -0.05)
     return _save(fig, "figure2_ecm_program.png")
 
@@ -443,7 +497,7 @@ def figure3() -> Path:
         fmt="",
         annot_kws={"fontsize": 6.5},
         ax=ax,
-        cbar_kws={"shrink": 0.6, "label": "tumor − adjacent", "pad": 0.02},
+        cbar_kws={"shrink": 0.6, "label": "tumor − adjacent\n(log2FC; panel_z in SD)", "pad": 0.02},
     )
     ax.axhline(len(GENES), color="k", lw=1.2)
     for x in (1, 5):
@@ -472,7 +526,7 @@ def figure3() -> Path:
         ax.set_title(
             f"bulk RNA (72): {k}\nρ = {corr.loc[k, 'spearman_rho_noDCN_LUM']:.2f}; "
             f"marker Δ {corr.loc[k, 'mean_marker_change_z']:+.2f}",
-            fontsize=7.5,
+            fontsize=TITLE,
         )
         ax.tick_params(labelsize=7)
         _label(ax, lab, -0.25)
@@ -490,13 +544,21 @@ def figure3() -> Path:
     ax.axhline(0, color="k", lw=0.5)
     ax.set_xticks(range(4), ["sn\nstroma", "sn\nwhole", "bulk\nRNA", "protein"], fontsize=7)
     ax.set_ylabel("panel Δ (T − Adj)", fontsize=7.5)
-    ax.set_title("Matched donors (n = 3)", fontsize=8)
+    ax.set_title("Matched donors (n = 3)", fontsize=TITLE)
     ax.tick_params(labelsize=7)
-    ax.legend(fontsize=6, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.2))
+    ax.legend(
+        fontsize=6.5,
+        frameon=False,
+        loc="center left",
+        bbox_to_anchor=(1.0, 0.5),
+        title="donor",
+        handletextpad=0.2,
+    )
     _label(ax, "d", -0.25)
     return _save(fig, "figure3_multimodal.png")
 
 
 def make_all() -> list[Path]:
-    sns.set_theme(style="white", context="paper")
+    sns.set_theme(style="ticks", context="paper")
+    plt.rcParams.update(STYLE)
     return [figure1(), figure2(), figure3()]
