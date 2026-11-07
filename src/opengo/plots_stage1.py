@@ -330,4 +330,84 @@ def make_all() -> list[Path]:
         fig_paired_coverage(t["cov"]),
         fig_genes(t["genes"]),
         fig_label_check(),
+        fig_trm_markers(),
     ]
+
+
+# ------------------------------------------------------------------ 7. TRM marker check
+
+TRM_GROUPS = {
+    "TRM": None,
+    "Macrophages": 1500,
+    "Monocytes": None,
+    "CD8 CTL": None,
+    "CD4 T-cells": 1500,
+    "Tregs": None,
+    "NK cells strong": None,
+    "Tumor cells": 1500,
+}
+TRM_MARKERS = {
+    "pan-immune": ["PTPRC"],
+    "myeloid": ["CD68", "CD163", "C1QA", "C1QC", "CSF1R", "MRC1", "CD4"],
+    "T cell": ["CD3D", "CD3E", "CD2", "CD8A", "IL7R"],
+    "tissue-resident T": ["ITGAE", "CD69"],
+    "NK": ["NKG7"],
+}
+
+
+def trm_marker_table() -> pd.DataFrame:
+    """Fraction of nuclei with >0 UMI per marker, TRM vs reference author labels (cohort A)."""
+    rng = np.random.default_rng(config.RANDOM_SEED)
+    a = ad.read_h5ad(config.cohort_raw_path("A"), backed="r")
+    labels = a.obs["author_broad"].astype(str).to_numpy()
+    idx = []
+    for g, n in TRM_GROUPS.items():
+        ii = np.where(labels == g)[0]
+        if n and len(ii) > n:
+            ii = rng.choice(ii, n, replace=False)
+        idx.extend(ii.tolist())
+    sub = a[np.sort(idx)].to_memory()
+    a.file.close()
+    sym = sub.var["symbol"].astype(str).to_numpy()
+    grp = sub.obs["author_broad"].astype(str).to_numpy()
+    rows = []
+    for lineage, genes in TRM_MARKERS.items():
+        for m in genes:
+            j = np.where(sym == m)[0]
+            if len(j) != 1:
+                continue
+            x = np.asarray(sub.X[:, j[0]].todense()).ravel()
+            for g in TRM_GROUPS:
+                rows.append((lineage, m, g, int((grp == g).sum()), float((x[grp == g] > 0).mean())))
+    out = pd.DataFrame(rows, columns=["lineage", "marker", "author_label", "n_nuclei", "frac_pos"])
+    out.to_csv(config.TABLES_DIR / "stage1_TRM_marker_check.tsv", sep="\t", index=False)
+    return out
+
+
+def fig_trm_markers() -> Path:
+    t = trm_marker_table()
+    mat = t.pivot_table(index=["lineage", "marker"], columns="author_label", values="frac_pos")
+    mat = mat.reindex(
+        [(lin, m) for lin, ms in TRM_MARKERS.items() for m in ms if (lin, m) in mat.index]
+    )[list(TRM_GROUPS)]
+    fig, ax = plt.subplots(figsize=(10, 7))
+    sns.heatmap(
+        mat * 100,
+        annot=True,
+        fmt=".0f",
+        cmap="Purples",
+        vmin=0,
+        vmax=100,
+        ax=ax,
+        cbar_kws={"label": "% nuclei with ≥1 UMI"},
+    )
+    ax.set_yticklabels([f"{m}  ({lin})" for lin, m in mat.index], rotation=0)
+    ax.add_patch(plt.Rectangle((0, 0), 1, len(mat), fill=False, ec="red", lw=2))
+    ax.set(
+        xlabel="cohort A author label",
+        ylabel="",
+        title="TRM nuclei express myeloid (CSF1R, CD4) but not T-cell markers (CD3D/E, CD2, CD8A)\n"
+        "→ supports remapping TRM to Myeloid (tissue-resident macrophages)",
+    )
+    fig.tight_layout()
+    return _save(fig, "07_TRM_marker_check.png")
