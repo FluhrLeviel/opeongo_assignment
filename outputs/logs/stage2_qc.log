@@ -1,0 +1,114 @@
+  CPT0000870003      n=  4515 pass=99.9% med_counts=5526 med_mt=0.02%
+  CPT0000880001      n=  4346 pass=99.5% med_counts=6373 med_mt=0.07%
+  CPT0000890002      n=  1138 pass=99.4% med_counts=1346 med_mt=0.00%
+  CPT0001180011      n=  4648 pass=98.3% med_counts=6249 med_mt=0.02%
+  CPT0001220012      n=  4768 pass=91.5% med_counts=3410 med_mt=0.35%
+  CPT0001260013      n=  3991 pass=90.0% med_counts=2484 med_mt=0.40%
+  CPT0001270002      n=  5637 pass=95.8% med_counts=4570 med_mt=0.21%
+  CPT0001500003      n=  4678 pass=98.3% med_counts=4757 med_mt=0.46%
+  CPT0001540013      n=  4822 pass=97.8% med_counts=3800 med_mt=0.22%
+  CPT0010100001      n=  4988 pass=99.2% med_counts=6557 med_mt=0.07%
+  CPT0010110013      n=  4100 pass=82.4% med_counts=5881 med_mt=0.50%
+  CPT0010160004      n=  4938 pass=99.9% med_counts=2816 med_mt=0.00%
+  CPT0012280004      n=  5416 pass=94.4% med_counts=4760 med_mt=0.15%
+  CPT0012550012      n=  5247 pass=83.6% med_counts=3112 med_mt=0.32%
+  CPT0014450005      n=  2590 pass=89.7% med_counts=3188 med_mt=0.54%
+  CPT0014470002      n=  4820 pass=83.2% med_counts=4182 med_mt=0.70%
+  CPT0015810004      n=  5106 pass=97.3% med_counts=3877 med_mt=0.13%
+  CPT0019130004      n=  3832 pass=98.0% med_counts=5946 med_mt=0.14%
+  CPT0020120013      n=  5012 pass=95.7% med_counts=2467 med_mt=2.11%
+  CPT0023690004      n=  3083 pass=98.9% med_counts=1550 med_mt=0.00%
+  CPT0025110004      n=  5241 pass=100.0% med_counts=2625 med_mt=0.00%
+  CPT0025880013      n=  4585 pass=99.3% med_counts=5539 med_mt=0.11%
+  CPT0025890002      n=  3623 pass=99.1% med_counts=6604 med_mt=0.09%
+  CPT0063630004      n=  2846 pass=99.2% med_counts=1504 med_mt=0.00%
+  CPT0065690004      n=  4551 pass=99.9% med_counts=2974 med_mt=0.00%
+  CPT0075120002      n=  4421 pass=97.4% med_counts=5587 med_mt=0.08%
+  CPT0075130004      n=  4573 pass=98.0% med_counts=2967 med_mt=0.08%
+  CPT0075140002      n=  4571 pass=96.4% med_counts=5721 med_mt=1.91%
+  CPT0075170013      n=  2361 pass=99.3% med_counts=1878 med_mt=0.00%
+  CPT0075720013      n=  3208 pass=99.8% med_counts=1438 med_mt=0.00%
+  CPT0078510004      n=  4608 pass=99.9% med_counts=2020 med_mt=0.00%
+  CPT0079410004      n=  1357 pass=97.3% med_counts=1320 med_mt=0.08%
+  CPT0086350004      n=  3699 pass=82.6% med_counts=3280 med_mt=1.19%
+  CPT0086820004      n=  4631 pass=99.3% med_counts=4489 med_mt=0.04%
+  RCC-BM1-Normal     n=  7043 pass=97.4% med_counts=1603 med_mt=3.00%
+  RCC-BM1-PTumor     n=  9971 pass=99.8% med_counts=1397 med_mt=1.88%
+  RCC-BM2-Normal     n=  2532 pass=94.5% med_counts=3776 med_mt=3.75%
+  RCC-BM2-PTumor1    n=  4745 pass=99.9% med_counts=4394 med_mt=1.67%
+  RCC-BM2-PTumor2    n=  5303 pass=99.6% med_counts=2903 med_mt=1.28%
+  RCC-PR1-Normal     n=  2620 pass=95.2% med_counts=1434 med_mt=2.63%
+  RCC-PR1-PTumor     n=  5906 pass=96.3% med_counts=1806 med_mt=9.13%
+  RCC-PR2-Normal     n=  1313 pass=94.8% med_counts=1307 med_mt=2.49%
+  RCC-PR2-PTumor     n=  7332 pass=100.0% med_counts=1488 med_mt=1.38%
+  RCC-PR3-Normal     n=  5051 pass=98.0% med_counts=1317 med_mt=1.78%
+  RCC-PR3-PTumor1    n=  9239 pass=100.0% med_counts=1640 med_mt=1.28%
+  RCC-PR3-PTumor2    n= 10571 pass=100.0% med_counts=1315 med_mt=1.81%
+  RCC-PR3-PTumor3    n= 12349 pass=100.0% med_counts=1447 med_mt=2.18%
+  RCC-PR4-Normal     n=  3482 pass=99.2% med_counts=1061 med_mt=1.44%
+  RCC-PR4-PTumor     n= 10675 pass=99.4% med_counts=1210 med_mt=1.62%
+  RCC-PR5-Normal     n=  6606 pass=99.4% med_counts=1298 med_mt=1.11%
+  RCC-PR5-PTumor1    n=  8689 pass=99.4% med_counts=1517 med_mt=1.36%
+  RCC-PR5-PTumor2    n=  7708 pass=99.6% med_counts=1325 med_mt=1.10%
+  RCC-PR5-PTumor3    n= 10187 pass=99.6% med_counts=1270 med_mt=1.10%
+  RCC-PR6-Normal     n=  1542 pass=94.0% med_counts=2048 med_mt=2.21%
+  RCC-PR6-PTumor     n=  3577 pass=98.8% med_counts=1969 med_mt=1.19%
+  RCC-PR7-PTumor     n=  3610 pass=100.0% med_counts=2259 med_mt=1.67%
+  RCC-PR8-Normal     n=  1573 pass=98.0% med_counts=2373 med_mt=1.64%
+  RCC-PR9-Normal     n=  4065 pass=97.2% med_counts=2064 med_mt=2.12%
+  RCC-PR9-PTumor     n=  6504 pass=100.0% med_counts=1646 med_mt=1.57%
+  RCC-PR9-PTumor2    n=  5688 pass=100.0% med_counts=2533 med_mt=1.80%
+  GSM4819725         n=  1704 pass=95.3% med_counts=752 med_mt=71.41%
+  GSM4819726         n=  1410 pass=66.0% med_counts=3670 med_mt=96.26%
+  GSM4819727         n=  1660 pass=92.0% med_counts=564 med_mt=61.36%
+  GSM4819728         n=   923 pass=91.1% med_counts=2632 med_mt=92.45%
+  GSM4819729         n=  3674 pass=93.7% med_counts=448 med_mt=49.96%
+  GSM4819730         n=  1097 pass=85.8% med_counts=467 med_mt=51.19%
+  GSM4819731         n=   578 pass=83.6% med_counts=418 med_mt=46.05%
+  GSM4819733         n=  1644 pass=68.7% med_counts=311 med_mt=18.18%
+  GSM4819734         n=  2872 pass=77.4% med_counts=288 med_mt=18.52%
+  GSM4819735         n=  1896 pass=92.8% med_counts=542 med_mt=60.15%
+  GSM4819736         n=  1953 pass=91.9% med_counts=372 med_mt=39.68%
+  GSM4819737         n=  6453 pass=94.1% med_counts=559 med_mt=60.74%
+  GSM4819738         n=  3635 pass=82.2% med_counts=310 med_mt=22.89%
+─────────────────────────── stage2_qc_by_population ────────────────────────────
+cohort              population  cells  pass_frac  median_counts  median_pct_mt  
+low_counts_frac  low_genes_frac  high_counts_frac  high_mt_frac  doublet_frac
+     A             Endothelial   3009   0.963775         4330.0       0.220751  
+0.000000        0.000000          0.000000      0.036225      0.000000
+     A                Lymphoid   9845   0.775825         2564.0       1.897617  
+0.000000        0.000000          0.000000      0.224175      0.000000
+     A    Malignant_epithelial  88536   0.993381         4744.0       0.064907  
+0.000000        0.000000          0.000056      0.006483      0.000079
+     A                 Myeloid  25378   0.898337         4064.0       0.492781  
+0.000000        0.000000          0.000000      0.101623      0.000039
+     A Nonmalignant_epithelial  11334   0.976443         3851.0       0.109803  
+0.000000        0.000000          0.000265      0.022499      0.000882
+     A       Stromal_fibro_myo   2772   0.985570         4030.5       0.102452  
+0.000000        0.000000          0.000000      0.014430      0.000000
+     A              Unresolved   1076   0.784387         5036.5       1.193880  
+0.000000        0.000000          0.000000      0.215613      0.000000
+     B             Endothelial   7090   0.997320         1448.0       1.669383  
+0.000000        0.000000          0.000987      0.001693      0.000000
+     B                Lymphoid  82652   0.999335         1329.0       1.344166  
+0.000000        0.000000          0.000302      0.000339      0.000024
+     B    Malignant_epithelial   9066   0.952019         1781.0       7.840622  
+0.000000        0.000110          0.002758      0.045114      0.000000
+     B                 Myeloid  35368   0.998530         2558.0       1.928333  
+0.000000        0.000000          0.001272      0.000170      0.000028
+     B Nonmalignant_epithelial   6714   0.874293         2692.5       9.188867  
+0.000000        0.007596          0.001043      0.124665      0.000000
+     B                Pericyte  14444   0.998962         1927.5       1.820746  
+0.000000        0.000000          0.000554      0.000485      0.000000
+     B       Stromal_fibro_myo    460   0.986957         2578.0       1.931905  
+0.000000        0.000000          0.002174      0.010870      0.000000
+     B              Unresolved   2087   0.994729         2538.0       2.014652  
+0.000000        0.000000          0.001437      0.002875      0.000958
+     C              Unlabelled  29499   0.873013          434.0      47.956402  
+0.071121        0.065358          0.000068      0.010678      0.001864
+──────────────────────── stage2_B_author_vs_recomputed ─────────────────────────
+       metric    author_field  spearman  exact_match_frac
+ total_counts        TotalUMI  1.000000               1.0
+      n_genes        gene.num  1.000000               1.0
+       pct_mt MT.ratio (x100)  1.000000               1.0
+doublet_score  doublest.score  0.724628               NaN

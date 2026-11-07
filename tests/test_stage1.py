@@ -47,3 +47,18 @@ def test_ecm_panel_in_all_cohorts():
     ecm = pd.read_csv(config.TABLES_DIR / "ecm_panel_presence.tsv", sep="\t")
     assert len(ecm) == 10
     assert ecm["shared_ABC"].all()
+
+
+def test_trm_override_applied_and_traceable():
+    path = config.TABLES_DIR / "stage1_population_overrides.tsv"
+    if not path.exists():
+        pytest.skip("run `opengo genes` first")
+    ov = pd.read_csv(path, sep="\t")
+    assert len(ov) == 1
+    row = ov.iloc[0]
+    assert (row["cohort"], row["population_suggested"], row["population"]) == (
+        "A",
+        "Lymphoid",
+        "Myeloid",
+    )
+    assert row["cells"] == 510

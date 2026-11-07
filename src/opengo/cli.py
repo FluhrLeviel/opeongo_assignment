@@ -96,8 +96,12 @@ def load(cohort: str) -> None:
 
 @main.command()
 def genes() -> None:
-    """Stage 1: gene correspondence across cohorts + ECM panel presence check."""
+    """Stage 1 wrap-up: gene correspondence, ECM panel check, design/coverage tables."""
     from opengo.genes import build_gene_table, ecm_check
+    from opengo.io import stage1_summaries
+
+    summaries = stage1_summaries()
+    console.print(summaries["stage1_population_overrides"].to_string(index=False))
 
     table, summary = build_gene_table()
     table.to_csv(config.TABLES_DIR / "gene_correspondence.tsv", sep="\t", index=False)
@@ -112,19 +116,43 @@ def genes() -> None:
 
 
 @main.command()
-@click.argument("stage", type=click.Choice(["1"]))
+@click.argument("stage", type=click.Choice(["1", "2"]))
 def figures(stage: str) -> None:
     """Render a stage's figures into outputs/step_<stage>_output/."""
-    from opengo import plots_stage1
+    import importlib
 
-    for path in plots_stage1.make_all():
+    module = importlib.import_module(f"opengo.plots_stage{stage}")
+    for path in module.make_all():
         console.print(f"  {path.relative_to(config.PROJECT_ROOT)}")
 
 
 @main.command()
 def qc() -> None:
-    """Stage 2: per-specimen QC metrics and exploratory structure."""
-    _not_yet("Stage 2")
+    """Stage 2: per-cell QC metrics and per-specimen flags (nothing removed)."""
+    from opengo import stage2
+
+    def progress(sid, m):
+        console.print(
+            f"  {sid:<18} n={len(m):>6} pass={m['qc_pass'].mean():.1%} "
+            f"med_counts={m['total_counts'].median():.0f} med_mt={m['pct_mt'].median():.2f}%"
+        )
+
+    tables = stage2.run_qc(progress=progress)
+    for name, df in tables.items():
+        if name != "stage2_qc_by_specimen":
+            console.rule(name)
+            console.print(df.to_string(index=False))
+
+
+@main.command()
+def explore() -> None:
+    """Stage 2: pseudobulk, exploratory PCA, marker labels (C), stromal identity checks."""
+    from opengo import stage2
+
+    out = stage2.run_explore(progress=lambda c, s: None)
+    for name, df in out.items():
+        console.rule(name)
+        console.print(df.to_string(index=False))
 
 
 @main.command()

@@ -1,0 +1,8 @@
+  outputs/step_2_output/01_qc_distributions.png
+  outputs/step_2_output/02_flag_rates.png
+  outputs/step_2_output/03_B_author_qc_vs_recomputed.png
+  outputs/step_2_output/04_pseudobulk_pca.png
+  outputs/step_2_output/05_marker_label_validation.png
+  outputs/step_2_output/06_cohortC_marker_labels.png
+  outputs/step_2_output/07_stromal_identity.png
+  outputs/step_2_output/08_cohortC_integrity.png

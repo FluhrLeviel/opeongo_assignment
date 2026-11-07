@@ -1,0 +1,45 @@
+─────────────────────────────────── Cohort B ───────────────────────────────────
+  RCC-PR6-Normal     cells=  1542 annotated=1542/1542 genes=32738 int=True [2s]
+  RCC-PR6-PTumor     cells=  3577 annotated=3577/3577 genes=32738 int=True [6s]
+  RCC-PR8-Normal     cells=  1573 annotated=1573/1573 genes=32738 int=True [8s]
+  RCC-PR7-PTumor     cells=  3610 annotated=3610/3610 genes=32738 int=True [12s]
+  RCC-PR9-Normal     cells=  4065 annotated=4065/4065 genes=32738 int=True [17s]
+  RCC-PR9-PTumor     cells=  6504 annotated=6504/6504 genes=32738 int=True [26s]
+  RCC-PR9-PTumor2    cells=  5688 annotated=5688/5688 genes=32738 int=True [34s]
+  RCC-PR5-Normal     cells=  6606 annotated=6606/6606 genes=32738 int=True [44s]
+  RCC-PR5-PTumor1    cells=  8689 annotated=8689/8689 genes=32738 int=True [61s]
+  RCC-PR5-PTumor2    cells=  7708 annotated=7708/7708 genes=32738 int=True [71s]
+  RCC-PR5-PTumor3    cells= 10187 annotated=10187/10187 genes=32738 int=True 
+[91s]
+  RCC-BM1-PTumor     cells=  9971 annotated=9971/9971 genes=32738 int=True 
+[111s]
+  RCC-BM1-Normal     cells=  7043 annotated=7043/7043 genes=32738 int=True 
+[121s]
+  RCC-BM2-PTumor1    cells=  4745 annotated=4745/4745 genes=32738 int=True 
+[128s]
+  RCC-BM2-PTumor2    cells=  5303 annotated=5303/5303 genes=32738 int=True 
+[136s]
+  RCC-BM2-Normal     cells=  2532 annotated=2532/2532 genes=32738 int=True 
+[139s]
+  RCC-PR1-Normal     cells=  2620 annotated=2620/2620 genes=32738 int=True 
+[142s]
+  RCC-PR1-PTumor     cells=  5906 annotated=5906/5906 genes=32738 int=True 
+[151s]
+  RCC-PR2-Normal     cells=  1313 annotated=1313/1313 genes=32738 int=True 
+[152s]
+  RCC-PR2-PTumor     cells=  7332 annotated=7332/7332 genes=32738 int=True 
+[162s]
+  RCC-PR4-Normal     cells=  3482 annotated=3482/3482 genes=32738 int=True 
+[166s]
+  RCC-PR4-PTumor     cells= 10675 annotated=10675/10675 genes=32738 int=True 
+[187s]
+  RCC-PR3-Normal     cells=  5051 annotated=5051/5051 genes=32738 int=True 
+[195s]
+  RCC-PR3-PTumor1    cells=  9239 annotated=9239/9239 genes=32738 int=True 
+[213s]
+  RCC-PR3-PTumor2    cells= 10571 annotated=10571/10571 genes=32738 int=True 
+[234s]
+  RCC-PR3-PTumor3    cells= 12349 annotated=12349/12349 genes=32738 int=True 
+[259s]
+Cohort B: 26 specimens, 157,881 cells -> outputs/checkpoints/cohort_B_raw.h5ad 
+(264s)

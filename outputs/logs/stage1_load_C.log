@@ -1,0 +1,16 @@
+─────────────────────────────────── Cohort C ───────────────────────────────────
+  GSM4819725         cells=  1704 annotated=0/0 genes=33694 int=True [0s]
+  GSM4819726         cells=  1410 annotated=0/0 genes=33694 int=True [0s]
+  GSM4819727         cells=  1660 annotated=0/0 genes=33694 int=True [1s]
+  GSM4819728         cells=   923 annotated=0/0 genes=33694 int=True [1s]
+  GSM4819729         cells=  3674 annotated=0/0 genes=33694 int=True [1s]
+  GSM4819730         cells=  1097 annotated=0/0 genes=33694 int=True [1s]
+  GSM4819731         cells=   578 annotated=0/0 genes=33694 int=True [2s]
+  GSM4819733         cells=  1644 annotated=0/0 genes=33694 int=True [2s]
+  GSM4819734         cells=  2872 annotated=0/0 genes=33694 int=True [2s]
+  GSM4819735         cells=  1896 annotated=0/0 genes=33694 int=True [2s]
+  GSM4819736         cells=  1953 annotated=0/0 genes=33694 int=True [3s]
+  GSM4819737         cells=  6453 annotated=0/0 genes=33694 int=True [3s]
+  GSM4819738         cells=  3635 annotated=0/0 genes=33694 int=True [3s]
+Cohort C: 13 specimens, 29,499 cells -> outputs/checkpoints/cohort_C_raw.h5ad 
+(4s)

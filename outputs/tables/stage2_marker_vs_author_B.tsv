@@ -1,0 +1,8 @@
+population	Endothelial	Lymphoid	Malignant_epithelial	Myeloid	Nonmalignant_epithelial	Stromal
+Endothelial	896	0	0	0	0	0
+Lymphoid	0	10516	1	6	18	3
+Malignant_epithelial	0	43	418	8	586	15
+Myeloid	1	10	1	4323	0	294
+Nonmalignant_epithelial	0	2	18	0	689	1
+Stromal	12	0	1	0	14	1873
+Unresolved	28	3	0	29	1	190

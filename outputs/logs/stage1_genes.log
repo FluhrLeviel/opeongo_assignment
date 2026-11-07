@@ -1,0 +1,40 @@
+cohort population_suggested population  cells
+     A             Lymphoid    Myeloid    510
+/Users/levielfluhr/Desktop/opengo/applicant-package/src/opengo/genes.py:77: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  table[col] = table[col].fillna(False).astype(bool)
+/Users/levielfluhr/Desktop/opengo/applicant-package/src/opengo/genes.py:77: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  table[col] = table[col].fillna(False).astype(bool)
+                       metric  value
+                      genes_A  33538
+                      genes_B  32738
+                      genes_C  33694
+                A_and_C_by_id  32991
+        B_mapped_via_A_symbol  20167
+        B_mapped_via_C_symbol   9831
+                  B_ambiguous      4
+                  B_collision    532
+                  B_unmatched   2204
+                 shared_A_B_C  29531
+symbol_differs_A_vs_C_same_id  11116
+gene_symbol ensembl_gene_id symbol_A symbol_B symbol_C  B_match  in_A  in_B  
+in_C  shared_ABC
+     COL1A1 ENSG00000108821   COL1A1   COL1A1   COL1A1 A_symbol  True  True  
+True        True
+     COL1A2 ENSG00000164692   COL1A2   COL1A2   COL1A2 A_symbol  True  True  
+True        True
+     COL3A1 ENSG00000168542   COL3A1   COL3A1   COL3A1 A_symbol  True  True  
+True        True
+     COL5A1 ENSG00000130635   COL5A1   COL5A1   COL5A1 A_symbol  True  True  
+True        True
+     COL6A1 ENSG00000142156   COL6A1   COL6A1   COL6A1 A_symbol  True  True  
+True        True
+     COL6A2 ENSG00000142173   COL6A2   COL6A2   COL6A2 A_symbol  True  True  
+True        True
+        FN1 ENSG00000115414      FN1      FN1      FN1 A_symbol  True  True  
+True        True
+      SPARC ENSG00000113140    SPARC    SPARC    SPARC A_symbol  True  True  
+True        True
+        DCN ENSG00000011465      DCN      DCN      DCN A_symbol  True  True  
+True        True
+        LUM ENSG00000139329      LUM      LUM      LUM A_symbol  True  True  
+True        True

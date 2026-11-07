@@ -1,76 +1,59 @@
 ─────────────────────────────────── Cohort A ───────────────────────────────────
   CPT0025110004      cells=  5241 annotated=5241/5241 genes=33538 int=True [8s]
   CPT0065690004      cells=  4551 annotated=4551/4551 genes=33538 int=True [16s]
-  CPT0014470002      cells=  4820 annotated=4820/4820 genes=33538 int=True [25s]
+  CPT0014470002      cells=  4820 annotated=4820/4820 genes=33538 int=True [24s]
   CPT0014450005      cells=  2590 annotated=2590/2590 genes=33538 int=True [32s]
   CPT0025880013      cells=  4585 annotated=4585/4585 genes=33538 int=True [41s]
   CPT0075170013      cells=  2361 annotated=2361/2361 genes=33538 int=True [47s]
-  CPT0075130004      cells=  4573 annotated=4573/4573 genes=33538 int=True [55s]
+  CPT0075130004      cells=  4573 annotated=4573/4573 genes=33538 int=True [54s]
   CPT0075720013      cells=  3208 annotated=3208/3208 genes=33538 int=True [60s]
   CPT0001540013      cells=  4822 annotated=4822/4822 genes=33538 int=True [68s]
-  CPT0001220012      cells=  4768 annotated=4768/4768 genes=33538 int=True [75s]
-  CPT0001500003      cells=  4678 annotated=4678/4678 genes=33538 int=True [84s]
-  CPT0001270002      cells=  5637 annotated=5637/5637 genes=33538 int=True [92s]
-  CPT0001260013      cells=  3991 annotated=3991/3991 genes=33538 int=True [98s]
+  CPT0001220012      cells=  4768 annotated=4768/4768 genes=33538 int=True [76s]
+  CPT0001500003      cells=  4678 annotated=4678/4678 genes=33538 int=True [85s]
+  CPT0001270002      cells=  5637 annotated=5637/5637 genes=33538 int=True [95s]
+  CPT0001260013      cells=  3991 annotated=3991/3991 genes=33538 int=True 
+[101s]
   CPT0000890002      cells=  1138 annotated=1138/1138 genes=33538 int=True 
-[104s]
+[107s]
   CPT0000880001      cells=  4346 annotated=4346/4346 genes=33538 int=True 
-[113s]
+[117s]
   CPT0000870003      cells=  4515 annotated=4515/4515 genes=33538 int=True 
-[121s]
+[126s]
   CPT0001180011      cells=  4648 annotated=4648/4648 genes=33538 int=True 
-[131s]
+[135s]
   CPT0010100001      cells=  4988 annotated=4988/4988 genes=33538 int=True 
-[140s]
+[145s]
   CPT0010160004      cells=  4938 annotated=4938/4938 genes=33538 int=True 
-[147s]
+[153s]
   CPT0019130004      cells=  3832 annotated=3832/3832 genes=33538 int=True 
-[156s]
-  CPT0086350004      cells=  3699 annotated=3699/3699 genes=33538 int=True 
 [162s]
+  CPT0086350004      cells=  3699 annotated=3699/3699 genes=33538 int=True 
+[171s]
   CPT0023690004      cells=  3083 annotated=3083/3083 genes=33538 int=True 
-[168s]
+[178s]
   CPT0079410004      cells=  1357 annotated=1357/1357 genes=33538 int=True 
-[177s]
+[185s]
   CPT0063630004      cells=  2846 annotated=2846/2846 genes=33538 int=True 
-[184s]
+[192s]
   CPT0086820004      cells=  4631 annotated=4631/4631 genes=33538 int=True 
-[193s]
+[202s]
   CPT0020120013      cells=  5012 annotated=5012/5012 genes=33538 int=True 
-[201s]
+[212s]
   CPT0012280004      cells=  5416 annotated=5416/5416 genes=33538 int=True 
-[210s]
+[223s]
   CPT0012550012      cells=  5247 annotated=5247/5247 genes=33538 int=True 
-[218s]
+[232s]
   CPT0078510004      cells=  4608 annotated=4608/4608 genes=33538 int=True 
-[225s]
+[241s]
   CPT0015810004      cells=  5106 annotated=5106/5106 genes=33538 int=True 
-[233s]
+[251s]
   CPT0025890002      cells=  3623 annotated=3623/3623 genes=33538 int=True 
-[242s]
-  CPT0010110013      cells=  4100 annotated=4100/4100 genes=33538 int=True 
-[252s]
-  CPT0075120002      cells=  4421 annotated=4421/4421 genes=33538 int=True 
 [261s]
+  CPT0010110013      cells=  4100 annotated=4100/4100 genes=33538 int=True 
+[272s]
+  CPT0075120002      cells=  4421 annotated=4421/4421 genes=33538 int=True 
+[282s]
   CPT0075140002      cells=  4571 annotated=4571/4571 genes=33538 int=True 
-[271s]
+[292s]
 Cohort A: 34 specimens, 141,950 cells -> outputs/checkpoints/cohort_A_raw.h5ad 
-(283s)
-      284.49 real       300.19 user        33.45 sys
-          1897119744  maximum resident set size
-                   0  average shared memory size
-                   0  average unshared data size
-                   0  average unshared stack size
-            11053740  page reclaims
-                3197  page faults
-                   0  swaps
-                   0  block input operations
-                   0  block output operations
-                   1  messages sent
-                   1  messages received
-                   1  signals received
-                6406  voluntary context switches
-              351578  involuntary context switches
-           194937393  instructions retired
-           122253639  cycles elapsed
-            10634496  peak memory footprint
+(304s)

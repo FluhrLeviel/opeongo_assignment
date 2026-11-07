@@ -1,8 +1,8 @@
 cohort	population	Adjacent	Tumor	total
 A	Endothelial	527	2482	3009
-A	Lymphoid	1129	9226	10355
+A	Lymphoid	1101	8744	9845
 A	Malignant_epithelial	0	88536	88536
-A	Myeloid	719	24149	24868
+A	Myeloid	747	24631	25378
 A	Nonmalignant_epithelial	10716	618	11334
 A	Stromal_fibro_myo	828	1944	2772
 A	Unresolved	37	1039	1076

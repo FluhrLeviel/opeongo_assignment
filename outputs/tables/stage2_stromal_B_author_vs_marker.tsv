@@ -1,0 +1,19 @@
+author_broad	Endothelial	Fibroblast	Mural
+Endothelial	7044	1	26
+Fibroblast	60	277	117
+Pericytes	44	242	14143
+Unresolved: Endothelial / Fibroblast	4	0	1
+Unresolved: Endothelial / Fibroblast proliferating	3	0	1
+Unresolved: Endothelial / Pericytes1	25	1	38
+Unresolved: Endothelial / Pericytes2	2	0	3
+Unresolved: Fibroblast / Endothelial-1	63	7	8
+Unresolved: Fibroblast / Endothelial-2	9	1	1
+Unresolved: Fibroblast / Endothelial-4	11	1	0
+Unresolved: Fibroblast / Endothelial-5	9	0	0
+Unresolved: Fibroblast / Pericytes1	6	63	353
+Unresolved: Fibroblast / Pericytes2	0	6	40
+Unresolved: Pericytes / Endothelial-1	5	1	7
+Unresolved: Pericytes / Endothelial-4	1	0	0
+Unresolved: Pericytes / Endothelial-5	0	0	1
+Unresolved: Pericytes / Fibroblast	0	2	19
+Unresolved: Pericytes / Fibroblast proliferating	0	0	11

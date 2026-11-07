@@ -1,0 +1,5 @@
+metric	author_field	spearman	exact_match_frac
+total_counts	TotalUMI	1.0	1.0
+n_genes	gene.num	1.0	1.0
+pct_mt	MT.ratio (x100)	1.0	1.0
+doublet_score	doublest.score	0.724627563166137	

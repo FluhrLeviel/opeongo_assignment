@@ -40,6 +40,26 @@ def cohort_raw_path(cohort: str) -> Path:
 
 COHORTS = ("A", "B", "C")
 
+# Stage 2 QC flag parameters (flags only; inclusion rule decided at Check-in 2)
+QC_PARAMS = {
+    "nmads_low": 5,  # low counts / genes: below median - 5 MAD (log scale), per specimen
+    "nmads_high": 5,  # high counts: above median + 5 MAD (possible multiplets)
+    "nmads_mt": 3,  # mitochondrial: above median + 3 MAD ...
+    "mt_floor_nuclei": 5.0,  # ... and above 5 % in nuclei (expected ~0 %)
+    "mt_floor_cells": 25.0,  # ... and above 25 % in whole kidney cells (PT cells run high)
+    "min_counts": 200,  # absolute floors
+    "min_genes": 100,
+}
+
+PSEUDOBULK_MIN_CELLS = 10  # primary floor (sensitivity at 20 / 50 in Stage 5)
+MARKER_VALIDATION_N = 20_000  # cells subsampled from A and B to validate marker labelling
+
+# Deliberate deviations from metadata/label_mapping.tsv (author broad label -> population).
+# Evidence: outputs/step_1_output/07_TRM_marker_check.png and decisions_log.tsv.
+POPULATION_OVERRIDES = {
+    "A": {"TRM": "Myeloid"},  # tissue-resident macrophages: CSF1R+, CD3D/E-, CD2-, CD8A-
+}
+
 # ECM 10-gene Panel
 ECM_GENES = [
     "COL1A1",

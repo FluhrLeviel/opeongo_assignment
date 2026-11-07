@@ -173,7 +173,12 @@ def load_a_specimen(row: pd.Series, annot: pd.DataFrame) -> tuple[ad.AnnData, Sp
     obs["author_cluster"] = mine["ident"].astype(str).values
     obs["author_umap_1"] = mine["UMAP_1"].values
     obs["author_umap_2"] = mine["UMAP_2"].values
-    obs["population"] = obs["author_broad"].map(pop_a).fillna("Unmapped").values
+    obs["population_suggested"] = obs["author_broad"].map(pop_a).fillna("Unmapped").values
+    overrides = config.POPULATION_OVERRIDES["A"]
+    obs["population"] = [
+        overrides.get(b, s)
+        for b, s in zip(obs["author_broad"], obs["population_suggested"], strict=True)
+    ]
     obs["in_author_annotation"] = True
 
     var = features.set_index("gene_id", drop=False)
@@ -250,6 +255,7 @@ def load_b_specimen(
         pop_b.get((b, d), "Unmapped") if ok else "Not_in_author_annotation"
         for b, d, ok in zip(obs["author_broad"], obs["author_detailed"], in_ann, strict=True)
     ]
+    obs["population_suggested"] = obs["population"]
     obs["in_author_annotation"] = in_ann
 
     var = pd.DataFrame({"symbol": genes}, index=genes)  # Ensembl IDs assigned by genes.py
@@ -294,6 +300,7 @@ def load_c_specimen(row: pd.Series) -> tuple[ad.AnnData, SpecimenRecord]:
 
     obs = _base_obs(row, barcodes)
     obs["population"] = "Unlabelled"
+    obs["population_suggested"] = "Unlabelled"
     obs["in_author_annotation"] = False
     var = pd.DataFrame({"gene_id": gene_ids, "symbol": symbols}, index=gene_ids)
     adata = ad.AnnData(X=x, obs=obs, var=var)
@@ -372,3 +379,48 @@ def load_cohort(cohort: str, progress=None) -> pd.DataFrame:
     ad.experimental.concat_on_disk(paths, out, join="inner", merge="same")
     shutil.rmtree(config.TMP_DIR, ignore_errors=True)
     return pd.DataFrame(records)
+
+
+# --------------------------------------------------------------------------------------
+# Stage 1 summary tables (built from the cohort checkpoints)
+
+
+def read_obs(cohort: str, columns: list[str] | None = None) -> pd.DataFrame:
+    """Cell metadata of one cohort without loading the count matrix."""
+    a = ad.read_h5ad(config.cohort_raw_path(cohort), backed="r")
+    obs = a.obs if columns is None else a.obs[columns]
+    obs = obs.copy()
+    a.file.close()
+    return obs
+
+
+def stage1_summaries() -> dict[str, pd.DataFrame]:
+    """Donor design and population coverage tables, written to outputs/tables/."""
+    cols = ["cohort", "sample_id", "donor_key", "condition", "population", "population_suggested"]
+    obs = pd.concat([read_obs(c, cols) for c in config.COHORTS])
+    for c in cols:
+        obs[c] = obs[c].astype(str)
+
+    design = obs.groupby(["cohort", "donor_key", "condition"])["sample_id"].nunique()
+    design = design.unstack(fill_value=0).reset_index()
+    design["paired"] = (design["Tumor"] > 0) & (design["Adjacent"] > 0)
+
+    by_spec = (
+        obs.groupby(["cohort", "sample_id", "condition", "population"]).size().rename("cells")
+    ).reset_index()
+    by_cond = obs.groupby(["cohort", "population", "condition"]).size().unstack(fill_value=0)
+    by_cond["total"] = by_cond.sum(axis=1)
+    changed = obs[obs["population"] != obs["population_suggested"]]
+    overrides = (
+        changed.groupby(["cohort", "population_suggested", "population"]).size().rename("cells")
+    ).reset_index()
+
+    out = {
+        "stage1_donor_design": design,
+        "stage1_population_by_specimen": by_spec,
+        "stage1_population_by_condition": by_cond.reset_index(),
+        "stage1_population_overrides": overrides,
+    }
+    for name, df in out.items():
+        df.to_csv(config.TABLES_DIR / f"{name}.tsv", sep="\t", index=False)
+    return out
