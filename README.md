@@ -7,6 +7,16 @@ combining cohorts changes that, and whether linked bulk RNA and protein data agr
 
 Panel: COL1A1, COL1A2, COL3A1, COL5A1, COL6A1, COL6A2, FN1, SPARC, DCN, LUM.
 
+**Author:** Leviel Fluhr · **Time spent:** about 6 hours · **AI tools:** used, with every output checked
+(see [AI assistance](#ai-assistance)).
+
+**For reviewers, in reading order:**
+1. the 4-page report, [`report/report.pdf`](report/report.pdf);
+2. the analysis notebook, [`notebooks/ecm_analysis.ipynb`](notebooks/ecm_analysis.ipynb);
+3. [How decisions were made](#how-decisions-were-made), for the reasoning behind each stage.
+
+Everything can be regenerated with `uv sync && uv run opengo all` (see [Setup](#setup)).
+
 **Deliverables**
 
 - **Report (4 pages):** [`report/report.pdf`](report/report.pdf) (source `report/report.html`,
@@ -27,7 +37,8 @@ Panel: COL1A1, COL1A2, COL3A1, COL5A1, COL6A1, COL6A2, FN1, SPARC, DCN, LUM.
    contains B's estimate). The pooled estimate is therefore dominated by B, and how it is pooled
    matters (fixed effect +0.88 [0.56, 1.21]; random effects +0.60 [−0.39, 1.59]).
 5. Full CPTAC bulk RNA (72 pairs) and protein (80 pairs) show the same gene pattern: collagens, FN1
-   and SPARC up; DCN/LUM not. The 3 matched multimodal donors are too few to decide.
+   and SPARC up; DCN/LUM not. This may reflect per-cell change, expansion of mural and vascular
+   tissue, or both. The 3 matched multimodal donors are too few to decide.
 
 ## Inputs (not committed)
 
