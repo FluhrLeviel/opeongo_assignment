@@ -22,7 +22,7 @@ Panel: COL1A1, COL1A2, COL3A1, COL5A1, COL6A1, COL6A2, FN1, SPARC, DCN, LUM.
 1. Cohort C was excluded: its counts are capped at ≤ 409 non-mitochondrial counts per cell.
 2. A (single-nucleus) and B (single-cell) were combined with Harmony (batch = cohort).
 3. The ECM panel is a stromal program. In the fibroblast + mural compartment, tumor exceeds adjacent
-   in 9/9 cohort B donors (+1.04 SD [0.63, 1.46]), robustly to composition.
+   in 9/9 cohort B donors (+1.04 SD [0.63, 1.46]), robust to the fibroblast:pericyte mix.
 4. Cohort A (3 pairs) is too imprecise to confirm or refute this (its 95 % CI, −1.77 to +1.81,
    contains B's estimate). The pooled estimate is therefore dominated by B, and how it is pooled
    matters (fixed effect +0.88 [0.56, 1.21]; random effects +0.60 [−0.39, 1.59]).
@@ -424,7 +424,9 @@ each effect estimated within its own assay, tumor − adjacent, paired by donor)
 - *Observation:* the well-powered bulk cohorts and the single-cell cohort B show the **same gene
   pattern** (fibrillar collagens, FN1 and SPARC higher in tumor, DCN/LUM lower or unchanged) at
   both RNA and protein level. COL6A1 is the one discrepancy (down in bulk RNA, up in protein and B).
-- *Observation:* the 3-donor matched subset cannot settle direction (donors disagree, all p ≥ 0.5);
+- *Observation:* the 3-donor matched subset cannot settle direction (donors disagree, all p ≥ 0.5).
+  Adding the flagged C3N-00242 link (sensitivity) moves bulk RNA from +0.48 to +0.07 and protein
+  from +0.26 to −0.17, which reinforces this;
   on average FN1 and SPARC are higher in tumor in every matched assay (not in every donor). The
   matched snRNA-stroma value (−0.22) differs from Stage 5's A estimate (+0.02) because Stage 6 uses
   only the crosswalk-linked tumor specimen, whereas Stage 5 averages all tumor regions per donor.
