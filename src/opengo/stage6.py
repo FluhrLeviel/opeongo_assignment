@@ -4,7 +4,7 @@
    to a real column of the condition-specific bulk file; protein aliquot / parent specimen are
    checked against the author sample table. Matched subset = primary (same parent specimen) links.
 2. Within-assay tumor - adjacent comparison, paired by donor, for each ECM gene and the panel:
-     snRNA stroma (linked specimens), snRNA whole specimen (bridge to bulk), bulk RNA, protein —
+     snRNA stroma (linked specimens), snRNA whole specimen (bridge to bulk), bulk RNA, protein;
    on the matched donors; C3N-00242 (flagged tumor protein link) as sensitivity.
    Context (NOT the matched subset): all CPTAC donors with both tumor and normal columns.
 3. Composition: bulk RNA stromal marker genes (non-panel) as a proxy for stromal content; does the
@@ -292,7 +292,7 @@ def agreement_table(effects: pd.DataFrame) -> pd.DataFrame:
     for _, r in effects.iterrows():
         rows.append(
             {
-                "evidence": f"{r['assay']} — {r['scope']}",
+                "evidence": f"{r['assay']} | {r['scope']}",
                 "feature": r["feature"],
                 "mean": r["mean"],
                 "n_donors": r["n_donors"],

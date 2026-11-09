@@ -21,113 +21,113 @@ snRNA/scRNA stroma, cohort B (Stage 5)	SPARC	1.7434817979315909	9.0	9.0	0.009765
 snRNA/scRNA stroma, cohort B (Stage 5)	DCN	-1.6732561702243869	9.0	3.0	0.1692708333333333	down
 snRNA/scRNA stroma, cohort B (Stage 5)	LUM	-0.7165891948717764	9.0	4.0	0.640625	down
 snRNA/scRNA stroma, cohort B (Stage 5)	panel_z	1.0421347727574943	9.0	9.0		up
-snRNA stroma — matched subset (3 donors, primary links)	COL1A1	-1.2240970196686478	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched subset (3 donors, primary links)	COL1A2	-1.0322300298007843	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched subset (3 donors, primary links)	COL3A1	0.04508132529388664	3.0	2.0	0.9375	up
-snRNA stroma — matched subset (3 donors, primary links)	COL5A1	-0.47224623444215624	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched subset (3 donors, primary links)	COL6A1	-0.3098221819114834	3.0	1.0	1.0	down
-snRNA stroma — matched subset (3 donors, primary links)	COL6A2	-0.5539094557539723	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched subset (3 donors, primary links)	FN1	1.3969470990414201	3.0	2.0	0.7142857142857143	up
-snRNA stroma — matched subset (3 donors, primary links)	SPARC	1.03766455723012	3.0	3.0	0.7142857142857143	up
-snRNA stroma — matched subset (3 donors, primary links)	DCN	-0.4215659709558522	3.0	2.0	1.0	down
-snRNA stroma — matched subset (3 donors, primary links)	LUM	-4.96303000877199	3.0	0.0	0.7142857142857143	down
-snRNA stroma — matched subset (3 donors, primary links)	panel_z	-0.21857935763435363	3.0	1.0		down
-snRNA whole specimen — matched subset (3 donors, primary links)	COL1A1	-0.7913491707676852	3.0	2.0	1.0	down
-snRNA whole specimen — matched subset (3 donors, primary links)	COL1A2	-1.177624196401182	3.0	1.0	0.7142857142857143	down
-snRNA whole specimen — matched subset (3 donors, primary links)	COL3A1	-0.10185376963616721	3.0	2.0	1.0	down
-snRNA whole specimen — matched subset (3 donors, primary links)	COL5A1	0.7841104930309437	3.0	2.0	0.7142857142857143	up
-snRNA whole specimen — matched subset (3 donors, primary links)	COL6A1	-1.1804990622681248	3.0	1.0	0.9375	down
-snRNA whole specimen — matched subset (3 donors, primary links)	COL6A2	0.9371511912152922	3.0	2.0	0.7142857142857143	up
-snRNA whole specimen — matched subset (3 donors, primary links)	FN1	2.4591167340581337	3.0	3.0	0.7142857142857143	up
-snRNA whole specimen — matched subset (3 donors, primary links)	SPARC	1.3527330060522094	3.0	2.0	0.7142857142857143	up
-snRNA whole specimen — matched subset (3 donors, primary links)	DCN	-1.9548213299257708	3.0	1.0	0.7142857142857143	down
-snRNA whole specimen — matched subset (3 donors, primary links)	LUM	-1.865135164598999	3.0	1.0	0.7142857142857143	down
-snRNA whole specimen — matched subset (3 donors, primary links)	panel_z	-0.13853957730586575	3.0	1.0		down
-bulk RNA — matched subset (3 donors, primary links)	COL1A1	0.3767666666666661	3.0	2.0	1.0	up
-bulk RNA — matched subset (3 donors, primary links)	COL1A2	-0.4466333333333334	3.0	1.0	0.9375	down
-bulk RNA — matched subset (3 donors, primary links)	COL3A1	0.16996666666666668	3.0	1.0	1.0	up
-bulk RNA — matched subset (3 donors, primary links)	COL5A1	1.3602	3.0	2.0	0.7142857142857143	up
-bulk RNA — matched subset (3 donors, primary links)	COL6A1	1.0032333333333334	3.0	2.0	0.7142857142857143	up
-bulk RNA — matched subset (3 donors, primary links)	COL6A2	2.1332333333333335	3.0	3.0	0.5	up
-bulk RNA — matched subset (3 donors, primary links)	FN1	3.2266333333333335	3.0	3.0	0.5	up
-bulk RNA — matched subset (3 donors, primary links)	SPARC	1.8666333333333334	3.0	3.0	0.5	up
-bulk RNA — matched subset (3 donors, primary links)	DCN	-4.3389999999999995	3.0	0.0	0.5	down
-bulk RNA — matched subset (3 donors, primary links)	LUM	-4.1621	3.0	0.0	0.5	down
-bulk RNA — matched subset (3 donors, primary links)	panel_z	0.4808213674107913	3.0	2.0		up
-bulk protein — matched subset (3 donors, primary links)	COL1A1	-0.19864291237413312	3.0	1.0	0.7142857142857143	down
-bulk protein — matched subset (3 donors, primary links)	COL1A2	-0.2726171687162318	3.0	1.0	0.7142857142857143	down
-bulk protein — matched subset (3 donors, primary links)	COL3A1	0.19864113166753228	3.0	2.0	0.8333333333333333	up
-bulk protein — matched subset (3 donors, primary links)	COL5A1	0.3926768787746653	3.0	2.0	0.8333333333333333	up
-bulk protein — matched subset (3 donors, primary links)	COL6A1	0.49348894728413245	3.0	3.0	0.5	up
-bulk protein — matched subset (3 donors, primary links)	COL6A2	0.24878497022350032	3.0	3.0	0.5	up
-bulk protein — matched subset (3 donors, primary links)	FN1	0.8880610617169005	3.0	3.0	0.5	up
-bulk protein — matched subset (3 donors, primary links)	SPARC	1.0245120618283987	3.0	3.0	0.5	up
-bulk protein — matched subset (3 donors, primary links)	DCN	-1.7303896513098007	3.0	0.0	0.5	down
-bulk protein — matched subset (3 donors, primary links)	LUM	-0.24054580085093255	3.0	2.0	1.0	down
-bulk protein — matched subset (3 donors, primary links)	panel_z	0.2586653107809607	3.0	2.0		up
-snRNA stroma — matched + C3N-00242 (4 donors)	COL1A1	-1.2240970196686478	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched + C3N-00242 (4 donors)	COL1A2	-1.0322300298007843	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched + C3N-00242 (4 donors)	COL3A1	0.04508132529388664	3.0	2.0	0.9375	up
-snRNA stroma — matched + C3N-00242 (4 donors)	COL5A1	-0.47224623444215624	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched + C3N-00242 (4 donors)	COL6A1	-0.3098221819114834	3.0	1.0	1.0	down
-snRNA stroma — matched + C3N-00242 (4 donors)	COL6A2	-0.5539094557539723	3.0	1.0	0.7142857142857143	down
-snRNA stroma — matched + C3N-00242 (4 donors)	FN1	1.3969470990414201	3.0	2.0	0.7142857142857143	up
-snRNA stroma — matched + C3N-00242 (4 donors)	SPARC	1.03766455723012	3.0	3.0	0.7142857142857143	up
-snRNA stroma — matched + C3N-00242 (4 donors)	DCN	-0.4215659709558522	3.0	2.0	1.0	down
-snRNA stroma — matched + C3N-00242 (4 donors)	LUM	-4.96303000877199	3.0	0.0	0.7142857142857143	down
-snRNA stroma — matched + C3N-00242 (4 donors)	panel_z	-0.21857935763435363	3.0	1.0		down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL1A1	-1.3928824830666784	4.0	2.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL1A2	-2.106963412307104	4.0	1.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL3A1	-1.1610782208233417	4.0	2.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL5A1	0.12094525349726754	4.0	2.0	0.9722222222222222	up
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL6A1	-1.7144294779827813	4.0	1.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	COL6A2	0.048221613508904526	4.0	2.0	1.0	up
-snRNA whole specimen — matched + C3N-00242 (4 donors)	FN1	1.9260417591769905	4.0	4.0	0.625	up
-snRNA whole specimen — matched + C3N-00242 (4 donors)	SPARC	0.6682304073766575	4.0	2.0	0.625	up
-snRNA whole specimen — matched + C3N-00242 (4 donors)	DCN	-2.986894600702945	4.0	1.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	LUM	-2.978082238086621	4.0	1.0	0.625	down
-snRNA whole specimen — matched + C3N-00242 (4 donors)	panel_z	-0.7159947194740022	4.0	1.0		down
-bulk RNA — matched + C3N-00242 (4 donors)	COL1A1	0.08507499999999935	4.0	2.0	1.0	up
-bulk RNA — matched + C3N-00242 (4 donors)	COL1A2	-0.7174499999999999	4.0	1.0	0.625	down
-bulk RNA — matched + C3N-00242 (4 donors)	COL3A1	-0.31747499999999995	4.0	1.0	0.78125	down
-bulk RNA — matched + C3N-00242 (4 donors)	COL5A1	0.70015	4.0	2.0	0.78125	up
-bulk RNA — matched + C3N-00242 (4 donors)	COL6A1	0.3749500000000001	4.0	2.0	0.8333333333333333	up
-bulk RNA — matched + C3N-00242 (4 donors)	COL6A2	1.3874500000000003	4.0	3.0	0.625	up
-bulk RNA — matched + C3N-00242 (4 donors)	FN1	2.5425	4.0	4.0	0.3125	up
-bulk RNA — matched + C3N-00242 (4 donors)	SPARC	1.6225	4.0	4.0	0.3125	up
-bulk RNA — matched + C3N-00242 (4 donors)	DCN	-5.25105	4.0	0.0	0.3125	down
-bulk RNA — matched + C3N-00242 (4 donors)	LUM	-4.66625	4.0	0.0	0.3125	down
-bulk RNA — matched + C3N-00242 (4 donors)	panel_z	0.07065534172652024	4.0	2.0		up
-bulk protein — matched + C3N-00242 (4 donors)	COL1A1	-0.38774721282827507	4.0	1.0	0.625	down
-bulk protein — matched + C3N-00242 (4 donors)	COL1A2	-0.4148589834383234	4.0	1.0	0.625	down
-bulk protein — matched + C3N-00242 (4 donors)	COL3A1	0.1304416084447242	4.0	2.0	0.9375	up
-bulk protein — matched + C3N-00242 (4 donors)	COL5A1	0.2239112419129743	4.0	2.0	0.9375	up
-bulk protein — matched + C3N-00242 (4 donors)	COL6A1	0.009637396447474522	4.0	3.0	1.0	up
-bulk protein — matched + C3N-00242 (4 donors)	COL6A2	-0.08795043376332501	4.0	3.0	1.0	down
-bulk protein — matched + C3N-00242 (4 donors)	FN1	0.43814737296730044	4.0	3.0	0.8333333333333334	up
-bulk protein — matched + C3N-00242 (4 donors)	SPARC	0.8302980625806491	4.0	4.0	0.625	up
-bulk protein — matched + C3N-00242 (4 donors)	DCN	-1.8092321500892252	4.0	0.0	0.625	down
-bulk protein — matched + C3N-00242 (4 donors)	LUM	-0.6369615421269987	4.0	2.0	0.8333333333333334	down
-bulk protein — matched + C3N-00242 (4 donors)	panel_z	-0.16719758782932959	4.0	2.0		down
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL1A1	1.721226388888889	72.0	56.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL1A2	1.107286111111111	72.0	52.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL3A1	1.281725	72.0	52.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL5A1	1.0556194444444447	72.0	52.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL6A1	-0.27570972222222234	72.0	23.0	0.00277	down
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	COL6A2	1.543223611111111	72.0	65.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	FN1	2.700601388888889	72.0	72.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	SPARC	1.8935152777777777	72.0	72.0	0.0	up
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	DCN	-3.6180624999999997	72.0	4.0	0.0	down
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	LUM	-2.724565277777778	72.0	9.0	0.0	down
-bulk RNA (all paired donors) — full bulk cohort (context, not matched)	panel_z	0.5186492308945181	72.0	54.0		up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL1A1	0.5393357847186514	80.0	58.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL1A2	0.6586145731246277	80.0	66.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL3A1	1.056367288281061	80.0	72.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL5A1	0.27770151884696387	80.0	45.0	0.010966666666666666	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL6A1	0.42248498114771993	80.0	63.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	COL6A2	0.4025452044348688	80.0	63.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	FN1	0.6701011251665613	80.0	65.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	SPARC	0.9821658280035512	80.0	78.0	0.0	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	DCN	-0.9381314409308839	80.0	13.0	0.0	down
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	LUM	0.09491679962347606	80.0	41.0	0.33567	up
-bulk protein (all paired donors) — full bulk cohort (context, not matched)	panel_z	0.6799525076530946	80.0	67.0		up
+snRNA stroma | matched subset (3 donors, primary links)	COL1A1	-1.2240970196686478	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched subset (3 donors, primary links)	COL1A2	-1.0322300298007843	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched subset (3 donors, primary links)	COL3A1	0.04508132529388664	3.0	2.0	0.9375	up
+snRNA stroma | matched subset (3 donors, primary links)	COL5A1	-0.47224623444215624	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched subset (3 donors, primary links)	COL6A1	-0.3098221819114834	3.0	1.0	1.0	down
+snRNA stroma | matched subset (3 donors, primary links)	COL6A2	-0.5539094557539723	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched subset (3 donors, primary links)	FN1	1.3969470990414201	3.0	2.0	0.7142857142857143	up
+snRNA stroma | matched subset (3 donors, primary links)	SPARC	1.03766455723012	3.0	3.0	0.7142857142857143	up
+snRNA stroma | matched subset (3 donors, primary links)	DCN	-0.4215659709558522	3.0	2.0	1.0	down
+snRNA stroma | matched subset (3 donors, primary links)	LUM	-4.96303000877199	3.0	0.0	0.7142857142857143	down
+snRNA stroma | matched subset (3 donors, primary links)	panel_z	-0.21857935763435363	3.0	1.0		down
+snRNA whole specimen | matched subset (3 donors, primary links)	COL1A1	-0.7913491707676852	3.0	2.0	1.0	down
+snRNA whole specimen | matched subset (3 donors, primary links)	COL1A2	-1.177624196401182	3.0	1.0	0.7142857142857143	down
+snRNA whole specimen | matched subset (3 donors, primary links)	COL3A1	-0.10185376963616721	3.0	2.0	1.0	down
+snRNA whole specimen | matched subset (3 donors, primary links)	COL5A1	0.7841104930309437	3.0	2.0	0.7142857142857143	up
+snRNA whole specimen | matched subset (3 donors, primary links)	COL6A1	-1.1804990622681248	3.0	1.0	0.9375	down
+snRNA whole specimen | matched subset (3 donors, primary links)	COL6A2	0.9371511912152922	3.0	2.0	0.7142857142857143	up
+snRNA whole specimen | matched subset (3 donors, primary links)	FN1	2.4591167340581337	3.0	3.0	0.7142857142857143	up
+snRNA whole specimen | matched subset (3 donors, primary links)	SPARC	1.3527330060522094	3.0	2.0	0.7142857142857143	up
+snRNA whole specimen | matched subset (3 donors, primary links)	DCN	-1.9548213299257708	3.0	1.0	0.7142857142857143	down
+snRNA whole specimen | matched subset (3 donors, primary links)	LUM	-1.865135164598999	3.0	1.0	0.7142857142857143	down
+snRNA whole specimen | matched subset (3 donors, primary links)	panel_z	-0.13853957730586575	3.0	1.0		down
+bulk RNA | matched subset (3 donors, primary links)	COL1A1	0.3767666666666661	3.0	2.0	1.0	up
+bulk RNA | matched subset (3 donors, primary links)	COL1A2	-0.4466333333333334	3.0	1.0	0.9375	down
+bulk RNA | matched subset (3 donors, primary links)	COL3A1	0.16996666666666668	3.0	1.0	1.0	up
+bulk RNA | matched subset (3 donors, primary links)	COL5A1	1.3602	3.0	2.0	0.7142857142857143	up
+bulk RNA | matched subset (3 donors, primary links)	COL6A1	1.0032333333333334	3.0	2.0	0.7142857142857143	up
+bulk RNA | matched subset (3 donors, primary links)	COL6A2	2.1332333333333335	3.0	3.0	0.5	up
+bulk RNA | matched subset (3 donors, primary links)	FN1	3.2266333333333335	3.0	3.0	0.5	up
+bulk RNA | matched subset (3 donors, primary links)	SPARC	1.8666333333333334	3.0	3.0	0.5	up
+bulk RNA | matched subset (3 donors, primary links)	DCN	-4.3389999999999995	3.0	0.0	0.5	down
+bulk RNA | matched subset (3 donors, primary links)	LUM	-4.1621	3.0	0.0	0.5	down
+bulk RNA | matched subset (3 donors, primary links)	panel_z	0.4808213674107913	3.0	2.0		up
+bulk protein | matched subset (3 donors, primary links)	COL1A1	-0.19864291237413312	3.0	1.0	0.7142857142857143	down
+bulk protein | matched subset (3 donors, primary links)	COL1A2	-0.2726171687162318	3.0	1.0	0.7142857142857143	down
+bulk protein | matched subset (3 donors, primary links)	COL3A1	0.19864113166753228	3.0	2.0	0.8333333333333333	up
+bulk protein | matched subset (3 donors, primary links)	COL5A1	0.3926768787746653	3.0	2.0	0.8333333333333333	up
+bulk protein | matched subset (3 donors, primary links)	COL6A1	0.49348894728413245	3.0	3.0	0.5	up
+bulk protein | matched subset (3 donors, primary links)	COL6A2	0.24878497022350032	3.0	3.0	0.5	up
+bulk protein | matched subset (3 donors, primary links)	FN1	0.8880610617169005	3.0	3.0	0.5	up
+bulk protein | matched subset (3 donors, primary links)	SPARC	1.0245120618283987	3.0	3.0	0.5	up
+bulk protein | matched subset (3 donors, primary links)	DCN	-1.7303896513098007	3.0	0.0	0.5	down
+bulk protein | matched subset (3 donors, primary links)	LUM	-0.24054580085093255	3.0	2.0	1.0	down
+bulk protein | matched subset (3 donors, primary links)	panel_z	0.2586653107809607	3.0	2.0		up
+snRNA stroma | matched + C3N-00242 (4 donors)	COL1A1	-1.2240970196686478	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched + C3N-00242 (4 donors)	COL1A2	-1.0322300298007843	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched + C3N-00242 (4 donors)	COL3A1	0.04508132529388664	3.0	2.0	0.9375	up
+snRNA stroma | matched + C3N-00242 (4 donors)	COL5A1	-0.47224623444215624	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched + C3N-00242 (4 donors)	COL6A1	-0.3098221819114834	3.0	1.0	1.0	down
+snRNA stroma | matched + C3N-00242 (4 donors)	COL6A2	-0.5539094557539723	3.0	1.0	0.7142857142857143	down
+snRNA stroma | matched + C3N-00242 (4 donors)	FN1	1.3969470990414201	3.0	2.0	0.7142857142857143	up
+snRNA stroma | matched + C3N-00242 (4 donors)	SPARC	1.03766455723012	3.0	3.0	0.7142857142857143	up
+snRNA stroma | matched + C3N-00242 (4 donors)	DCN	-0.4215659709558522	3.0	2.0	1.0	down
+snRNA stroma | matched + C3N-00242 (4 donors)	LUM	-4.96303000877199	3.0	0.0	0.7142857142857143	down
+snRNA stroma | matched + C3N-00242 (4 donors)	panel_z	-0.21857935763435363	3.0	1.0		down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL1A1	-1.3928824830666784	4.0	2.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL1A2	-2.106963412307104	4.0	1.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL3A1	-1.1610782208233417	4.0	2.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL5A1	0.12094525349726754	4.0	2.0	0.9722222222222222	up
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL6A1	-1.7144294779827813	4.0	1.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	COL6A2	0.048221613508904526	4.0	2.0	1.0	up
+snRNA whole specimen | matched + C3N-00242 (4 donors)	FN1	1.9260417591769905	4.0	4.0	0.625	up
+snRNA whole specimen | matched + C3N-00242 (4 donors)	SPARC	0.6682304073766575	4.0	2.0	0.625	up
+snRNA whole specimen | matched + C3N-00242 (4 donors)	DCN	-2.986894600702945	4.0	1.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	LUM	-2.978082238086621	4.0	1.0	0.625	down
+snRNA whole specimen | matched + C3N-00242 (4 donors)	panel_z	-0.7159947194740022	4.0	1.0		down
+bulk RNA | matched + C3N-00242 (4 donors)	COL1A1	0.08507499999999935	4.0	2.0	1.0	up
+bulk RNA | matched + C3N-00242 (4 donors)	COL1A2	-0.7174499999999999	4.0	1.0	0.625	down
+bulk RNA | matched + C3N-00242 (4 donors)	COL3A1	-0.31747499999999995	4.0	1.0	0.78125	down
+bulk RNA | matched + C3N-00242 (4 donors)	COL5A1	0.70015	4.0	2.0	0.78125	up
+bulk RNA | matched + C3N-00242 (4 donors)	COL6A1	0.3749500000000001	4.0	2.0	0.8333333333333333	up
+bulk RNA | matched + C3N-00242 (4 donors)	COL6A2	1.3874500000000003	4.0	3.0	0.625	up
+bulk RNA | matched + C3N-00242 (4 donors)	FN1	2.5425	4.0	4.0	0.3125	up
+bulk RNA | matched + C3N-00242 (4 donors)	SPARC	1.6225	4.0	4.0	0.3125	up
+bulk RNA | matched + C3N-00242 (4 donors)	DCN	-5.25105	4.0	0.0	0.3125	down
+bulk RNA | matched + C3N-00242 (4 donors)	LUM	-4.66625	4.0	0.0	0.3125	down
+bulk RNA | matched + C3N-00242 (4 donors)	panel_z	0.07065534172652024	4.0	2.0		up
+bulk protein | matched + C3N-00242 (4 donors)	COL1A1	-0.38774721282827507	4.0	1.0	0.625	down
+bulk protein | matched + C3N-00242 (4 donors)	COL1A2	-0.4148589834383234	4.0	1.0	0.625	down
+bulk protein | matched + C3N-00242 (4 donors)	COL3A1	0.1304416084447242	4.0	2.0	0.9375	up
+bulk protein | matched + C3N-00242 (4 donors)	COL5A1	0.2239112419129743	4.0	2.0	0.9375	up
+bulk protein | matched + C3N-00242 (4 donors)	COL6A1	0.009637396447474522	4.0	3.0	1.0	up
+bulk protein | matched + C3N-00242 (4 donors)	COL6A2	-0.08795043376332501	4.0	3.0	1.0	down
+bulk protein | matched + C3N-00242 (4 donors)	FN1	0.43814737296730044	4.0	3.0	0.8333333333333334	up
+bulk protein | matched + C3N-00242 (4 donors)	SPARC	0.8302980625806491	4.0	4.0	0.625	up
+bulk protein | matched + C3N-00242 (4 donors)	DCN	-1.8092321500892252	4.0	0.0	0.625	down
+bulk protein | matched + C3N-00242 (4 donors)	LUM	-0.6369615421269987	4.0	2.0	0.8333333333333334	down
+bulk protein | matched + C3N-00242 (4 donors)	panel_z	-0.16719758782932959	4.0	2.0		down
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL1A1	1.721226388888889	72.0	56.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL1A2	1.107286111111111	72.0	52.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL3A1	1.281725	72.0	52.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL5A1	1.0556194444444447	72.0	52.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL6A1	-0.27570972222222234	72.0	23.0	0.00277	down
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	COL6A2	1.543223611111111	72.0	65.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	FN1	2.700601388888889	72.0	72.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	SPARC	1.8935152777777777	72.0	72.0	0.0	up
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	DCN	-3.6180624999999997	72.0	4.0	0.0	down
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	LUM	-2.724565277777778	72.0	9.0	0.0	down
+bulk RNA (all paired donors) | full bulk cohort (context, not matched)	panel_z	0.5186492308945181	72.0	54.0		up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL1A1	0.5393357847186514	80.0	58.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL1A2	0.6586145731246277	80.0	66.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL3A1	1.056367288281061	80.0	72.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL5A1	0.27770151884696387	80.0	45.0	0.010966666666666666	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL6A1	0.42248498114771993	80.0	63.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	COL6A2	0.4025452044348688	80.0	63.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	FN1	0.6701011251665613	80.0	65.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	SPARC	0.9821658280035512	80.0	78.0	0.0	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	DCN	-0.9381314409308839	80.0	13.0	0.0	down
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	LUM	0.09491679962347606	80.0	41.0	0.33567	up
+bulk protein (all paired donors) | full bulk cohort (context, not matched)	panel_z	0.6799525076530946	80.0	67.0		up

@@ -1,4 +1,4 @@
-# Working plan — ECM program in ccRCC
+# Working plan: ECM program in ccRCC
 
 This is a living document. The analysis is stepwise and adaptive: each stage ends with a
 **check-in** (below) and what we learn can change the next stage. Changes are logged at the bottom.
@@ -9,18 +9,18 @@ integration on an HVG subset only; pseudobulk summed from raw counts per cohort.
 
 ---
 
-## Working protocol — check-in after every stage
+## Working protocol: check-in after every stage
 
 At the end of each stage Claude stops and reports:
 1. **What was run** (command, parameters, runtime).
 2. **Key numbers and 1–3 diagnostic figures/tables** (paths in `outputs/`).
 3. **Surprises / problems** (anything that contradicts expectations or the metadata).
 4. **Proposed decision(s)** with alternatives and what each would change downstream.
-5. **Effect on later stages** — does the plan need to change?
+5. **Effect on later stages**: does the plan need to change?
 
 Then we decide together: **proceed / redo with changes / revise plan**. No stage starts without
 an explicit go. Every decision is appended to `outputs/tables/decisions_log.tsv`
-(stage, decision, evidence, alternatives considered) — this doubles as the
+(stage, decision, evidence, alternatives considered); this doubles as the
 inclusion/exclusion record required by the assignment.
 
 Decisions that are deliberately **left open until we see data** (flagged ⟶ in the stages):
@@ -29,7 +29,7 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
 
 ---
 
-## Stage 0 — Environment, CLI, repo
+## Stage 0: Environment, CLI, repo
 - `.venv` exists (uv, Python 3.11) but no `pyproject.toml`/`uv.lock` → convert to a uv project, pin
   installed packages. All installs via `uv add` (no pip).
 - Code layout: logic in `src/opengo/` (importable), heavy steps through a CLI, exploration and
@@ -43,7 +43,7 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
 - `opengo verify`: SHA-256 of every input vs `FILE_MANIFEST.tsv`.
 - **Check-in 0:** env locked, CLI runs, hashes all match.
 
-## Stage 1 — Load & reconcile (no filtering)
+## Stage 1: Load & reconcile (no filtering)
 | Cohort | Load | Cell key | Cells kept at load |
 |---|---|---|---|
 | A snRNA | extract each tar to tmp, `read_10x_mtx` | `orig.ident` + `individual_barcode` | barcodes in author annotation (expect 141,950) |
@@ -56,11 +56,11 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
   `paper_annotated_cells`, donor/condition join against `sample_manifest.tsv`.
 - **Check-in 1:** specimen table (cells, annotation match %, donor, condition, repeats).
 
-## Stage 2 — Exploratory QC & structure (all populations, all cohorts)
+## Stage 2: Exploratory QC & structure (all populations, all cohorts)
 - Per-specimen metrics: UMI, genes, % mito, % ribo. B source QC fields recomputed and compared.
   Missing acquisition diagnostics are not treated as pass/fail.
-- Assay-aware criteria: nuclei (A) — mito should be ~0, high mito = ambient/stripping, not dying
-  cells; kidney cells (B/C) — mito can be biologically high → per-specimen MAD-based outliers, not a
+- Assay-aware criteria: nuclei (A): mito should be ~0, high mito = ambient/stripping, not dying
+  cells; kidney cells (B/C): mito can be biologically high → per-specimen MAD-based outliers, not a
   fixed %. ⟶ thresholds decided from the plots.
 - Coverage table: cells per specimen × major population incl. `Unresolved` (kept in coverage, not
   in contrasts).
@@ -73,12 +73,12 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
   transfer in the integrated space. Never use ECM panel genes alone to define fibroblasts (circular).
 - **Check-in 2:** cell/specimen exclusions; ⟶ C in integration or only as robustness cohort.
 
-## Stage 3 — Section 1: A first, then what B/C add; baseline vs Harmony
+## Stage 3: Section 1: A first, then what B/C add; baseline vs Harmony
 - Sequence the assignment asks for: **A alone** → **A+B** → **A+B+C** (if C passes Check-in 2).
 - Combined HVG object; normalize_total → log1p; HVGs with `batch_key`; ECM genes kept in object
   (not forced into HVGs); PCA.
 - **Baseline:** PCA → kNN → UMAP, no correction. **Integration:** Harmony on PCA.
-  ⟶ batch key = cohort (primary) vs specimen — specimen is confounded with condition; decided by
+  ⟶ batch key = cohort (primary) vs specimen; specimen is confounded with condition; decided by
   the evaluation.
 - One concise comparison (table + figure):
   - mixing: iLISI by cohort; identity: cLISI + silhouette by major population; Leiden vs labels ARI/NMI;
@@ -86,10 +86,10 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
     (fibroblasts, pericytes) stay distinct or get merged.
 - Write up explicitly: **signals preserved / weakened / lost**, and **what combining adds**
   (donors, adjacent samples, population coverage, scRNA vs snRNA capture differences).
-- The embedding is used only for visualisation and label transfer — **never for testing**.
+- The embedding is used only for visualisation and label transfer, **never for testing**.
 - **Check-in 3.**
 
-## Stage 4 — ECM overview across populations
+## Stage 4: ECM overview across populations
 - Per-gene dotplot (fraction expressing + mean log-norm) across major populations × cohort.
 - **Summary (justified):** per pseudobulk sample, mean of per-gene z-scored log-CPM over the 10 genes
   (equal gene weights, interpretable as an average log-fold shift; z-scoring within cohort removes
@@ -101,9 +101,9 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
   counterpart → reported as non-estimable.
 - **Check-in 4:** chosen population + justification.
 
-## Stage 5 — Tumor vs adjacent in the focus population
+## Stage 5: Tumor vs adjacent in the focus population
 - Values tested: **raw counts summed per specimen** (pseudobulk) → log-CPM (edgeR-style TMM or CPM).
-  ⟶ min cells per pseudobulk (e.g. ≥ 20); repeated tumor regions averaged per donor (primary) — or
+  ⟶ min cells per pseudobulk (e.g. ≥ 20); repeated tumor regions averaged per donor (primary), or
   donor random effect.
 - Primary: paired within-donor differences (tumor − adjacent) for the panel score and each gene.
   - per cohort: mean difference, 95 % CI, per-donor spaghetti plot;
@@ -112,12 +112,12 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
   - small n (≈4–9 pairs per cohort): emphasise effect size + CI and sign consistency; exact
     sign-flip permutation p-value; BH across the 10 genes. Unpaired donors used only in a sensitivity
     model.
-- ⟶ Robustness check aimed at the main uncertainty seen by then — likely candidates: leave-one-cohort /
+- ⟶ Robustness check aimed at the main uncertainty seen by then: likely candidates: leave-one-cohort /
   leave-one-donor-out; restrict to paired donors; vary min-cells; alternative score (rank-based);
   cell-number/composition sensitivity.
 - **Check-in 5.**
 
-## Stage 6 — Section 3: linked modalities (cohort A)
+## Stage 6: Section 3: linked modalities (cohort A)
 - Validate crosswalk: 34 A specimens → 27 primary (23 T, 4 Adj), 2 flagged (C3L-00908 T different parent;
   **C3N-00242 T multiple protein IDs**), 5 with no bulk link. Confirm every `bulk_sample_id` resolves
   via `bulk_samples.tsv` to a real column in the condition-specific file.
@@ -125,15 +125,15 @@ focus population · min cells per pseudobulk · repeated-region handling · robu
   links** (C3N-00242 tumor is flagged) → primary paired n = 3, n = 4 in sensitivity. Bulk RNA is
   donor/condition-level only (aliquot not reconciled).
 - Within each assay, same direction question for the panel and each gene:
-  (a) snRNA focus-population pseudobulk; (b) snRNA **whole-specimen** pseudobulk — a bridge that mixes
-  composition the same way bulk does; (c) bulk RNA; (d) protein — matched subset, paired where possible.
+  (a) snRNA focus-population pseudobulk; (b) snRNA **whole-specimen** pseudobulk, a bridge that mixes
+  composition the same way bulk does; (c) bulk RNA; (d) protein; matched subset, paired where possible.
 - Context (clearly labelled *not* the matched subset): full bulk cohort has 72 paired RNA and 80 paired
   protein tumor/adjacent donors → much better powered direction estimate.
 - Composition: stromal/endothelial fraction per specimen from snRNA, to explain bulk vs cell-type
   discrepancies. Protein missingness per gene reported; no zero-filling.
 - **Check-in 6:** agreement table, discrepancies, limitations.
 
-## Stage 7 — Report & repo
+## Stage 7: Report & repo
 - Report ≤ 4 pages: observations separated from interpretations, uncertainty stated, negative results OK.
 - README (inputs, `uv sync`, run order `opengo all` + notebook), params + seed (42) in `src/opengo/config.py`,
   decisions log, AI-assistance note (what was checked and how), time log.
@@ -147,7 +147,7 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 |---|---|---|
 | TRM (510 A nuclei) mapped to Lymphoid, authors group it with Macrophages | Harmonise labels to a shared ontology/reference, log deviations | Remap TRM → Myeloid (pending OK); log as deviation from the guide |
 | Stromal paired coverage thin: A ≤ 3, B ≤ 2 donors (≥ 10 cells) | Pseudobulk floor ≈ 10 cells / 1,000 counts (50 conservative) | Stage 4: focus population probably endothelial (A 3 + B 9 paired) or a mural/stromal compartment; decided from coverage + QC |
-| B `Unresolved` = fibroblast/pericyte/endothelial label conflicts (2,087 cells) | Fibroblast vs pericyte not cleanly separable by single markers | Stage 2: re-check these with non-panel markers (fibroblast: PDGFRA, C7, FBLN1; pericyte: RGS5, MYH11, NOTCH3; endothelial: VWF, CDH5, RAMP2 — PECAM1 absent in B). **Never use DCN/LUM/COL genes to define cells (they are the panel).** |
+| B `Unresolved` = fibroblast/pericyte/endothelial label conflicts (2,087 cells) | Fibroblast vs pericyte not cleanly separable by single markers | Stage 2: re-check these with non-panel markers (fibroblast: PDGFRA, C7, FBLN1; pericyte: RGS5, MYH11, NOTCH3; endothelial: VWF, CDH5, RAMP2; PECAM1 absent in B). **Never use DCN/LUM/COL genes to define cells (they are the panel).** |
 | A has no pericyte label; A "Myofibroblasts" may contain mural cells | Same | Stage 2: check RGS5/MYH11 in A myofibroblasts before treating A stroma ≈ B fibroblasts |
 | Composition differs strongly by cohort (B tumors mostly immune; A mostly tumor nuclei) | snRNA vs scRNA capture biases (Wu 2019; Denisenko 2020) | Never compare population proportions across cohorts; compare within-population expression only, cohort as a fixed term |
 | Depth differs ~10× (C adjacent specimens ~300–1,000 counts/cell) | Per-specimen QC | Stage 2: per-specimen/assay-aware QC; C may be robustness-only |
@@ -197,11 +197,11 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
   interest (another reason not to test on the embedding).
 
 ## References (practice)
-- Heumos et al. 2023 *Nat Rev Genet* — best practices; per-sample QC, ambient RNA, doublets.
-- Squair et al. 2021 *Nat Commun* — pseudobulk with donor replicates.
-- Luecken et al. 2022 *Nat Methods* (scIB) — batch removal vs bio conservation metrics.
-- OSCA "single-nuclei processing"; Hippen et al. 2021 miQC — assay-aware mito QC.
-- Clark et al. 2019 *Cell* — CPTAC ccRCC proteogenomics (bulk source).
+- Heumos et al. 2023 *Nat Rev Genet*: best practices; per-sample QC, ambient RNA, doublets.
+- Squair et al. 2021 *Nat Commun*: pseudobulk with donor replicates.
+- Luecken et al. 2022 *Nat Methods* (scIB), batch removal vs bio conservation metrics.
+- OSCA "single-nuclei processing"; Hippen et al. 2021 miQC: assay-aware mito QC.
+- Clark et al. 2019 *Cell*: CPTAC ccRCC proteogenomics (bulk source).
 
 ## Plan changes log
 | Date | Stage | Change | Reason |
@@ -221,5 +221,5 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | 2026-11-07 | 3 | Harmony by cohort approved | Check-in 3 |
 | 2026-11-07 | 3 | Done: A, A+B baseline, Harmony(cohort), Harmony(specimen). harmonypy pinned 0.0.10 (2.1.0 no-op). Proposed: Harmony by cohort; specimen key rejected (erases condition). Combined stromal compartment supported by label transfer (99 %) | Check-in 3 |
 | 2026-11-07 | 2 | Done: C excluded, flagged cells removed (approved) | Check-in 2 |
-| 2026-11-07 | 1 | Done: 329,330 cells loaded (A 141,950 / B 157,881 / C 29,499), all counts match docs; 29,531 shared genes. Early signal: stromal paired coverage is thin (A ≤3, B ≤2 donors) — affects Stage 4 choice | Check-in 1 |
+| 2026-11-07 | 1 | Done: 329,330 cells loaded (A 141,950 / B 157,881 / C 29,499), all counts match docs; 29,531 shared genes. Early signal: stromal paired coverage is thin (A ≤3, B ≤2 donors), which affects Stage 4 choice | Check-in 1 |
 | 2026-11-07 | 0 | Done: uv project (96 locked pkgs), `src/opengo/` package, CLI with `verify`, pytest + ruff, git init (no commit). 70/70 inputs verified | Check-in 0 |

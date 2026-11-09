@@ -469,7 +469,7 @@ def figure3() -> Path:
         elif ev.startswith("bulk protein (all"):
             cols[ev] = "protein (80)"
         elif "matched subset" in ev:
-            short = ev.split(" — ")[0].replace("snRNA whole specimen", "snRNA whole")
+            short = ev.split(" | ")[0].replace("snRNA whole specimen", "snRNA whole")
             cols[ev] = short.replace("bulk protein", "protein")
     order = [
         "B scRNA stroma (9)",

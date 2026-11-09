@@ -133,7 +133,7 @@ def fig_flag_rates(cells: pd.DataFrame) -> Path:
         annot_kws={"fontsize": 7},
     )
     ax.set_title(
-        "Flag rates per population — are flags technical, or concentrated in one cell type?"
+        "Flag rates per population: are flags technical, or concentrated in one cell type?"
     )
     plt.setp(ax.get_xticklabels(), rotation=60, ha="right", fontsize=8)
     fig.tight_layout()

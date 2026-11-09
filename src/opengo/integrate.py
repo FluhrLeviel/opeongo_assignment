@@ -17,7 +17,7 @@ Metrics (scIB-style; Luecken et al. 2022):
 - identity       : cLISI over population (rescaled 0-1), cell-type ASW, ARI/NMI of Leiden vs labels,
                    kNN label purity per population
 - cross-cohort   : kNN label transfer A -> B and B -> A (accuracy, balanced accuracy)
-- biology        : tumor/adjacent silhouette within each (cohort, population) — does integration
+- biology        : tumor/adjacent silhouette within each (cohort, population): does integration
                    erase the condition structure we later test?
 """
 

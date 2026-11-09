@@ -113,7 +113,7 @@ the stage has been reviewed. The full record, with alternatives considered, is i
 [`outputs/tables/decisions_log.tsv`](outputs/tables/decisions_log.tsv); the rationale for each
 stage's choices is in [`PLAN.md`](PLAN.md).
 
-### Stage 1 — loading and reconciliation
+### Stage 1: loading and reconciliation
 
 Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv run opengo figures 1`).
 
@@ -122,7 +122,7 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
   processed matrices. A silent join error would change every downstream number.
 - *Check:* join A barcodes to the author annotation by specimen + barcode; compare cells per
   specimen with the package manifest; pytest assertions on the documented totals.
-- *Evidence:* `02_load_reconciliation.png` — all 73 specimens on the identity line; A 141,950,
+- *Evidence:* `02_load_reconciliation.png`: all 73 specimens on the identity line; A 141,950,
   B 157,881, C 29,499 cells, every author annotation matched, all counts non-negative integers.
 - *Action:* A restricted to annotated nuclei (no re-calling, as instructed); B and C keep all
   deposited cells until QC.
@@ -132,7 +132,7 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
   annotation. Matching by symbol alone can silently pick the wrong gene.
 - *Check:* A↔C by Ensembl ID; each B symbol assigned only if it matches exactly one A (else C)
   symbol; collisions and ambiguities counted rather than guessed.
-- *Evidence:* `05_gene_correspondence.png` — 29,531 genes shared by all three cohorts; 532 B
+- *Evidence:* `05_gene_correspondence.png`: 29,531 genes shared by all three cohorts; 532 B
   symbols (old and new names of the same 266 genes, mostly lncRNA clone names) left out; all 10
   ECM genes matched by Ensembl ID in every cohort.
 - *Action:* integration uses the shared set; a gene absent from a cohort is treated as unmeasured,
@@ -159,7 +159,7 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
 - *Issue:* donors, not cells, are the replicates; a population needs enough cells in *both*
   conditions in the *same* donors.
 - *Check:* count paired donors per population at minimum-cell thresholds 1–100.
-- *Evidence:* `01_study_design.png`, `04_paired_donor_coverage.png` — at ≥ 10 cells the
+- *Evidence:* `01_study_design.png`, `04_paired_donor_coverage.png`: at ≥ 10 cells the
   fibroblast/myofibroblast compartment has only 3 paired donors in A and 2 in B, whereas
   endothelial cells have 3 (A) + 9 (B) and B pericytes 9.
 - *Action:* no exclusion yet; this shapes Stage 2 (re-examine B's fibroblast/pericyte/endothelial
@@ -167,7 +167,7 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
   Panel genes (DCN, LUM, collagens) are never used to define cells, to avoid circularity.
 
 **5. Are the cohorts comparable in composition and depth?**
-- *Evidence:* `03_population_composition.png` — A tumors are mostly malignant nuclei, B tumors
+- *Evidence:* `03_population_composition.png`: A tumors are mostly malignant nuclei, B tumors
   mostly immune cells, C unlabelled; mean counts per cell differ ~10-fold (C adjacent lowest).
 - *Interpretation:* consistent with known single-nucleus vs single-cell capture biases
   (Wu et al. 2019; Denisenko et al. 2020).
@@ -175,12 +175,12 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
   are estimated within cohort, with cohort as a model term; QC thresholds are set per specimen and
   per assay.
 
-### Stage 2 — quality control and exploratory structure
+### Stage 2: quality control and exploratory structure
 
 Figures: [`outputs/step_2_output/`](outputs/step_2_output/) (regenerate with `uv run opengo qc`,
 `uv run opengo explore`, `uv run opengo figures 2`). Decisions approved at Check-in 2.
 
-**1. Which cells are low quality — and is a flag technical or biological?**
+**1. Which cells are low quality, and is a flag technical or biological?**
 - *Approach:* per-specimen, assay-aware flags (no fixed global cut-offs): counts/genes below
   median − 5 MAD, counts above median + 5 MAD, mitochondrial % above median + 3 MAD *and* above
   5 % (nuclei, where mitochondrial reads indicate ambient RNA) or 25 % (whole kidney cells, where
@@ -198,7 +198,7 @@ Figures: [`outputs/step_2_output/`](outputs/step_2_output/) (regenerate with `uv
 - *Issue noticed:* C's median mitochondrial fraction is 48 % and ~175 genes are detected per cell.
 - *Check:* non-mitochondrial counts per cell, mitochondrial fraction per specimen, ECM panel
   detection by cohort.
-- *Evidence:* `08_cohortC_integrity.png` — every C cell has **≤ 409 non-mitochondrial counts**
+- *Evidence:* `08_cohortC_integrity.png`: every C cell has **≤ 409 non-mitochondrial counts**
   (a hard ceiling; A and B reach 10⁴–10⁵); mitochondrial reads are 76 % of all C counts; the two
   worst specimens (median 92–96 % mitochondrial) are the tumors of two of C's four paired donors;
   DCN and LUM are detected in 0.2 % of C cells. Marker-based labelling still recovers broad
@@ -212,30 +212,30 @@ Figures: [`outputs/step_2_output/`](outputs/step_2_output/) (regenerate with `uv
 **3. What dominates variation between specimens?**
 - *Check:* PCA of whole-specimen and endothelial pseudobulk, with R² of cohort / condition / donor
   for each component.
-- *Evidence:* `04_pseudobulk_pca.png` — PC1 (83 %) is cohort (R² 0.99, i.e. single-nucleus vs
+- *Evidence:* `04_pseudobulk_pca.png`: PC1 (83 %) is cohort (R² 0.99, i.e. single-nucleus vs
   single-cell); tumor vs adjacent appears only on later components, within cohort (endothelial PC4,
   R² 0.58).
-- *Action:* confirms the plan — effects are estimated within cohort and combined with a cohort
+- *Action:* confirms the plan: effects are estimated within cohort and combined with a cohort
   term or meta-analysis; never by pooling raw expression across cohorts.
 
 **4. What is the stromal compartment made of?** (sets up the Stage 4 choice)
 - *Check:* non-panel fibroblast (PDGFRA, C7, FBLN1, MFAP5), mural (RGS5, NOTCH3, MYH11, PDGFRB)
   and endothelial markers in A and B stromal labels, plus marker-based sub-clustering.
-- *Evidence:* `07_stromal_identity.png` — A "Fibroblasts" are mostly mural-like (RGS5 50 %,
+- *Evidence:* `07_stromal_identity.png`: A "Fibroblasts" are mostly mural-like (RGS5 50 %,
   PDGFRA 2 %); A "Myofibroblasts" are a fibroblast (C7 42 %) + mural mix; B "Fibroblast" is also
   RGS5-high; B fibroblast/pericyte label conflicts fall mostly with mural cells. In ccRCC the
   fibroblast–pericyte boundary is a continuum, not two clean types.
 - *Implication:* a combined **fibroblast + mural (stromal) compartment** is defensible across A and
-  B and has 3 (A) + 9 (B) paired donors at ≥ 10 cells — the same coverage as endothelium, but it is
+  B and has 3 (A) + 9 (B) paired donors at ≥ 10 cells, the same coverage as endothelium, but it is
   the compartment that actually produces the ECM panel. Decided at Stage 4 from the ECM dot plot.
 
-### Stage 3 — combining cohorts: unintegrated baseline vs Harmony
+### Stage 3: combining cohorts: unintegrated baseline vs Harmony
 
 Figures: [`outputs/step_3_output/`](outputs/step_3_output/) (regenerate with
 `uv run opengo integrate`, `uv run opengo figures 3`). Cohorts A + B (C excluded at Stage 2).
 Embeddings use a stratified subsample (87,489 cells: ≤ 1,000 per specimen plus every endothelial,
 fibroblast/myofibroblast and pericyte cell). **Embeddings are used for visualisation, evaluation and
-label transfer only — never for testing** (tests use pseudobulk counts, Stages 4–5).
+label transfer only, never for testing** (tests use pseudobulk counts, Stages 4–5).
 
 **1. Did the integration method actually run? (a tool problem caught by checking)**
 - *Issue:* the first Harmony run reproduced the unintegrated metrics to three decimals.
@@ -264,14 +264,14 @@ report does not use ARI.
 
 - *Decision (approved):* **Harmony with batch = cohort** is the integrated embedding. Batch =
   specimen is rejected: specimen is confounded with condition, and it erased the tumor/adjacent
-  structure in stroma and endothelium — exactly the signal Stage 5 tests.
+  structure in stroma and endothelium, exactly the signal Stage 5 tests.
 
 **3. What was preserved, weakened or lost?**
 - *Preserved:* every major population stays distinct (kNN purity 0.89–1.00); tumor vs adjacent
   structure within stroma and endothelium (reduced ~10–20 %, not erased).
 - *Weakened:* the malignant vs non-malignant epithelium boundary across cohorts (both derive from
   proximal tubule); global cohort mixing stays low (median iLISI ≈ 1) because the two cohorts have
-  very different compositions (A mostly tumor nuclei, B mostly immune cells) and assays — Harmony
+  very different compositions (A mostly tumor nuclei, B mostly immune cells) and assays; Harmony
   aligns matching identities rather than forcing everything to mix.
 - *Lost:* nothing with batch = cohort; with batch = specimen, the condition structure.
 
@@ -283,7 +283,7 @@ report does not use ARI.
 - B adds an explicit pericyte label and an independent single-cell assay to test whether a
   tumor-vs-adjacent effect seen in nuclei replicates.
 
-### Stage 4 — where is the ECM panel expressed, and which population to test?
+### Stage 4: where is the ECM panel expressed, and which population to test?
 
 Figures: [`outputs/step_4_output/`](outputs/step_4_output/) (regenerate with
 `uv run opengo overview`, `uv run opengo figures 4`). Values: cell level = log1p(CP10k) and
@@ -330,7 +330,7 @@ library size from all genes of the cohort.
   therefore reports the pericyte-only (B) result and the fibroblast fraction within the
   compartment alongside the main estimate.
 
-### Stage 5 — tumor vs adjacent in the stromal compartment
+### Stage 5: tumor vs adjacent in the stromal compartment
 
 Figures: [`outputs/step_5_output/`](outputs/step_5_output/) (regenerate with
 `uv run opengo pseudobulk`, `uv run opengo figures 5`).
@@ -360,7 +360,7 @@ BH correction over the 10 genes. Cohorts combined by inverse-variance meta-analy
   fibroblast-specific in a compartment of which ~97 % of cells are author-labelled pericytes in B.
 - *A:* no consistent direction; one donor up, two down; intervals span ±2.
 
-**Robustness check — targeted at the main uncertainty, compartment composition**
+**Robustness check, targeted at the main uncertainty, compartment composition**
 (`03_robustness.png`). If the effect came from more fibroblasts in tumor stroma, it should vanish in
 pure mural cells and without the fibroblast genes, and the fibroblast share should rise in tumors.
 - Pericytes only (B): **+1.27 [+0.85, +1.70], 9 / 9 up.**
@@ -391,7 +391,7 @@ tumor shift in ECM transcripts.
   The B result is robust within B; whether it generalises to snRNA data and to fibroblasts is not
   established here.
 
-### Stage 6 — linked modalities: snRNA vs bulk RNA vs protein
+### Stage 6: linked modalities: snRNA vs bulk RNA vs protein
 
 Figures: [`outputs/step_6_output/`](outputs/step_6_output/) (regenerate with
 `uv run opengo multimodal`, `uv run opengo figures 6`). Bulk values are used as supplied (log2,
@@ -407,7 +407,7 @@ already normalised); missing protein values are not imputed (none occur for the 
 - *Matched subset:* donors with primary-linked tumor **and** adjacent = **C3L-00079, C3L-00088,
   C3N-01200 (n = 3)**. C3N-00242 (tumor protein from two parent specimens) is sensitivity only;
   C3L-00908 (different parent) has no adjacent anyway. The 5 unlinked snRNA specimens get no bulk
-  partner — no pairing is invented from donor identity. Bulk RNA is a donor/condition column whose
+  partner: no pairing is invented from donor identity. Bulk RNA is a donor/condition column whose
   exact aliquot is not reconciled; each assay used a different portion of the parent specimen.
 
 **2. Do the assays agree on direction?** (`02_cross_assay_agreement.png`, `03_matched_subset.png`;
@@ -422,7 +422,7 @@ each effect estimated within its own assay, tumor − adjacent, paired by donor)
 | **Protein, all CPTAC pairs (80)** | **+0.68 [0.49, 0.87], 67/80 up** | up (SPARC 78/80, COL3A1 72/80) | DCN down, LUM ≈ 0 |
 
 - *Observation:* the well-powered bulk cohorts and the single-cell cohort B show the **same gene
-  pattern** — fibrillar collagens, FN1 and SPARC higher in tumor, DCN/LUM lower or unchanged — at
+  pattern** (fibrillar collagens, FN1 and SPARC higher in tumor, DCN/LUM lower or unchanged) at
   both RNA and protein level. COL6A1 is the one discrepancy (down in bulk RNA, up in protein and B).
 - *Observation:* the 3-donor matched subset cannot settle direction (donors disagree, all p ≥ 0.5);
   on average FN1 and SPARC are higher in tumor in every matched assay (not in every donor). The
@@ -432,7 +432,7 @@ each effect estimated within its own assay, tumor − adjacent, paired by donor)
 **3. Could tissue composition explain the bulk signal?** (`04_composition_proxy.png`; non-panel
 marker genes in bulk RNA, 72 pairs)
 - Fibroblast markers (PDGFRA, C7, FBLN1) **fall** in 97 % of tumors (mean −1.54 SD); mural (+0.56)
-  and endothelial (+1.63) markers rise — the hypervascular ccRCC pattern.
+  and endothelial (+1.63) markers rise, the hypervascular ccRCC pattern.
 - Across donors the ECM change tracks fibroblast (ρ 0.77; 0.68 without DCN/LUM) and mural (ρ 0.62)
   marker change: composition strongly shapes the bulk signal.
 - Yet the 8-gene panel (without DCN/LUM) rises on average (+0.96 SD) **despite** the fibroblast

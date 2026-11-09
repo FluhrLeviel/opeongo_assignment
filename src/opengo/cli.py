@@ -52,7 +52,7 @@ def verify() -> None:
 
 
 def _not_yet(stage: str) -> None:
-    console.print(f"[yellow]Not implemented yet — built at {stage} after check-in.[/yellow]")
+    console.print(f"[yellow]Not implemented yet; built at {stage} after check-in.[/yellow]")
     sys.exit(2)
 
 

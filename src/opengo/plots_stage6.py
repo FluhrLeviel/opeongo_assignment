@@ -94,7 +94,7 @@ def fig_agreement() -> Path:
         elif ev.startswith("bulk protein (all"):
             keep[ev] = "protein, all CPTAC pairs (80)"
         elif "matched subset" in ev:
-            keep[ev] = ev.split(" — ")[0] + " (matched, 3)"
+            keep[ev] = ev.split(" | ")[0] + " (matched, 3)"
     a = a[a["evidence"].isin(keep)].assign(evidence=lambda d: d["evidence"].map(keep))
     order = list(dict.fromkeys(keep.values()))
     piv = a.pivot_table(index="feature", columns="evidence", values="mean").reindex(
