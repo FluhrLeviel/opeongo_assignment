@@ -154,7 +154,7 @@ Figures: [`outputs/step_1_output/`](outputs/step_1_output/) (regenerate with `uv
   authors' own grouping column places all 510 under Macrophages. "TRM" is ambiguous: tissue-resident
   *macrophages* or tissue-resident *memory T cells*.
 - *First instinct, and why it was not enough:* the initial proposal was to remap from the label
-  columns alone. A second review (another AI agent, consulted by the author) pointed out that labels
+  columns alone. The Gemini gatekeeper review (independent of the working agent) pointed out that labels
   can carry clerical errors and that lineage marker genes should decide. We agreed and tested it.
 - *Check:* fraction of nuclei expressing myeloid vs T-cell markers in TRM, compared with reference
   author groups (macrophages, monocytes, CD4/CD8 T cells, Tregs, NK, tumor).
@@ -506,14 +506,29 @@ uv run pytest
 
 ## AI assistance
 
-**Tools.** Claude Code (Anthropic, Claude Opus 5.5) planned the analysis with the author, wrote the
-code and drafted the text. A second AI agent was consulted by the author for independent review at
-two points (the TRM label, and focus-population / statistics advice).
+**Two separate AI systems, with different roles:**
 
-**Workflow.** Work proceeded in stages. After each stage the AI stopped and reported what was run,
-key numbers and figures, surprises, and proposed decisions with alternatives. The author approved,
-redirected or asked for a redo before the next stage started (`PLAN.md` change log;
-`decisions_log.tsv`).
+- **Working agent: Claude Code** (Anthropic, Claude Opus 5.5). It planned the analysis with the
+  author, wrote the code, ran the pipeline and drafted the text.
+- **Gatekeeper: Gemini** (Google). The author used it as an independent reviewer, kept separate from
+  Claude and unbiased by its reasoning. At every stage it evaluated the conclusions and the QC before
+  the work moved on. Where it disagreed, the disagreement was settled by data, not by preference. For
+  example, it challenged the first TRM relabelling, which was then decided by lineage markers. Its
+  advice on population choice, statistics and the composition bridge to bulk data is recorded in
+  `PLAN.md` (rows marked "Gemini review").
+- **Fresh-context reviews:** in addition, two independent Claude sub-agents with no access to the
+  working conversation reviewed the finished work. One checked compliance with the assignment and
+  every number in the report against the tables; the other scored the final submission. Their
+  findings were applied.
+
+**Workflow.** Work proceeded in stages, each closed by a gate:
+- Claude stopped and reported what was run, the key numbers and figures, any surprises, and its
+  proposed decisions with alternatives.
+- Gemini independently evaluated the stage's conclusions and QC.
+- The author then approved the stage, redirected it, or asked for a redo before the next stage
+  started.
+
+These steps are recorded in the `PLAN.md` change log and in `decisions_log.tsv`.
 
 **How consequential outputs were checked**
 
@@ -528,7 +543,8 @@ redirected or asked for a redo before the next stage started (`PLAN.md` change l
     baseline, confirmed against 0.0.10 on identical input, then pinned and guarded by a test.
   - scanpy's neighbour search failed on a sparse type above ~8k cells; a wrapper was added after
     reproducing the failure.
-- *Second opinion settled by data:* the TRM relabelling was challenged and then decided by
+- *Gatekeeper challenges settled by data:* e.g. the TRM relabelling was challenged by the Gemini
+  review and then decided by
   lineage-marker expression, not by label text.
 - *Statistics:* the exact sign-flip minimum p is unit-tested. With n = 3 pairs no p below 0.25 is
   possible, so effect sizes and confidence intervals lead.

@@ -154,17 +154,17 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | Gene names: B older annotation, 2,204 unmatched, 532 rename pairs left out | Ensembl ID first, symbol fallback, log ambiguities | Keep; check every marker gene used later is in the shared set |
 | Paired n small (A 3–4, C 4, B 9) | Sign-flip minimum two-sided p = 2/2ⁿ (n = 3 → 0.25) | Lead with effect size + CI and direction consistency; pool across cohorts (cohort-stratified model + meta-analysis) |
 
-## Stage 2 findings and second-review input → changes to later stages (Check-in 2)
+## Stage 2 findings and Gemini gatekeeper review → changes to later stages (Check-in 2)
 | Source | Point | Change |
 |---|---|---|
 | Stage 2 QC | C non-mitochondrial counts capped at ≤ 409/cell; 76 % mito reads; DCN/LUM in 0.2 % of cells | Proposed: C excluded from integration + primary analysis; optional sensitivity only |
 | Stage 2 QC | A/B already author-filtered; flags rare in stroma/endothelium | Proposed: drop flagged cells (union) in A and B |
 | Stage 2 PCA | PC1 83 % = cohort (sn vs sc) | Within-cohort effects + cohort term / meta-analysis (unchanged plan, now evidenced) |
 | Stage 2 stroma | Fibroblast/mural boundary blurred in A and B | Stage 4 candidate: combined fibroblast + mural compartment (A 3 + B 9 paired donors ≥ 10 cells); split by marker sub-label as sensitivity |
-| Second review | ECM panel is fibroblast-driven; don't choose endothelium on counts alone | Agreed: ECM dot plot across populations first (Stage 4); if endothelium is tested, report sparse baseline collagen |
-| Second review | Combined model needs cohort term | Agreed, refined: donor nested in cohort (keeps pairing) |
-| Second review | Stromal fraction as bridge to bulk | Agreed with caveats (captured-nuclei proxy, different aliquot); add bulk-internal stromal marker genes in the full bulk cohort (72 pairs) |
-| Second review | 3-figure report layout | Agreed in principle (Stage 7); add ambient-RNA limitation |
+| Gemini review | ECM panel is fibroblast-driven; don't choose endothelium on counts alone | Agreed: ECM dot plot across populations first (Stage 4); if endothelium is tested, report sparse baseline collagen |
+| Gemini review | Combined model needs cohort term | Agreed, refined: donor nested in cohort (keeps pairing) |
+| Gemini review | Stromal fraction as bridge to bulk | Agreed with caveats (captured-nuclei proxy, different aliquot); add bulk-internal stromal marker genes in the full bulk cohort (72 pairs) |
+| Gemini review | 3-figure report layout | Agreed in principle (Stage 7); add ambient-RNA limitation |
 | Stage 2 fix | scanpy 1.11.5 kNN fails on pynndescent `csr_array` for > ~8k cells | `_CsrKnn` wrapper (same algorithm); scipy pinned < 1.17 (not the cause, kept for consistency of QC outputs) |
 
 ## Requirements traceability (assignment → plan)
@@ -210,7 +210,7 @@ Figures: `outputs/step_1_output/` (`uv run opengo figures 1`).
 | 2026-11-07 | 7 | Notebook polished (role statement, per-stage narrative, readable tables); runtime claims corrected to the measured 25 min | Final consistency pass |
 | 2026-11-07 | 7 | Publication-style figures; report rewritten in article style with a figure/table reference per claim | Author request |
 | 2026-11-07 | 7 | Clean end-to-end rebuild verified (63/65 tables identical; only Leiden ARI/NMI on Harmony vary) | Verification |
-| 2026-11-07 | 7 | Independent review applied (cohort A framed as uninformative; composition caveat; per-specimen inclusion records; figure fixes) | Second-agent review |
+| 2026-11-07 | 7 | Independent review applied (cohort A framed as uninformative; composition caveat; per-specimen inclusion records; figure fixes) | Independent Claude sub-agent review (fresh context) |
 | 2026-11-07 | 7 | Done: 4-page report (report/report.pdf), executed notebook, `opengo all`, README finalised (AI note, time log) | Stage 7 |
 | 2026-11-07 | 6 | Stage 6 findings accepted | Check-in 6 |
 | 2026-11-07 | 6 | Done: crosswalk validated (27 primary, 3 matched pairs + C3N-00242). Full bulk RNA +0.52 (54/72), protein +0.68 (67/80); same gene pattern as B scRNA (collagens/FN1/SPARC up, DCN/LUM not). Fibroblast markers fall in 97 % of tumors; ECM tracks composition but rises despite fibroblast loss. Matched n = 3 inconclusive | Check-in 6 |
